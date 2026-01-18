@@ -1,0 +1,8 @@
+{
+  "name": "LetUIC - Intelligence for Education",
+  "description": "A high-fidelity platform uniting administrators, teachers, and students through real-time data and seamless collaboration.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
