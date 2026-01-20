@@ -27,8 +27,8 @@ const HowItWorks: React.FC = () => {
     <section className="container max-w-[1400px] mx-auto px-6 mb-40">
       <div className="flex flex-col items-center text-center mb-32 reveal">
         <div className="px-6 py-2 rounded-full bg-navy-custom/5 border border-navy-custom/10 text-[10px] font-black uppercase tracking-[0.4em] text-navy-custom mb-10">The Methodology</div>
-        <h2 className="text-6xl md:text-8xl font-extrabold tracking-tighter text-navy-custom leading-[0.9] mb-10 uppercase">Orchestrated <br/>Efficiency.</h2>
-        <p className="text-xl md:text-2xl text-navy-custom/40 font-medium max-w-2xl leading-relaxed">A refined three-step methodology designed to bridge the gap between institutional management and home-life.</p>
+        <h2 className="text-6xl md:text-8xl font-extrabold tracking-tighter text-navy-custom leading-[0.9] mb-10">Orchestrated <br/>Efficiency.</h2>
+        <p className="text-l md:text-xl text-navy-custom/40 font-medium max-w-2xl leading-relaxed">A refined three-step methodology designed to bridge the gap between institutional management and home-life.</p>
       </div>
       
       <div className="relative">

@@ -38,7 +38,7 @@ const App: React.FC = () => {
     <div className="min-h-screen selection:bg-primary/30">
       <Navbar onNavigate={(view) => setCurrentView(view)} currentView={currentView} />
       
-      <main className="pt-24">
+      <main className="pt-2">
         {currentView === 'home' ? (
           <>
             <div id="platform">

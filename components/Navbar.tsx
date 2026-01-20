@@ -39,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
                 <LogoSec className="w-10 h-10 text-primary" />
             <LogoSec className="h-10 text-white" /> */}
 
-              <LogoSec className="w-40 h-12 text-white" />
+              <LogoSec className="w-40 h-10 text-white" />
 
           </div>
           {/* <span className="text-xl font-extrabold tracking-tighter text-navy-custom">Letuic</span> */}
