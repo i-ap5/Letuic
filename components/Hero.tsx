@@ -573,7 +573,16 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant }) => {
       `}} />
 
       {/* Ambient Background */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* <div className="absolute inset-0 pointer-events-none overflow-hidden"> */}
+      <div 
+  className="absolute inset-0 pointer-events-none overflow-hidden"
+  /* Add this style object to create the global fade mask */
+  // style={{
+  //   maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+  //   WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+  // }}
+>
+        
         <div className="absolute top-[-10%] left-[-5%] w-[70vw] h-[70vw] bg-primary/20 rounded-full blur-[160px] animate-pulse-glow"></div>
         <div className="absolute bottom-[-20%] right-[-5%] w-[60vw] h-[60vw] bg-navy-custom/5 rounded-full blur-[140px]"></div>
         {/* <div className="absolute bottom-[5%] right-[-5%] w-[60vw] h-[60vw] bg-navy-custom/5 rounded-full blur-[140px]"></div> */}
@@ -581,6 +590,8 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant }) => {
           backgroundImage: 'linear-gradient(#152328 1px, transparent 1px), linear-gradient(90deg, #152328 1px, transparent 1px)', 
           backgroundSize: '65px 65px' 
         }}></div>
+        {/* NEW: Bottom Vignette - Adds a physical layer of depth to the softening */}
+  <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#F8F9FA] to-transparent z-10"></div>
       </div>
 
       {/* Spatial Awareness Widgets - REDUCED SIZES */}
@@ -644,7 +655,8 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant }) => {
 
                 <div className="size-28 rounded-full glass-card border border-white p-5 shadow-2xl flex items-center justify-center transform group-hover:scale-110 transition-all duration-700">
                   <div className="absolute inset-0 rounded-full border border-primary/40 animate-spin-slow opacity-50"></div>
-                  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Technologist.png" alt="Faculty" className="size-full object-contain drop-shadow-xl" />
+                  {/* <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Technologist.png" alt="Faculty" className="size-full object-contain drop-shadow-xl" /> */}
+                  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/55e1dceff489121c3f7c7a7ec4f4d401d2cbd53e/Emojis/People%20with%20professions/Man%20Teacher%20Light%20Skin%20Tone.png" alt="Faculty" className="size-full object-contain drop-shadow-xl" />
                 </div>
                 <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-navy-custom text-primary rounded-full text-[8px] font-black uppercase tracking-widest shadow-xl whitespace-nowrap">Faculty Node</div>
               </div>
@@ -661,14 +673,16 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant }) => {
 
                 <div className="size-28 rounded-full glass-card border border-white p-5 shadow-2xl flex items-center justify-center transform group-hover:scale-110 transition-all duration-700">
                   <div className="absolute inset-0 rounded-full border border-primary/40 animate-spin-slow-reverse opacity-50"></div>
-                  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Student.png" alt="Student" className="size-full object-contain drop-shadow-xl" />
+                  {/* <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Student.png" alt="Student" className="size-full object-contain drop-shadow-xl" /> */}
+                 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/55e1dceff489121c3f7c7a7ec4f4d401d2cbd53e/Emojis/People%20with%20professions/Man%20Student%20Light%20Skin%20Tone.png" alt="Student" className="size-full object-contain drop-shadow-xl" />
+
                 </div>
                 <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-navy-custom rounded-full text-[8px] font-black uppercase tracking-widest shadow-xl whitespace-nowrap">Learner Node</div>
               </div>
             </div>
           </div>
         {/* Campus Sync - Scaled down from w-72 to w-64 */}
-        <div className="absolute bottom-[20%] right-[10%] animate-float-alt pointer-events-auto">
+        <div className="absolute bottom-[20%] right-[8%] animate-float-alt pointer-events-auto">
           <div className="animate-explode-focus opacity-0" style={{ animationDelay: '1s', '--tw-translate-x': '-100px', '--tw-translate-y': '-100px' } as any}>
             <div className="glass-card p-5 rounded-[28px] shadow-premium w-64 border border-white/80 group hover:-translate-y-3 transition-all duration-700 text-left">
                <div className="flex justify-between items-center mb-4">
@@ -711,7 +725,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant }) => {
         </p>
 
         {/* Buttons: Reduced padding and rounded corners */}
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 animate-fade-up opacity-0" style={{ animationDelay: '0.6s' }}>
+        {/* <div className="flex flex-col sm:flex-row justify-center items-center gap-4 animate-fade-up opacity-0" style={{ animationDelay: '0.6s' }}>
           <button onClick={onOpenAssistant} className="w-full sm:w-auto bg-navy-custom text-white pl-10 pr-5 py-4 rounded-[22px] font-bold text-lg hover:bg-black hover:shadow-2xl transition-all duration-700 flex items-center justify-center gap-8 active:scale-95 group">
             Launch Assistant
             <div className="size-10 bg-primary rounded-xl flex items-center justify-center text-navy-custom shadow-lg border border-white/5">
@@ -721,57 +735,70 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant }) => {
           <button className="w-full sm:w-auto bg-white/20 backdrop-blur-3xl text-navy-custom border border-white px-10 py-4 rounded-[22px] font-bold text-lg hover:bg-white hover:shadow-premium transition-all duration-700 flex items-center justify-center gap-3 active:scale-95">
             View Platform
           </button>
-        </div>
-      </div>
-{/* Reveal Container - Prevents the line from touching the dock */}
-<div className="w-full relative z-30 mt-auto pt-16 pb-0 overflow-hidden">
-  
-  {/* The "Optical Anchor" - Now spaced higher and animates width */}
-  <div 
-    className="absolute top-8 left-1/2 -translate-x-1/2 h-[1.5px] bg-primary shadow-[0_0_15px_rgba(219,232,144,0.4)] animate-width-grow"
-    style={{ width: '80px' }}
-  ></div>
-
-  <div 
-    className="relative group animate-fade-up opacity-0" 
-    style={{ animationDelay: '0.8s' }}
+        </div> */}
+       <div
+  className="flex flex-col sm:flex-row justify-center items-center gap-4 animate-fade-up opacity-0"
+  style={{ animationDelay: "0.6s" }}
+>
+  {/* PRIMARY BUTTON */}
+  <button
+  onNavigate
+    onClick={onOpenAssistant}
+    className="group relative w-[280px] h-[64px] rounded-[22px]
+               bg-navy-custom text-white font-bold text-lg
+               flex items-center justify-center
+               overflow-hidden
+               transition-all duration-700
+               hover:bg-black hover:shadow-[0_20px_60px_rgba(0,0,0,0.45)]
+               active:scale-95"
   >
-    {/* Refined Edge Masks */}
-    <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#F8F9FA] to-transparent z-10 pointer-events-none"></div>
-    <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#F8F9FA] to-transparent z-10 pointer-events-none"></div>
+    <span className="transition-transform duration-500 group-hover:-translate-x-2">
+      Contact Sales
+    </span>
 
-    <div className="flex whitespace-nowrap animate-scroll-modern items-center hover:[animation-play-state:paused] cursor-default">
-      {[...Array(3)].map((_, i) => (
-        <div key={i} className="flex items-center">
-          {[
-            { category: 'Syllabus', title: 'Synchronization' },
-            { category: 'Real-time', title: 'Fleet GPS' },
-            { category: 'Neural', title: 'Presence Log' },
-            { category: 'Growth', title: 'Performance IQ' },
-            { category: 'Adaptive', title: 'Assessments' },
-            { category: 'Campus', title: 'Activity Stream' }
-          ].map((item, idx) => (
-            <div key={idx} className="flex items-center group/item px-10">
-              
-              <div className="flex items-center gap-3">
-                <span className="text-[14px] font-extrabold tracking-tight text-navy-custom/20 group-hover/item:text-primary transition-all duration-500">
-                  {item.category}
-                </span>
-                <span className="text-[14px] font-extrabold text-navy-custom/80 tracking-tight group-hover/item:text-navy-custom transition-all duration-500">
-                  {item.title}
-                </span>
-              </div>
+    {/* Arrow */}
+    <span
+      className="absolute right-6 flex items-center justify-center
+                 size-10 rounded-xl bg-primary text-navy-custom
+                 shadow-lg border border-white/10
+                 transition-all duration-500
+                 group-hover:translate-x-2 group-hover:scale-110"
+    >
+       <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="transform transition-transform duration-500
+                 -rotate-90 group-hover:rotate-0"
+    >
+      <path d="M5 12h14" />
+      <path d="m13 6 6 6-6 6" />
+    </svg>
+    </span>
+  </button>
 
-              {/* Minimalist Separator */}
-              <div className="w-10 h-[1px] bg-navy-custom/[0.05] ml-10 group-hover/item:bg-primary/40 transition-all duration-700"></div>
-            </div>
-          ))}
-        </div>
-      ))}
-    </div>
-  </div>
+  {/* SECONDARY BUTTON */}
+  <button
+    className="relative w-[280px] h-[64px] rounded-[22px]
+               bg-white/20 backdrop-blur-3xl
+               text-navy-custom font-bold text-lg
+               border border-white/30
+               flex items-center justify-center
+               transition-all duration-700
+               hover:bg-white hover:shadow-[0_15px_50px_rgba(0,0,0,0.2)]
+               active:scale-95"
+  >
+    Explore Platform
+  </button>
 </div>
-        
+
+      </div>
     </section>
   );
 };

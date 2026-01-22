@@ -319,23 +319,76 @@ const BentoGrid: React.FC = () => {
 
   return (
     <section className="container max-w-[1280px] mx-auto px-6 pb-32">
+      {/* Reveal Container - Prevents the line from touching the dock */}
+      <div className="w-full relative z-30 mt-0 pt-12 pb-0 overflow-hidden">
+        
+        {/* The "Optical Anchor" - Now spaced higher and animates width */}
+        <div 
+          className="absolute top-8 left-1/2 -translate-x-1/2 h-[1.5px] bg-primary shadow-[0_0_15px_rgba(219,232,144,0.4)] animate-width-grow"
+          style={{ width: '80px' }}
+        ></div>
 
+        <div 
+          className="relative group animate-fade-up opacity-0" 
+          style={{ animationDelay: '0.8s' }}
+        >
+          {/* Refined Edge Masks */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#F8F9FA] to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#F8F9FA] to-transparent z-10 pointer-events-none"></div>
+
+          <div className="flex whitespace-nowrap animate-scroll-modern items-center hover:[animation-play-state:paused] cursor-default">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="flex items-center">
+                {[
+                  { category: 'Syllabus', title: 'Synchronization' },
+                  { category: 'Real-time', title: 'Fleet GPS' },
+                  { category: 'Neural', title: 'Presence Log' },
+                  { category: 'Growth', title: 'Performance IQ' },
+                  { category: 'Adaptive', title: 'Assessments' },
+                  { category: 'Campus', title: 'Activity Stream' }
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-center group/item px-10">
+                    
+                    <div className="flex items-center gap-3">
+                      <span className="text-[14px] font-extrabold tracking-tight text-navy-custom/20 group-hover/item:text-primary transition-all duration-500">
+                        {item.category}
+                      </span>
+                      <span className="text-[14px] font-extrabold text-navy-custom/80 tracking-tight group-hover/item:text-navy-custom transition-all duration-500">
+                        {item.title}
+                      </span>
+                    </div>
+
+                    {/* Minimalist Separator */}
+                    <div className="w-10 h-[1px] bg-navy-custom/[0.05] ml-10 group-hover/item:bg-primary/40 transition-all duration-700"></div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
       {/* Transition Title Section */}
-            <div className="pt-40 pb-20 text-center reveal">
-               <div className="max-w-4xl mx-auto px-6">
-                 <div className="flex items-center justify-center gap-4 mb-10">
-                    <div className="h-px w-12 bg-navy-custom/10"></div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.6em] text-navy-custom/30">Intelligence Node</span>
-                    <div className="h-px w-12 bg-navy-custom/10"></div>
-                 </div>
-                 <h2 className="text-5xl md:text-7xl font-black text-navy-custom tracking-tighter leading-none mb-8">
-                   The Ecosystem of <br className="hidden sm:block"/> <span className="text-gradient">Synchrony.</span>
-                 </h2>
-                 <p className="text-l md:text-xl text-navy-custom/30 font-medium max-w-2xl mx-auto">
-                   A symmetrical architecture connecting every stakeholder in the high-fidelity digital campus.
-                 </p>
-               </div>
-               </div>
+            <div className="pt-40 pb-20 text-center relative reveal reveal-scale">
+              <div className="max-w-4xl mx-auto px-6">
+                <div className="flex items-center justify-center gap-4 mb-10">
+                  <div className="h-px w-12 bg-navy-custom/10"></div>
+                  <span className="text-[10px] font-black uppercase tracking-[0.6em] text-navy-custom/30">
+                    Intelligence Node
+                  </span>
+                  <div className="h-px w-12 bg-navy-custom/10"></div>
+                </div>
+
+                <h2 className="text-5xl md:text-7xl font-black text-navy-custom tracking-tighter leading-none mb-8">
+                  The Ecosystem of <br className="hidden sm:block" />
+                  <span className="text-gradient">Synchrony.</span>
+                </h2>
+
+                <p className="text-l md:text-xl text-navy-custom/30 font-medium max-w-2xl mx-auto">
+                  A symmetrical architecture connecting every stakeholder in the high-fidelity digital campus.
+                </p>
+              </div>
+            </div>
+
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         
         

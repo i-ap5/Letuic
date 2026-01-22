@@ -16,7 +16,7 @@ const App: React.FC = () => {
   useEffect(() => {
     // Scroll Reveal Observer
     const observerOptions = {
-      threshold: 0.15,
+      threshold: 0.2,
       rootMargin: "0px 0px -50px 0px"
     };
 
