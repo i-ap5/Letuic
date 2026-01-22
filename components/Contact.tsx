@@ -234,22 +234,22 @@ const Contact: React.FC = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-navy-custom/40 ml-2">Lead Name</label>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-navy-custom/40 ml-2">Name</label>
                   <input 
                     required
                     type="text" 
-                    placeholder="John Doe"
+                    placeholder="Enter your name"
                     className="w-full bg-apple-grey/60 border-none rounded-xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none"
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-navy-custom/40 ml-2">Email Node</label>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-navy-custom/40 ml-2">Email</label>
                   <input 
                     required
                     type="email" 
-                    placeholder="lead@institution.edu"
+                    placeholder="Enter your email"
                     className="w-full bg-apple-grey/60 border-none rounded-xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none"
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
@@ -262,7 +262,7 @@ const Contact: React.FC = () => {
                 <input 
                   required
                   type="tel" 
-                  placeholder="+91 98765 43210"
+                  placeholder="+91 XXXXX XXXXX"
                   className="w-full bg-apple-grey/60 border-none rounded-xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none"
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
@@ -290,7 +290,7 @@ const Contact: React.FC = () => {
                   <div className="size-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                 ) : (
                   <>
-                    Deploy Inquiry
+                    Send Inquiry
                     <svg width="18" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                   </>
                 )}

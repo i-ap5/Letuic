@@ -319,10 +319,10 @@ const BentoGrid: React.FC = () => {
 
   return (
     <section className="container max-w-[1280px] mx-auto px-6 pb-32">
-      {/* Reveal Container - Prevents the line from touching the dock */}
+      {/* Reveal Container - Prevents the line from touching the dock
       <div className="w-full relative z-30 mt-0 pt-12 pb-0 overflow-hidden">
         
-        {/* The "Optical Anchor" - Now spaced higher and animates width */}
+        The "Optical Anchor" - Now spaced higher and animates width
         <div 
           className="absolute top-8 left-1/2 -translate-x-1/2 h-[1.5px] bg-primary shadow-[0_0_15px_rgba(219,232,144,0.4)] animate-width-grow"
           style={{ width: '80px' }}
@@ -332,7 +332,7 @@ const BentoGrid: React.FC = () => {
           className="relative group animate-fade-up opacity-0" 
           style={{ animationDelay: '0.8s' }}
         >
-          {/* Refined Edge Masks */}
+          Refined Edge Masks
           <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#F8F9FA] to-transparent z-10 pointer-events-none"></div>
           <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#F8F9FA] to-transparent z-10 pointer-events-none"></div>
 
@@ -358,7 +358,7 @@ const BentoGrid: React.FC = () => {
                       </span>
                     </div>
 
-                    {/* Minimalist Separator */}
+                    Minimalist Separator
                     <div className="w-10 h-[1px] bg-navy-custom/[0.05] ml-10 group-hover/item:bg-primary/40 transition-all duration-700"></div>
                   </div>
                 ))}
@@ -366,7 +366,84 @@ const BentoGrid: React.FC = () => {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
+      {/* ===== Feature Strip (Responsive & Optimized) ===== */}
+<div className="w-full relative z-30 pt-10 pb-6 overflow-hidden">
+
+  {/* Optical Anchor */}
+  <div
+    className="absolute top-6 left-1/2 -translate-x-1/2 h-[1.5px]
+               bg-primary shadow-[0_0_12px_rgba(219,232,144,0.35)]
+               animate-width-grow
+               w-12 md:w-20"
+  />
+
+  {/* ================= DESKTOP VERSION ================= */}
+  <div
+    className="hidden md:block relative group animate-fade-up opacity-0"
+    style={{ animationDelay: "0.8s" }}
+  >
+    {/* Edge Masks */}
+    <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#F8F9FA] to-transparent z-10 pointer-events-none" />
+    <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#F8F9FA] to-transparent z-10 pointer-events-none" />
+
+    <div className="flex whitespace-nowrap animate-scroll-modern items-center hover:[animation-play-state:paused] cursor-default">
+      {[...Array(2)].map((_, i) => (
+        <div key={i} className="flex items-center">
+          {[
+            { category: "Syllabus", title: "Synchronization" },
+            { category: "Real-time", title: "Fleet GPS" },
+            { category: "Neural", title: "Presence Log" },
+            { category: "Growth", title: "Performance IQ" },
+            { category: "Adaptive", title: "Assessments" },
+            { category: "Campus", title: "Activity Stream" },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className="flex items-center px-10 group/item"
+            >
+              <span className="text-[13px] font-extrabold tracking-tight text-navy-custom/20 group-hover/item:text-primary transition-colors duration-500">
+                {item.category}
+              </span>
+              <span className="ml-2 text-[13px] font-extrabold text-navy-custom/80 tracking-tight">
+                {item.title}
+              </span>
+              <div className="w-10 h-px bg-navy-custom/10 ml-10 group-hover/item:bg-primary/40 transition-all duration-700" />
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* ================= MOBILE VERSION ================= */}
+  <div
+    className="md:hidden px-6 animate-fade-up opacity-0"
+    style={{ animationDelay: "0.6s" }}
+  >
+    <div className="grid grid-cols-2 gap-x-6 gap-y-4 text-center">
+      {[
+        { category: "Syllabus", title: "Synchronization" },
+        { category: "Real-time", title: "Fleet GPS" },
+        { category: "Neural", title: "Presence Log" },
+        { category: "Growth", title: "Performance IQ" },
+        { category: "Adaptive", title: "Assessments" },
+        { category: "Campus", title: "Activity Stream" },
+      ].map((item, idx) => (
+        <div key={idx} className="flex flex-col">
+          <span className="text-[11px] font-bold uppercase tracking-widest text-navy-custom/30">
+            {item.category}
+          </span>
+          <span className="text-sm font-extrabold text-navy-custom">
+            {item.title}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+</div>
+
       {/* Transition Title Section */}
             <div className="pt-40 pb-20 text-center relative reveal reveal-scale">
               <div className="max-w-4xl mx-auto px-6">
