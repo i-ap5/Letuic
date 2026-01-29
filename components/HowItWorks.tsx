@@ -111,8 +111,15 @@ const HowItWorks: React.FC = () => {
 
       {/* Reduced bottom margin from mb-32 to mb-20 */}
       <div className="flex flex-col items-center text-center mb-20 reveal">
-        <div className="px-5 py-1.5 rounded-full bg-navy-custom/5 border border-navy-custom/10 text-[9px] font-black tracking-[0.4em] text-navy-custom mb-8">
+        {/* <div className="px-5 py-1.5 rounded-full bg-navy-custom/5 border border-navy-custom/10 text-[9px] font-black tracking-[0.4em] text-navy-custom mb-8 uppercase">
           Simple Steps
+        </div> */}
+        <div className="flex items-center justify-center gap-4 mb-10">
+          <div className="h-px w-12 bg-navy-custom/10"></div>
+          <span className="text-[10px] font-black tracking-[0.6em] text-navy-custom/30 uppercase">
+            Simple Magic
+          </span>
+          <div className="h-px w-12 bg-navy-custom/10"></div>
         </div>
         {/* Condensed heading scale from text-8xl to text-5xl/text-6xl */}
         <h2 className="text-4xl md:text-6xl font-extrabold tracking-tighter text-navy-custom leading-[0.95] mb-6">
@@ -145,7 +152,7 @@ const HowItWorks: React.FC = () => {
                   <div className="size-10 rounded-xl bg-navy-custom flex items-center justify-center text-primary shadow-lg group-hover:rotate-12 transition-all duration-500">
                     <span className="text-xs font-black">{step.num}</span>
                   </div>
-                  <div className="px-3 py-1.5 rounded-full bg-apple-grey text-[9px] font-black tracking-[0.2em] text-navy-custom/30 group-hover:bg-primary group-hover:text-navy-custom transition-all">
+                  <div className="px-3 py-1.5 rounded-full uppercase bg-apple-grey text-[9px] font-black tracking-[0.2em] text-navy-custom/30 group-hover:bg-primary group-hover:text-navy-custom transition-all">
                     {step.tag}
                   </div>
                 </div>
@@ -175,12 +182,12 @@ const HowItWorks: React.FC = () => {
 
       {/* Branding - Reduced margin from 32 to 20 */}
       <div className="mt-20 flex justify-center reveal">
-        <div className="flex items-center gap-4 group cursor-default">
+        {/* <div className="flex items-center gap-4 group cursor-default">
           <div className="size-1.5 bg-navy-custom rounded-full animate-pulse group-hover:bg-primary transition-colors"></div>
           <span className="text-[9px] font-black tracking-[0.6em] text-navy-custom/10 group-hover:text-navy-custom/40 transition-colors">
             Letuic Core Workflow
           </span>
-        </div>
+        </div> */}
       </div>
     </section>
   );

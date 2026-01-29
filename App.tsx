@@ -14,6 +14,32 @@ const App: React.FC = () => {
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
   const [currentView, setCurrentView] = useState<'home' | 'contact' | 'community'>('home');
 
+  const handleNavigate = (view: 'home' | 'contact' | 'community') => {
+    setCurrentView(view);
+    window.history.pushState({ view }, '', `#${view}`);
+  };
+
+  useEffect(() => {
+    // Handle Browser Back Button
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state && event.state.view) {
+        setCurrentView(event.state.view);
+      } else {
+        // Fallback for initial load or empty state
+        setCurrentView('home');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    // Set initial state if null
+    if (!window.history.state) {
+      window.history.replaceState({ view: 'home' }, '', '#home');
+    }
+
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentView]);
@@ -40,21 +66,21 @@ const App: React.FC = () => {
   }, [currentView]); // Re-observe when view changes
 
   return (
-    <div className="min-h-screen selection:bg-primary/30">
-      <Navbar onNavigate={(view) => setCurrentView(view)} currentView={currentView} />
+    <div className={`min-h-screen selection:bg-primary/30 ${currentView === 'community' ? 'bg-navy-custom' : 'bg-white'}`}>
+      <Navbar onNavigate={handleNavigate} currentView={currentView} />
 
-      <main className="pt-2">
+      <main>
         {currentView === 'home' ? (
           <>
             <div id="platform">
               <Hero
                 onOpenAssistant={() => setIsAssistantOpen(true)}
-                onNavigate={(view: any) => setCurrentView(view)}
+                onNavigate={handleNavigate}
               />
             </div>
 
             <div id="ecosystem" className="scroll-mt-32">
-              <BentoGrid onNavigate={(view) => setCurrentView(view)} />
+              <BentoGrid onNavigate={handleNavigate} />
             </div>
 
             <div id="solutions" className="scroll-mt-32">
@@ -62,17 +88,17 @@ const App: React.FC = () => {
             </div>
 
             <div id="security" className="reveal scroll-mt-32">
-              <CTA onNavigate={(view: any) => setCurrentView(view)} />
+              <CTA onNavigate={handleNavigate} />
             </div>
           </>
         ) : currentView === 'community' ? (
-          <Community onNavigate={(view) => setCurrentView(view)} />
+          <Community onNavigate={handleNavigate} />
         ) : (
           <Contact />
         )}
       </main>
 
-      <Footer onNavigate={(view) => setCurrentView(view)} />
+      <Footer onNavigate={handleNavigate} currentView={currentView} />
 
       <AssistantModal
         isOpen={isAssistantOpen}

@@ -660,7 +660,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
                 {/* <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Technologist.png" alt="Faculty" className="size-full object-contain drop-shadow-xl" /> */}
                 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/55e1dceff489121c3f7c7a7ec4f4d401d2cbd53e/Emojis/People%20with%20professions/Man%20Teacher%20Light%20Skin%20Tone.png" alt="Faculty" className="size-full object-contain drop-shadow-xl" />
               </div>
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-navy-custom text-primary rounded-full text-[9px] font-black tracking-widest shadow-xl whitespace-nowrap">Faculty Node</div>
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-navy-custom text-primary rounded-full text-[9px] font-black tracking-widest shadow-xl whitespace-nowrap uppercase">Faculty Node</div>
             </div>
           </div>
         </div>
@@ -679,7 +679,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
                 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/55e1dceff489121c3f7c7a7ec4f4d401d2cbd53e/Emojis/People%20with%20professions/Man%20Student%20Light%20Skin%20Tone.png" alt="Student" className="size-full object-contain drop-shadow-xl" />
 
               </div>
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-navy-custom rounded-full text-[9px] font-black tracking-widest shadow-xl whitespace-nowrap">Learner Node</div>
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-navy-custom rounded-full text-[9px] font-black tracking-widest shadow-xl whitespace-nowrap uppercase">Learner Node</div>
             </div>
           </div>
         </div>
@@ -707,18 +707,20 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
 
       {/* Main Hero Content - REFINED TYPOGRAPHY */}
       <div className="relative z-20 flex-1 flex flex-col items-center justify-center container max-w-[1200px] mx-auto px-6 text-center">
-        <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-2xl px-5 py-1.5 rounded-full shadow-sm border border-white/30 mb-8 animate-fade-up opacity-0">
+        {/* <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-2xl px-5 py-1.5 rounded-full shadow-sm border border-white/30 mb-8 animate-fade-up opacity-0">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_8px_#dbe890]"></span>
-          </span>
-          <span className="text-[10px] font-bold tracking-[0.2em] text-navy-custom/40">Simple. Safe. Connected.</span>
+          </span> */}
+        <div className="inline-flex items-center gap-3  px-5 py-1.5 rounded-full mb-8 animate-fade-up opacity-0">
+
+          <span className="text-[10px] font-bold tracking-[0.2em] text-navy-custom/40 uppercase">Simply Collaborate</span>
         </div>
 
         {/* Heading: Reduced size from 120px to 100px */}
         <h1 className="text-6xl md:text-8xl lg:text-[90px] xl:text-[100px] font-extrabold text-navy-custom leading-[0.85] max-w-6xl mx-auto mb-10 tracking-[-0.04em] animate-fade-up opacity-0" style={{ animationDelay: '0.2s' }}>
           School life made <br className="hidden lg:block" />
-          <span className="text-gradient">Easier</span> for Everyone.
+          <span className="text-gradient">easier</span> for Everyone.
         </h1>
 
         {/* Description: Reduced size and mb */}
@@ -745,14 +747,14 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
           {/* PRIMARY BUTTON */}
           <button
             onClick={() => onNavigate?.('contact')}
-
             className="group relative w-[280px] h-[64px] rounded-[22px]
-               bg-navy-custom text-white font-bold text-lg
-               flex items-center justify-center
-               overflow-hidden
-               transition-all duration-700
-               hover:bg-black hover:shadow-[0_20px_60px_rgba(0,0,0,0.45)]
-               active:scale-95"
+    bg-navy-custom text-white font-bold text-lg
+    flex items-center
+    pl-12 pr-20
+    overflow-hidden
+    transition-all duration-700
+    hover:bg-black hover:shadow-[0_20px_60px_rgba(0,0,0,0.45)]
+    active:scale-95"
           >
             <span className="transition-transform duration-500 group-hover:-translate-x-2">
               Contact Sales
@@ -761,10 +763,10 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
             {/* Arrow */}
             <span
               className="absolute right-6 flex items-center justify-center
-                 size-10 rounded-xl bg-primary text-navy-custom
-                 shadow-lg border border-white/10
-                 transition-all duration-500
-                 group-hover:translate-x-2 group-hover:scale-110"
+      size-10 rounded-xl bg-primary text-navy-custom
+      shadow-lg border border-white/10
+      transition-all duration-500
+      group-hover:translate-x-2 group-hover:scale-110"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -777,7 +779,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 className="transform transition-transform duration-500
-                 -rotate-90 group-hover:rotate-0"
+        -rotate-90 group-hover:rotate-0"
               >
                 <path d="M5 12h14" />
                 <path d="m13 6 6 6-6 6" />
@@ -785,8 +787,11 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
             </span>
           </button>
 
+
           {/* SECONDARY BUTTON */}
           <button
+            onClick={() => onNavigate?.('community')}
+
             className="relative w-[280px] h-[64px] rounded-[22px]
                bg-white/20 backdrop-blur-3xl
                text-navy-custom font-bold text-lg
@@ -796,7 +801,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
                hover:bg-white hover:shadow-[0_15px_50px_rgba(0,0,0,0.2)]
                active:scale-95"
           >
-            Explore Platform
+            Explore Community
           </button>
         </div>
 

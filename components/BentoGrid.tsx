@@ -111,7 +111,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
         <div className="max-w-4xl mx-auto px-6">
           <div className="flex items-center justify-center gap-4 mb-10">
             <div className="h-px w-12 bg-navy-custom/10"></div>
-            <span className="text-[10px] font-black tracking-[0.6em] text-navy-custom/30">
+            <span className="text-[10px] font-black tracking-[0.6em] text-navy-custom/30 uppercase">
               Intelligence Node
             </span>
             <div className="h-px w-12 bg-navy-custom/10"></div>
@@ -137,28 +137,40 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
             <div className="flex-1 flex flex-col justify-between">
               <div>
                 <div className="flex gap-2 mb-8">
-                  <span className="px-3 py-1 rounded-full text-[9px] font-black tracking-widest bg-navy-custom text-primary">Single App</span>
-                  <span className="px-3 py-1 rounded-full text-[9px] font-black tracking-widest bg-apple-grey text-navy-custom/40 border border-gray-100">For Everyone</span>
+                  {/* <span className="px-3 py-1 rounded-full text-[9px] font-black tracking-widest bg-navy-custom text-primary">Single App</span> */}
+                  <span className="px-3 py-1 rounded-full text-[9px] font-black tracking-widest bg-apple-grey text-navy-custom/40 border border-gray-100 uppercase">For Everyone</span>
                 </div>
                 <h3 className="text-4xl md:text-5xl font-extrabold mb-6 leading-[1.05] tracking-tighter text-navy-custom">Everything in <br />one place.</h3>
                 <p className="text-navy-custom/50 text-lg leading-relaxed font-medium max-w-sm">No more switching between apps. Notes, marks, updates, and bus tracking—all right here.</p>
               </div>
-              <div className="flex items-center gap-5 mt-12">
+              <div className="flex items-center gap-4 mt-12">
                 <div className="flex -space-x-3">
                   {[1, 2, 3].map(i => (
-                    <div key={i} className="size-11 rounded-full border-4 border-white bg-navy-custom/5 shadow-sm overflow-hidden flex items-center justify-center">
-                      <div className="size-full bg-navy-custom/10 animate-pulse"></div>
+                    <div key={i} className="size-10 rounded-full border-[3px] border-white bg-gray-100 shadow-sm overflow-hidden relative z-10 grayscale hover:grayscale-0 transition-all duration-500">
+                      <img src={`https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-${i}.png`} className="size-full object-cover" alt="User" />
                     </div>
                   ))}
+                  <div className="size-10 rounded-full border-[3px] border-white bg-navy-custom flex items-center justify-center text-[16px] font-bold text-white relative z-20">
+                    +
+                  </div>
                 </div>
-                <span className="text-[10px] font-black tracking-widest text-navy-custom/20">Used by 32+ Schools</span>
+                <div>
+                  <div className="text-[13px] font-bold text-navy-custom leading-tight">Active Campus</div>
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
+                    </span>
+                    <span className="text-[9px] font-bold text-navy-custom/40 uppercase tracking-wider">Sync Live</span>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div className="flex-1 bg-transparent flex items-center justify-center relative overflow-hidden group min-h-[320px]">
 
               {/* MASTER CONTAINER - Rigidly Centered */}
-              <div className="relative size-[300px] flex items-center justify-center">
+              <div className="relative size-[300px] flex items-center justify-center scale-[0.8] sm:scale-100 transition-transform duration-500">
 
                 {/* 1. Background Glow (Centered) */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -229,12 +241,11 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
 
                 {/* 3. Central Hub (Relative - On Top) */}
                 <div className="relative z-20 flex flex-col items-center justify-center">
-                  <div className="size-20 rounded-full bg-navy-custom text-white border-[6px] border-white shadow-2xl flex items-center justify-center relative z-20 group-hover:scale-105 transition-transform duration-500">
-                    <LogoWhite className="w-9 h-9 text-white z-10" />
+                  <div className="size-16 rounded-full bg-gradient-to-b from-navy-custom to-[#0f172a] border border-white/10 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] flex items-center justify-center relative z-20 group-hover:scale-105 transition-transform duration-500">
+                    <div className="absolute top-2 w-12 h-6 bg-white/5 rounded-[100%] blur-[2px]"></div>
+                    <div className="absolute inset-0 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
+                    <LogoWhite className="w-12 h-12 text-white relative z-10" />
                   </div>
-                  {/* <div className="absolute -bottom-8 px-3 py-1 bg-white/80 backdrop-blur-md border border-navy-custom/5 rounded-full shadow-sm text-[10px] font-black tracking-widest uppercase text-navy-custom/60 z-20 whitespace-nowrap">
-                    One Hub
-                  </div> */}
                 </div>
 
               </div>
@@ -245,10 +256,10 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
         {/* 02. Safety Hub */}
         <div className="md:col-span-12 lg:col-span-4 bg-white rounded-apple p-8 shadow-bento hover:shadow-bento-hover transition-all duration-700 border border-gray-100 flex flex-col group overflow-hidden reveal-right">
           <div className="flex items-center justify-between mb-6">
-            <span className="px-3 py-1 rounded-full text-[9px] font-black tracking-widest bg-primary/20 text-navy-custom">Live Map</span>
+            <span className="px-3 py-1 rounded-full text-[9px] font-black tracking-widest bg-primary/20 text-navy-custom uppercase">Live Map</span>
             <div className="size-2.5 bg-green-500 rounded-full shadow-[0_0_12px_#22c55e]"></div>
           </div>
-          <h3 className="text-2xl font-extrabold mb-3 tracking-tighter text-navy-custom">Where is the bus?</h3>
+          <h3 className="text-2xl font-extrabold mb-3 tracking-tight text-navy-custom">Where is the bus?</h3>
           <p className="text-navy-custom/40 text-sm font-medium mb-8 leading-relaxed">Watch the school bus move in real-time. No more waiting at the stop wondering if you missed it.</p>
 
           <div className="mt-auto relative w-full h-48 bg-apple-grey rounded-apple-sm border border-gray-100 overflow-hidden flex items-center justify-center">
@@ -256,10 +267,10 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
             <div className="w-full max-w-[220px]">
               <Lottie animationData={busAnimationData} loop={true} />
             </div>
-            <div className="absolute bottom-4 left-5">
-              <div className="flex items-center gap-2">
-                <div className="size-1.5 bg-primary rounded-full animate-pulse"></div>
-                <span className="text-[9px] font-black tracking-widest text-navy-custom/30">Bus 4A • Moving</span>
+            <div className="absolute top-4 left-4 z-20">
+              <div className="flex items-center gap-2 ">
+                {/* <div className="size-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_#22c55e]"></div> */}
+                <span className="text-[9px] font-black tracking-widest text-navy-custom/80 uppercase">Bus 4A • Moving</span>
               </div>
             </div>
           </div>
@@ -277,35 +288,66 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
             </div>
           </div>
           <div className="px-8 mb-6">
-            <h3 className="text-3xl font-black tracking-tighter text-navy-custom leading-none ">Classroom buzz</h3>
-            <p className="text-[10px] font-black text-navy-custom/30 tracking-[0.2em] mt-3">What's happening today</p>
+            <h3 className="text-3xl font-black tracking-tight text-navy-custom leading-none ">Classroom buzz</h3>
+            <p className="text-[10px] font-black text-navy-custom/30 tracking-[0.04em] mt-3">What's happening today?</p>
           </div>
-          <div className="mt-auto relative z-10 px-8">
-            <div className="bg-white/80 backdrop-blur-[40px] rounded-t-[40px] p-7 shadow-2xl border-t border-white/50 border-x border-white/30 transform transition-transform duration-500 translate-y-2 group-hover:translate-y-0">
-              <div className="flex items-center justify-between mb-5">
+          <div className="mt-4 relative z-10 px-6 flex-1 flex flex-col justify-end pb-6">
+            {/* Stack Effect Backgrounds (Floating) */}
+            <div className="absolute bottom-4 left-10 right-10 h-12 bg-white/20 backdrop-blur-sm rounded-[24px] z-0"></div>
+            <div className="absolute bottom-5 left-8 right-8 h-12 bg-white/40 backdrop-blur-md rounded-[28px] z-0"></div>
+
+            {/* Main Card (Floating) */}
+            <div className="bg-white/90 backdrop-blur-[40px] rounded-[32px] p-6 shadow-2xl border border-white/60 transform transition-all duration-500 hover:-translate-y-2 relative z-10 flex-1 overflow-hidden">
+              {/* Overlay Element (Gradient Sheen) */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+
+              <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="size-11 rounded-full bg-navy-custom text-primary flex items-center justify-center font-bold text-xs border-2 border-primary/40 shadow-xl group-hover:rotate-12 transition-transform">JJ</div>
+                  <div className="size-10 rounded-full bg-navy-custom text-primary flex items-center justify-center font-bold text-xs border-2 border-primary/40 shadow-xl">BM</div>
                   <div>
-                    <div className="text-[12px] font-black text-navy-custom leading-none mb-1">Ms. John Jacob</div>
-                    <div className="text-[9px] font-bold text-navy-custom/40 tracking-widest">Sr. Physics Faculty</div>
+                    <div className="text-[12px] font-black text-navy-custom leading-none mb-0.5">Ms. Bindu Mathew</div>
+                    <div className="text-[9px] font-medium text-navy-custom/40 tracking-normal">Sr. Physics Faculty</div>
                   </div>
                 </div>
                 <div className="text-[9px] font-black text-navy-custom/20">JUST NOW</div>
               </div>
-              <p className="text-[14px] font-bold text-navy-custom/80 leading-[1.4] mb-7">
-                "Physics notes for Class 10 are uploaded. Exam schedule is also out. Please check!"
-              </p>
-              <div className="flex items-center justify-between pt-5 border-t border-navy-custom/5">
-                <div className="flex gap-6">
-                  <div className="flex items-center gap-2 cursor-pointer group/action">
-                    <div className="size-8 bg-navy-custom/5 rounded-full flex items-center justify-center group-hover/action:bg-navy-custom transition-all">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-navy-custom/40 group-hover/action:text-primary"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" /></svg>
-                    </div>
-                    <span className="text-[10px] font-black text-navy-custom/40">124</span>
+
+              <div className="space-y-4 mb-5">
+                <p className="text-[13px] font-bold text-navy-custom/80 leading-[1.5]">
+                  I have assigned a Physics assignment based on today’s lesson. The topic covered in class should be used for this assignment. Please complete it and submit it in the next class without fail.
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-2 py-1 rounded-md bg-navy-custom/5 text-[10px] font-bold text-navy-custom/60">#Physics</span>
+                  <span className="px-2 py-1 rounded-md bg-navy-custom/5 text-[10px] font-bold text-navy-custom/60">#Homework</span>
+                  <span className="px-2 py-1 rounded-md bg-red-500/10 text-[10px] font-bold text-red-500">Due Tomorrow</span>
+                </div>
+
+                {/* Visual Attachment */}
+                <div className="flex items-center gap-3 p-3 bg-navy-custom/5 rounded-2xl border border-navy-custom/5 hover:bg-navy-custom/10 transition-colors cursor-pointer group/file relative overflow-hidden">
+                  <div className="absolute inset-0 bg-primary/5 translate-x-[-100%] group-hover/file:translate-x-[100%] transition-transform duration-1000"></div>
+                  <div className="size-9 rounded-xl bg-white flex items-center justify-center text-red-500 shadow-sm border border-gray-100 group-hover/file:scale-110 transition-transform relative z-10">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /></svg>
+                  </div>
+                  <div className="relative z-10">
+                    <div className="text-[11px] font-bold text-navy-custom mb-0.5">Physics_Assignment_Ch4.pdf</div>
+                    <div className="text-[9px] font-black text-navy-custom/30 uppercase tracking-widest">1.8 MB • PDF</div>
                   </div>
                 </div>
-                <div className="size-9 bg-navy-custom rounded-2xl flex items-center justify-center text-primary shadow-lg hover:scale-110 transition-transform cursor-pointer">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
+              </div>
+
+              <div className="flex items-center justify-between pt-4 border-t border-navy-custom/5">
+                <div className="flex gap-4">
+                  <div className="flex items-center gap-1.5 cursor-pointer group/action opacity-60 hover:opacity-100 transition-opacity">
+                    <div className="size-7 bg-navy-custom/5 rounded-full flex items-center justify-center group-hover/action:bg-navy-custom transition-all">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-navy-custom/40 group-hover/action:text-primary"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" /></svg>
+                    </div>
+                    <span className="text-[9px] font-black text-navy-custom/40">124</span>
+                  </div>
+                </div>
+                <div className="size-8 bg-navy-custom rounded-xl flex items-center justify-center text-primary shadow-lg hover:scale-110 transition-transform cursor-pointer">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
                 </div>
               </div>
             </div>
@@ -319,8 +361,8 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
             <div className="flex-1 flex flex-col justify-between">
               <div>
                 <div className="flex gap-2 mb-8">
-                  <span className="px-3 py-1.5 rounded-full text-[9px] font-black tracking-widest bg-white/5 text-primary border border-white/10">v4.0 Hub</span>
-                  <span className="px-3 py-1.5 rounded-full text-[9px] font-black tracking-widest bg-primary text-navy-custom">Synthesis Active</span>
+                  <span className="px-3 py-1.5 rounded-full text-[9px] font-black tracking-widest bg-white/5 text-primary border border-white/10">v4.0 HUB</span>
+                  <span className="px-3 py-1.5 rounded-full text-[9px] font-black tracking-widest bg-primary text-navy-custom uppercase">Synthesis Active</span>
                 </div>
                 <h3 className="text-3xl md:text-4xl font-extrabold mb-6 tracking-tighter leading-tight text-white">Learning <br />together.</h3>
                 <p className="text-white/40 text-base font-medium leading-relaxed max-w-sm mb-4">A safe space to ask questions and help friends. Because learning is better when we do it together.</p>
@@ -338,7 +380,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
                 </button>
               </div>
               <div className="mt-10 pt-10 border-t border-white/5">
-                <div className="text-[9px] font-black tracking-[0.3em] text-white/20 mb-5">Trending Perspectives</div>
+                <div className="text-[9px] font-black tracking-normal text-white/20 mb-5">Trending Perspectives</div>
                 <div className="flex flex-wrap gap-2">
                   {['Calculus', 'AI Ethics', 'Vedic Math'].map(tag => (
                     <span key={tag} className="px-3 py-1.5 rounded-full bg-white/5 text-[8px] font-bold text-white/40 border border-white/5 hover:bg-primary/20 hover:text-primary transition-all">#{tag}</span>
@@ -349,7 +391,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
             <div className="flex-1 flex flex-col justify-between">
               <div className="space-y-3">
                 {[
-                  { q: 'Calculus Synthesis', up: 42, aura: '+125', color: 'bg-primary/10 text-primary border-primary/20' },
+                  { q: 'Calculus Mind', up: 42, aura: '+125', color: 'bg-primary/10 text-primary border-primary/20' },
                   { q: 'Organic Chem Hub', up: 89, aura: '+89', color: 'bg-white/5 text-white/40 border-white/5' },
                   { q: 'State Syllabus Prep', up: 156, aura: '+210', color: 'bg-white/10 text-white border-white/10' }
                 ].map((item, i) => (
@@ -427,7 +469,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
 
         <div className="md:col-span-12 lg:col-span-4 bg-navy-custom rounded-apple p-8 shadow-bento hover:shadow-bento-hover transition-all duration-700 border border-navy-custom group flex flex-col justify-between overflow-hidden relative reveal" style={{ transitionDelay: '0.2s' }}>
           <div>
-            <div className="px-3 py-1 rounded-full text-[9px] font-black tracking-[0.2em] bg-white/10 text-primary mb-6 w-fit">Academic Core</div>
+            <div className="px-3 py-1 rounded-full text-[9px] font-black tracking-[0.2em] bg-white/10 text-primary mb-6 w-fit uppercase">Academic Core</div>
             <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-tighter mb-4">Notes in <br />your pocket</h3>
             <p className="text-white/30 text-sm font-medium leading-relaxed">Class notes and study materials, ready whenever you need them.</p>
           </div>
@@ -440,7 +482,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
           {/* RESTORED BLUR ORB */}
           <div className="absolute -bottom-8 -right-8 size-24 bg-primary/10 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-1000"></div>
           <div>
-            <div className="px-3 py-1 rounded-full text-[9px] font-black tracking-[0.2em] bg-primary text-navy-custom mb-6 w-fit">Attendance</div>
+            <div className="px-3 py-1 rounded-full text-[9px] font-black tracking-[0.2em] bg-primary text-navy-custom mb-6 w-fit uppercase">Attendance</div>
             <h3 className="text-2xl md:text-3xl font-extrabold text-navy-custom tracking-tighter mb-4">Safe at <br />school</h3>
             <p className="text-navy-custom/40 text-sm font-medium leading-relaxed">Get a gentle ping when your child reaches school. Peace of mind, every morning.</p>
           </div>

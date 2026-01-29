@@ -24,8 +24,7 @@ const CTA: React.FC<CTAProps> = ({ onNavigate }) => {
           </h2>
 
           <p className="text-base md:text-lg lg:text-xl text-white/50 font-medium mb-10 md:mb-12">
-            Join the elite institutions building the future of digital education today.
-          </p>
+            Powering the future of digital education for elite institutions.          </p>
 
           {/* Buttons: Stack on mobile, side-by-side on desktop */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6">
@@ -35,9 +34,9 @@ const CTA: React.FC<CTAProps> = ({ onNavigate }) => {
             >
               Get Started Now
             </button>
-            <button className="w-full sm:w-auto bg-white/10 text-white border border-white/20 px-8 md:px-12 py-4 md:py-5 rounded-2xl font-bold text-base md:text-lg backdrop-blur-md hover:bg-white/20 transition-all">
-              Talk to Sales
-            </button>
+            {/* <button className="w-full sm:w-auto bg-white/10 text-white border border-white/20 px-8 md:px-12 py-4 md:py-5 rounded-2xl font-bold text-base md:text-lg backdrop-blur-md hover:bg-white/20 transition-all">
+                Talk to Sales
+              </button> */}
           </div>
         </div>
       </div>
