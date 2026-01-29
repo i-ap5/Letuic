@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, currentView }) => {
             <h4 className={`text-[10px] font-black uppercase tracking-[0.25em] ${isDark ? 'text-white/30' : 'text-navy-custom/30'}`}>Explore</h4>
             <div className="flex flex-col space-y-3 items-start">
               <button
-                onClick={() => { onNavigate('community'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                // onClick={() => { onNavigate('community'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                 className={`text-sm font-bold hover:text-primary transition-colors ${isDark ? 'text-white' : 'text-navy-custom'}`}
               >
                 Community Hub

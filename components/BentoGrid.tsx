@@ -372,7 +372,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
                 </div>
 
                 <button
-                  onClick={() => onNavigate && onNavigate('community')}
+                  // onClick={() => onNavigate && onNavigate('community')}
                   className="group flex items-center gap-2 text-primary text-sm font-bold tracking-wide hover:text-white transition-colors"
                 >
                   Explore Community
