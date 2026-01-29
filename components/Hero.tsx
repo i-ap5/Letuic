@@ -138,7 +138,7 @@
 //         {/* CTA Synergy */}
 //         <div className="flex flex-col sm:flex-row justify-center items-center gap-6 animate-fade-up opacity-0" style={{ animationDelay: '0.6s' }}>
 //           <button 
-//             onClick={onOpenAssistant}
+//             onClick={() => onNavigate?.('contact')}
 //             className="w-full sm:w-auto bg-navy-custom text-white pl-12 pr-6 py-6 rounded-[28px] font-bold text-xl hover:bg-black hover:shadow-2xl hover:shadow-navy-custom/30 hover:-translate-y-2 transition-all duration-700 flex items-center justify-center gap-10 active:scale-95 group"
 //           >
 //             Launch Assistant
@@ -546,9 +546,10 @@ import React from 'react';
 
 interface HeroProps {
   onOpenAssistant: () => void;
+  onNavigate?: (page: string) => void;
 }
 
-const Hero: React.FC<HeroProps> = ({ onOpenAssistant }) => {
+const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
   return (
     // <section className="relative min-h-screen flex flex-col bg-[#F8F9FA] overflow-hidden pt-20">
     // <section className="relative h-auto flex flex-col bg-[#F8F9FA] overflow-hidden pt-20 pb-12">
@@ -607,7 +608,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant }) => {
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
                 </div>
                 <div className="flex-1 text-left">
-                  <div className="text-[8px] font-black uppercase tracking-[0.2em] text-navy-custom/30">Fleet GPS</div>
+                  <div className="text-[9px] font-black tracking-[0.15em] text-navy-custom/30">Fleet GPS</div>
                   <div className="text-[11px] font-bold text-navy-custom">Bus 4A Arriving</div>
                 </div>
               </div>
@@ -659,7 +660,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant }) => {
                 {/* <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Technologist.png" alt="Faculty" className="size-full object-contain drop-shadow-xl" /> */}
                 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/55e1dceff489121c3f7c7a7ec4f4d401d2cbd53e/Emojis/People%20with%20professions/Man%20Teacher%20Light%20Skin%20Tone.png" alt="Faculty" className="size-full object-contain drop-shadow-xl" />
               </div>
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-navy-custom text-primary rounded-full text-[8px] font-black uppercase tracking-widest shadow-xl whitespace-nowrap">Faculty Node</div>
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-navy-custom text-primary rounded-full text-[9px] font-black tracking-widest shadow-xl whitespace-nowrap">Faculty Node</div>
             </div>
           </div>
         </div>
@@ -678,7 +679,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant }) => {
                 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/55e1dceff489121c3f7c7a7ec4f4d401d2cbd53e/Emojis/People%20with%20professions/Man%20Student%20Light%20Skin%20Tone.png" alt="Student" className="size-full object-contain drop-shadow-xl" />
 
               </div>
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-navy-custom rounded-full text-[8px] font-black uppercase tracking-widest shadow-xl whitespace-nowrap">Learner Node</div>
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-navy-custom rounded-full text-[9px] font-black tracking-widest shadow-xl whitespace-nowrap">Learner Node</div>
             </div>
           </div>
         </div>
@@ -688,7 +689,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant }) => {
             <div className="glass-card p-5 rounded-[28px] shadow-premium w-64 border border-white/80 group hover:-translate-y-3 transition-all duration-700 text-left">
               <div className="flex justify-between items-center mb-4">
                 <div>
-                  <div className="text-[8px] font-black uppercase tracking-[0.2em] text-navy-custom/30 mb-0.5">Campus Sync</div>
+                  <div className="text-[9px] font-black tracking-[0.15em] text-navy-custom/30 mb-0.5">Campus Sync</div>
                   <div className="text-xl font-black text-navy-custom tracking-tighter leading-none">98.2%</div>
                 </div>
                 <div className="size-10 bg-primary/15 rounded-xl flex items-center justify-center text-navy-custom">
@@ -696,7 +697,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant }) => {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[9px] font-black text-green-500 uppercase tracking-widest">Alerts Sent</span>
+                <span className="text-[10px] font-black text-green-500 tracking-widest">Alerts Sent</span>
                 <div className="flex-1 h-px bg-navy-custom/5"></div>
               </div>
             </div>
@@ -711,18 +712,18 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant }) => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_8px_#dbe890]"></span>
           </span>
-          <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-navy-custom/40">Modern Edu-Partner</span>
+          <span className="text-[10px] font-bold tracking-[0.2em] text-navy-custom/40">Simple. Safe. Connected.</span>
         </div>
 
         {/* Heading: Reduced size from 120px to 100px */}
-        <h1 className="text-6xl md:text-8xl lg:text-[90px] xl:text-[100px] font-extrabold text-navy-custom leading-[0.85] max-w-5xl mx-auto mb-10 tracking-[-0.04em] animate-fade-up opacity-0" style={{ animationDelay: '0.2s' }}>
-          Educational <br className="hidden lg:block" />
-          <span className="text-gradient">Fidelity </span> Hub.
+        <h1 className="text-6xl md:text-8xl lg:text-[90px] xl:text-[100px] font-extrabold text-navy-custom leading-[0.85] max-w-6xl mx-auto mb-10 tracking-[-0.04em] animate-fade-up opacity-0" style={{ animationDelay: '0.2s' }}>
+          School life made <br className="hidden lg:block" />
+          <span className="text-gradient">Easier</span> for Everyone.
         </h1>
 
         {/* Description: Reduced size and mb */}
         <p className="text-base md:text-lg text-navy-custom/30 max-w-xl mx-auto leading-relaxed font-medium mb-10 animate-fade-up opacity-0" style={{ animationDelay: '0.4s' }}>
-          Real-time performance metrics, logistics, and chapter-synced deployment. Built exclusively for elite CBSE & State institutions.
+          Attendance, bus tracking, marks, and notes—everything you need to know about your school, right on your phone. No confusion. Just clarity.
         </p>
 
         {/* Buttons: Reduced padding and rounded corners */}
@@ -743,7 +744,8 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant }) => {
         >
           {/* PRIMARY BUTTON */}
           <button
-            onClick={onOpenAssistant}
+            onClick={() => onNavigate?.('contact')}
+
             className="group relative w-[280px] h-[64px] rounded-[22px]
                bg-navy-custom text-white font-bold text-lg
                flex items-center justify-center

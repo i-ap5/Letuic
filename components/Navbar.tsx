@@ -44,7 +44,7 @@
 //           </div>
 //           {/* <span className="text-xl font-extrabold tracking-tighter text-navy-custom">Letuic</span> */}
 //         </div>
-        
+
 //         <nav className="hidden lg:flex items-center gap-8">
 //           {[
 //             { label: 'Home', id: 'platform' },
@@ -68,7 +68,7 @@
 //             Contact
 //           </button>
 //         </nav>
-        
+
 //         <div className="flex items-center gap-4">
 //           <button className="text-sm font-bold text-navy-custom/80 mr-4">Sign In</button>
 //           <button 
@@ -183,7 +183,7 @@
 //       <div className={`fixed inset-0 z-[550] lg:hidden transition-all duration-700 ${isOpen ? 'visible' : 'invisible pointer-events-none'}`}>
 //         {/* Background Morph */}
 //         <div className={`absolute inset-0 bg-white transition-all duration-700 ease-expo ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`} />
-        
+
 //         {/* Menu Content */}
 //         <div className="relative h-full flex flex-col justify-center items-center px-10">
 //           <div className="flex flex-col gap-6 text-center">
@@ -219,8 +219,8 @@ import React, { useState, useEffect } from 'react';
 import LogoSec from "@/components/assets/logo.svg?react";
 
 interface NavbarProps {
-  onNavigate: (view: 'home' | 'contact') => void;
-  currentView: 'home' | 'contact';
+  onNavigate: (view: 'home' | 'contact' | 'community') => void;
+  currentView: 'home' | 'contact' | 'community';
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
@@ -263,9 +263,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
       */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed top-8 right-8 md:right-12 z-[999] lg:hidden flex flex-col gap-1.5 p-3 text-navy-custom transition-all duration-500 ${
-          isOpen ? 'scale-110' : 'scale-100'
-        }`}
+        className={`fixed top-8 right-8 md:right-12 z-[999] lg:hidden flex flex-col gap-1.5 p-3 text-navy-custom transition-all duration-500 ${isOpen ? 'scale-110' : 'scale-100'
+          }`}
         aria-label="Toggle menu"
       >
         <span className={`h-0.5 w-6 bg-current transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
@@ -285,7 +284,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
           `}
         >
           <LogoSec
-            className="w-28 md:w-36 h-8 cursor-pointer text-navy-custom"
+            className={`w-28 md:w-36 h-8 cursor-pointer transition-all duration-500 hover:opacity-70 ${!isScrolled && currentView === 'community' ? 'text-white' : 'text-navy-custom'
+              }`}
             onClick={() => { onNavigate('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
           />
 

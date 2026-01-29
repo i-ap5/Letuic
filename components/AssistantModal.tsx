@@ -107,7 +107,7 @@ const AssistantModal: React.FC<AssistantModalProps> = ({ isOpen, onClose }) => {
 
         {/* Action Tray */}
         <div className="px-10 py-4 flex gap-3 overflow-x-auto no-scrollbar border-t border-gray-50">
-          {['Features for Teachers', 'Driver App Functions', 'App Management', 'Parent Dashboard'].map(cmd => (
+          {['How do I check marks?', 'Where is the bus?', 'How to send notes?', 'Is my child safe?'].map(cmd => (
             <button
               key={cmd}
               onClick={() => handleMagicCommand(cmd)}

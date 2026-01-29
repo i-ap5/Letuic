@@ -81,27 +81,26 @@
 //   );
 // };
 
-// export default HowItWorks;
 import React from 'react';
 
 const steps = [
   {
     num: '01',
-    title: 'Precision Deployment',
-    tag: 'Academic Sync',
-    description: 'Faculty deploy syllabus-aligned materials chapter-by-chapter. Seamless syncing ensures students are on the same page instantly.'
+    title: 'Start Teaching',
+    tag: 'For Teachers',
+    description: 'Teachers just teach. We handle the rest. Mark attendance and share notes in seconds.'
   },
   {
     num: '02',
-    title: 'Reactive Alerts',
-    tag: 'Neural Alerts',
-    description: 'Attendance triggers real-time parent notifications. Every assessment initiates a deep-dive fidelity analysis automatically.'
+    title: 'Learn without limits',
+    tag: 'For Students',
+    description: "School follows you home, in the best way. Get notes, ask questions, and check your marks anytime."
   },
   {
     num: '03',
-    title: 'Knowledge Synthesis',
-    tag: 'Community Hub',
-    description: 'Students shift from passive consumers to active knowledge creators. Collaborative forums foster a digital campus culture.'
+    title: 'Connect from home',
+    tag: 'For Parents',
+    description: "You're always in the loop, without the stress. Know about the bus, marks, and everything else."
   }
 ];
 
@@ -112,15 +111,15 @@ const HowItWorks: React.FC = () => {
 
       {/* Reduced bottom margin from mb-32 to mb-20 */}
       <div className="flex flex-col items-center text-center mb-20 reveal">
-        <div className="px-5 py-1.5 rounded-full bg-navy-custom/5 border border-navy-custom/10 text-[9px] font-black uppercase tracking-[0.4em] text-navy-custom mb-8">
-          The Methodology
+        <div className="px-5 py-1.5 rounded-full bg-navy-custom/5 border border-navy-custom/10 text-[9px] font-black tracking-[0.4em] text-navy-custom mb-8">
+          Simple Steps
         </div>
         {/* Condensed heading scale from text-8xl to text-5xl/text-6xl */}
         <h2 className="text-4xl md:text-6xl font-extrabold tracking-tighter text-navy-custom leading-[0.95] mb-6">
-          Orchestrated <br />Efficiency.
+          How it <br />Helps You.
         </h2>
         <p className="text-base md:text-lg text-navy-custom/40 font-medium max-w-xl leading-relaxed">
-          A refined three-step methodology designed to bridge the gap between institutional management and home-life.
+          We keep things simple so you can focus on what matters most—learning and growing.
         </p>
       </div>
 
@@ -146,7 +145,7 @@ const HowItWorks: React.FC = () => {
                   <div className="size-10 rounded-xl bg-navy-custom flex items-center justify-center text-primary shadow-lg group-hover:rotate-12 transition-all duration-500">
                     <span className="text-xs font-black">{step.num}</span>
                   </div>
-                  <div className="px-3 py-1.5 rounded-full bg-apple-grey text-[9px] font-black uppercase tracking-[0.2em] text-navy-custom/30 group-hover:bg-primary group-hover:text-navy-custom transition-all">
+                  <div className="px-3 py-1.5 rounded-full bg-apple-grey text-[9px] font-black tracking-[0.2em] text-navy-custom/30 group-hover:bg-primary group-hover:text-navy-custom transition-all">
                     {step.tag}
                   </div>
                 </div>
@@ -178,7 +177,7 @@ const HowItWorks: React.FC = () => {
       <div className="mt-20 flex justify-center reveal">
         <div className="flex items-center gap-4 group cursor-default">
           <div className="size-1.5 bg-navy-custom rounded-full animate-pulse group-hover:bg-primary transition-colors"></div>
-          <span className="text-[9px] font-black uppercase tracking-[0.6em] text-navy-custom/10 group-hover:text-navy-custom/40 transition-colors">
+          <span className="text-[9px] font-black tracking-[0.6em] text-navy-custom/10 group-hover:text-navy-custom/40 transition-colors">
             Letuic Core Workflow
           </span>
         </div>

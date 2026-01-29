@@ -8,10 +8,15 @@ import CTA from './components/CTA';
 import Footer from './components/Footer';
 import AssistantModal from './components/AssistantModal';
 import Contact from './components/Contact';
+import Community from './components/Community';
 
 const App: React.FC = () => {
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'contact'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'contact' | 'community'>('home');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentView]);
 
   useEffect(() => {
     // Scroll Reveal Observer
@@ -37,26 +42,31 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen selection:bg-primary/30">
       <Navbar onNavigate={(view) => setCurrentView(view)} currentView={currentView} />
-      
+
       <main className="pt-2">
         {currentView === 'home' ? (
           <>
             <div id="platform">
-              <Hero onOpenAssistant={() => setIsAssistantOpen(true)} />
+              <Hero
+                onOpenAssistant={() => setIsAssistantOpen(true)}
+                onNavigate={(view: any) => setCurrentView(view)}
+              />
             </div>
-            
+
             <div id="ecosystem" className="scroll-mt-32">
-              <BentoGrid />
+              <BentoGrid onNavigate={(view) => setCurrentView(view)} />
             </div>
-            
+
             <div id="solutions" className="scroll-mt-32">
               <HowItWorks />
             </div>
-            
+
             <div id="security" className="reveal scroll-mt-32">
-              <CTA />
+              <CTA onNavigate={(view: any) => setCurrentView(view)} />
             </div>
           </>
+        ) : currentView === 'community' ? (
+          <Community onNavigate={(view) => setCurrentView(view)} />
         ) : (
           <Contact />
         )}
@@ -64,18 +74,18 @@ const App: React.FC = () => {
 
       <Footer onNavigate={(view) => setCurrentView(view)} />
 
-      <AssistantModal 
-        isOpen={isAssistantOpen} 
-        onClose={() => setIsAssistantOpen(false)} 
+      <AssistantModal
+        isOpen={isAssistantOpen}
+        onClose={() => setIsAssistantOpen(false)}
       />
 
       {/* Floating Action Button for AI Assistant */}
-      <button 
+      <button
         onClick={() => setIsAssistantOpen(true)}
         className="fixed bottom-8 right-8 z-50 bg-navy-custom text-primary p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center group"
       >
         <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping group-hover:animate-none"></div>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg>
       </button>
     </div>
   );
