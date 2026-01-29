@@ -43,7 +43,7 @@
 //             </div>
 //             <p className="text-navy-custom/40 text-lg leading-relaxed max-w-sm">Leading the next generation of educational intelligence through connected platforms.</p>
 //           </div>
-          
+
 //           <div className="col-span-12 lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
 //             {sections.map((section) => (
 //               <div key={section.title}>
@@ -57,7 +57,7 @@
 //             ))}
 //           </div>
 //         </div>
-        
+
 //         <div className="pt-10 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6">
 //           <p className="text-[10px] font-bold text-navy-custom/20 uppercase tracking-widest">© 2026 LetUIC Inc.</p>
 //           <div className="flex gap-8 text-[10px] font-bold text-navy-custom/40 uppercase tracking-widest">
@@ -156,7 +156,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* BOTTOM BAR */}
         <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[10px] font-bold text-navy-custom/20 uppercase tracking-[0.35em]">
-            © 2026 LetUIC Inc.
+            © 2026 Letuic Inc.
           </p>
 
           <div className="flex gap-6 text-[10px] font-bold text-navy-custom/40 uppercase tracking-[0.35em]">

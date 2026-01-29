@@ -45,7 +45,7 @@
 //     <section className="min-h-screen py-24 relative overflow-hidden px-6">
 //       {/* Background elements */}
 //       <div className="absolute top-0 right-0 size-[600px] bg-primary/10 blur-[140px] rounded-full -translate-y-1/2 translate-x-1/2 -z-10"></div>
-      
+
 //       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
 //         <div className="reveal-left in-view">
 //           <div className="px-6 py-2 rounded-full bg-navy-custom/5 border border-navy-custom/10 text-[10px] font-black uppercase tracking-[0.4em] text-navy-custom mb-10 w-fit">Inquiry Node</div>
@@ -174,7 +174,7 @@ const Contact: React.FC = () => {
       <section className="min-h-[70vh] flex items-center justify-center px-6">
         <div className="max-w-md w-full text-center reveal-scale">
           <div className="size-20 bg-primary rounded-[24px] flex items-center justify-center text-navy-custom mx-auto mb-8 shadow-lg">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12" /></svg>
           </div>
           <h2 className="text-3xl font-black text-navy-custom mb-4 tracking-tighter">Transmission Successful.</h2>
           <p className="text-base text-navy-custom/40 font-medium">Your institutional telemetry has been received. Expect sync within 24 cycles.</p>
@@ -189,24 +189,24 @@ const Contact: React.FC = () => {
   return (
     /* Container locked to 1280px with px-6/px-10 to match Bento Grid sides */
     <section className="container max-w-[1280px] mx-auto px-6 md:px-10 py-24 relative overflow-hidden">
-      
+
       {/* Percentage-based background blur - Stops mobile breaking */}
       <div className="absolute top-0 right-0 w-[50%] aspect-square bg-primary/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 -z-10"></div>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-        
+
         {/* Left Content - Takes 5 cols */}
         <div className="lg:col-span-5 space-y-10 reveal-left">
           <div className="px-4 py-1.5 rounded-full bg-navy-custom/5 border border-navy-custom/10 text-[9px] font-black uppercase tracking-[0.4em] text-navy-custom w-fit">
             Inquiry Node
           </div>
-          
+
           <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-navy-custom leading-[0.95]">
-            Get in <br/><span className="text-gradient">Sync.</span>
+            Get in <br /><span className="text-gradient">Sync.</span>
           </h2>
-          
+
           <p className="text-base text-navy-custom/40 font-medium leading-relaxed max-w-sm">
-            Ready to deploy LetUIC Intelligence? Submit your telemetry data and let's orchestrate your educational future.
+            Ready to deploy Letuic Intelligence? Submit your telemetry data and let's orchestrate your educational future.
           </p>
 
           <div className="space-y-6 pt-4">
@@ -235,54 +235,54 @@ const Contact: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-navy-custom/40 ml-2">Name</label>
-                  <input 
+                  <input
                     required
-                    type="text" 
+                    type="text"
                     placeholder="Enter your name"
                     className="w-full bg-apple-grey/60 border-none rounded-xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none"
                     value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-navy-custom/40 ml-2">Email</label>
-                  <input 
+                  <input
                     required
-                    type="email" 
+                    type="email"
                     placeholder="Enter your email"
                     className="w-full bg-apple-grey/60 border-none rounded-xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none"
                     value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-navy-custom/40 ml-2">Phone</label>
-                <input 
+                <input
                   required
-                  type="tel" 
+                  type="tel"
                   placeholder="+91 XXXXX XXXXX"
                   className="w-full bg-apple-grey/60 border-none rounded-xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none"
                   value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 />
               </div>
 
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-navy-custom/40 ml-2">Objectives</label>
-                <textarea 
+                <textarea
                   required
                   rows={3}
                   placeholder="Institution scale and goals..."
                   className="w-full bg-apple-grey/60 border-none rounded-2xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none resize-none"
                   value={formData.description}
-                  onChange={(e) => setFormData({...formData, description: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 ></textarea>
               </div>
 
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={isSubmitting}
                 className="w-full bg-navy-custom text-white py-4.5 rounded-2xl font-bold text-base hover:bg-black transition-all flex items-center justify-center gap-3 group disabled:opacity-50"
               >
@@ -291,7 +291,7 @@ const Contact: React.FC = () => {
                 ) : (
                   <>
                     Send Inquiry
-                    <svg width="18" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    <svg width="18" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="group-hover:translate-x-1 transition-transform"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                   </>
                 )}
               </button>
