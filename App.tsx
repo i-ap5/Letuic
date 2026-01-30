@@ -66,7 +66,7 @@ const App: React.FC = () => {
   }, [currentView]); // Re-observe when view changes
 
   return (
-    <div className={`min-h-screen selection:bg-primary/30 ${currentView === 'community' ? 'bg-navy-custom' : 'bg-white'}`}>
+    <div className={`min-h-screen selection:bg-primary/30 overflow-x-hidden ${currentView === 'community' ? 'bg-navy-custom' : 'bg-white'}`}>
       <Navbar onNavigate={handleNavigate} currentView={currentView} />
 
       <main>
