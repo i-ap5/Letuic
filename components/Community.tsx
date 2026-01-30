@@ -52,7 +52,7 @@ const Community: React.FC<CommunityProps> = ({ onNavigate }) => {
             `}</style>
 
             {/* Hero Section */}
-            <section className="px-6 md:px-12 mb-32 relative overflow-visible">
+            <section className="px-4 md:px-12 mb-32 relative overflow-visible">
                 <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
 
                     {/* Left: Text Content */}
@@ -174,7 +174,7 @@ const Community: React.FC<CommunityProps> = ({ onNavigate }) => {
             </section>
 
             {/* Feature Sections */}
-            <section className="px-6 md:px-12 max-w-7xl mx-auto space-y-32">
+            <section className="px-4 md:px-12 max-w-7xl mx-auto space-y-32">
 
                 {/* 1. Interschool Competitions */}
                 <div className="grid md:grid-cols-2 gap-12 items-center reveal-community opacity-0 translate-y-8 transition-all duration-1000">
@@ -329,7 +329,7 @@ const Community: React.FC<CommunityProps> = ({ onNavigate }) => {
             </section>
 
             {/* CTA Footer */}
-            <section className="mt-40 mb-20 text-center px-6 relative max-w-4xl mx-auto">
+            <section className="mt-40 mb-20 text-center px-4 relative max-w-4xl mx-auto">
                 {/* Glow BG */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[600px] h-[300px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
 

@@ -52,7 +52,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
       */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed top-8 right-8 md:right-12 z-[999] lg:hidden flex flex-col gap-1.5 p-3 text-navy-custom transition-all duration-500 ${isOpen ? 'scale-110' : 'scale-100'
+        className={`fixed top-6 right-7 md:right-12 z-[999] lg:hidden flex flex-col gap-1.5 p-3 transition-all duration-500 ${isOpen ? 'scale-110 text-navy-custom' : isCommunity ? 'text-white' : 'text-navy-custom'
           }`}
         aria-label="Toggle menu"
       >
@@ -62,7 +62,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
       </button>
 
       {/* 2. THE CAPSULE NAVBAR */}
-      <div className={`fixed top-0 left-0 right-0 z-[500] flex justify-center p-4 md:p-6 transition-transform duration-700 ${isOpen ? '-translate-y-24' : 'translate-y-0'}`}>
+      <div className={`fixed top-0 left-0 right-0 z-[500] flex justify-center p-4 md:p-6 transition-transform duration-700 ${isOpen ? 'translate-y-0' : 'translate-y-0'}`}>
         <header
           className={`
             flex items-center justify-between transition-all duration-700 ease-in-out px-6 md:px-8
@@ -99,7 +99,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
             {/* Updated Contact Button Logic */}
             <button
               onClick={() => onNavigate('contact')}
-              className={`${useWhiteLogo ? 'bg-primary text-navy-custom shadow-primary/20' : 'bg-navy-custom text-white shadow-navy-custom/10'} px-5 py-2 rounded-xl font-bold text-[10px] uppercase tracking-widest shadow-lg hover:scale-105 transition-all duration-300`}
+              className={`${useWhiteLogo ? 'bg-primary text-navy-custom shadow-primary/20' : 'bg-navy-custom text-white shadow-navy-custom/10'} hidden md:block px-5 py-2 rounded-xl font-bold text-[10px] uppercase tracking-widest shadow-lg hover:scale-105 transition-all duration-300`}
             >
               Contact
             </button>

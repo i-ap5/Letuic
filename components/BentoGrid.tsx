@@ -30,7 +30,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
   }, []);
 
   return (
-    <section className="container max-w-[1280px] mx-auto px-6 pb-32">
+    <section className="container max-w-[1280px] mx-auto px-4 md:px-6 pb-32">
       <div className="w-full relative z-30 pt-10 pb-6 overflow-hidden">
         {/* Optical Anchor */}
         <div
@@ -53,12 +53,12 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
             {[...Array(2)].map((_, i) => (
               <div key={i} className="flex items-center">
                 {[
-                  { category: "Syllabus", title: "Synchronization" },
-                  { category: "Real-time", title: "Fleet GPS" },
-                  { category: "Neural", title: "Presence Log" },
-                  { category: "Growth", title: "Performance IQ" },
-                  { category: "Adaptive", title: "Assessments" },
-                  { category: "Campus", title: "Activity Stream" },
+                  { category: "Classroom", title: "Lesson Plans" },
+                  { category: "Transport", title: "Bus Tracker" },
+                  { category: "Daily", title: "Attendance" },
+                  { category: "Progress", title: "My Marks" },
+                  { category: "Homework", title: "Assignments" },
+                  { category: "Campus", title: "Notice Board" },
                 ].map((item, idx) => (
                   <div
                     key={idx}
@@ -141,7 +141,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
                   <span className="px-3 py-1 rounded-full text-[9px] font-black tracking-widest bg-apple-grey text-navy-custom/40 border border-gray-100 uppercase">For Everyone</span>
                 </div>
                 <h3 className="text-4xl md:text-5xl font-extrabold mb-6 leading-[1.05] tracking-tighter text-navy-custom">Everything in <br />one place.</h3>
-                <p className="text-navy-custom/50 text-lg leading-relaxed font-medium max-w-sm">No more switching between apps. Notes, marks, updates, and bus tracking—all right here.</p>
+                <p className="text-navy-custom/50 text-lg leading-relaxed font-medium max-w-sm">No more switching between apps. Notes, marks, updates, and bus tracking, all right here.</p>
               </div>
               <div className="flex items-center gap-4 mt-12">
                 <div className="flex -space-x-3">

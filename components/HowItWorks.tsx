@@ -107,7 +107,7 @@ const steps = [
 const HowItWorks: React.FC = () => {
   return (
     /* Reduced container max-width and margins */
-    <section className="container max-w-[1280px] mx-auto px-6 mb-32">
+    <section className="container max-w-[1280px] mx-auto px-4 md:px-6 mb-32">
 
       {/* Reduced bottom margin from mb-32 to mb-20 */}
       <div className="flex flex-col items-center text-center mb-20 reveal">
@@ -122,11 +122,11 @@ const HowItWorks: React.FC = () => {
           <div className="h-px w-12 bg-navy-custom/10"></div>
         </div>
         {/* Condensed heading scale from text-8xl to text-5xl/text-6xl */}
-        <h2 className="text-4xl md:text-6xl font-extrabold tracking-tighter text-navy-custom leading-[0.95] mb-6">
+        <h2 className="text-5xl md:text-7xl font-black text-navy-custom tracking-tighter leading-none mb-8">
           How it <br />Helps You.
         </h2>
         <p className="text-base md:text-lg text-navy-custom/40 font-medium max-w-xl leading-relaxed">
-          We keep things simple so you can focus on what matters most—learning and growing.
+          We keep things simple so you can focus on what matters most, learning and growing.
         </p>
       </div>
 

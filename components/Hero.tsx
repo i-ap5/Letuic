@@ -553,7 +553,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
   return (
     // <section className="relative min-h-screen flex flex-col bg-[#F8F9FA] overflow-hidden pt-20">
     // <section className="relative h-auto flex flex-col bg-[#F8F9FA] overflow-hidden pt-20 pb-12">
-    <section className="relative h-[100dvh] flex flex-col bg-[#F8F9FA] overflow-hidden pt-20 pb-12">
+    <section className="relative w-full min-h-[95vh] bg-[#F8F9FA] overflow-hidden flex flex-col items-center pt-32 pb-20">
 
       {/* Premium Blur-to-Focus Animation */}
       <style dangerouslySetInnerHTML={{
@@ -706,7 +706,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
       </div>
 
       {/* Main Hero Content - REFINED TYPOGRAPHY */}
-      <div className="relative z-20 flex-1 flex flex-col items-center justify-center container max-w-[1200px] mx-auto px-6 text-center">
+      <div className="relative z-20 flex-1 flex flex-col items-center justify-center container max-w-[1200px] mx-auto px-4 md:px-6 text-center">
         {/* <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-2xl px-5 py-1.5 rounded-full shadow-sm border border-white/30 mb-8 animate-fade-up opacity-0">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -725,7 +725,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
 
         {/* Description: Reduced size and mb */}
         <p className="text-base md:text-lg text-navy-custom/30 max-w-xl mx-auto leading-relaxed font-medium mb-10 animate-fade-up opacity-0" style={{ animationDelay: '0.4s' }}>
-          Attendance, bus tracking, marks, and notes—everything you need to know about your school, right on your phone. No confusion. Just clarity.
+          Attendance, bus tracking, marks, and notes, everything you need to know about your school, right on your phone. No confusion. Just clarity.
         </p>
 
         {/* Buttons: Reduced padding and rounded corners */}
@@ -806,6 +806,9 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
         </div>
 
       </div>
+
+      {/* Seamless Blend Gradient (No Rounded Corners) */}
+      <div className="absolute bottom-0 w-full h-20 bg-gradient-to-t from-white via-white/40 to-transparent z-20 pointer-events-none"></div>
     </section>
   );
 };
