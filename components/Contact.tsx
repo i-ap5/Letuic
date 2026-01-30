@@ -70,7 +70,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section className="container max-w-[1280px] mx-auto px-6 md:px-10 py-24 relative overflow-hidden">
+    <section className="container max-w-[1280px] mx-auto px-4 md:px-10 py-24 relative overflow-hidden">
 
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[50%] aspect-square bg-primary/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 -z-10"></div>
