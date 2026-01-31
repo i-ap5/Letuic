@@ -80,7 +80,7 @@ const AssistantModal: React.FC<AssistantModalProps> = ({ isOpen, onClose }) => {
         <div ref={scrollRef} className="flex-1 overflow-y-auto p-10 space-y-8 bg-apple-grey/20 no-scrollbar">
           {messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-up`}>
-              <div className={`max-w-[85%] p-6 rounded-[32px] text-base font-medium leading-relaxed shadow-sm ${msg.role === 'user'
+              <div className={`max-w-[85%] px-6 py-4 rounded-[32px] text-base font-medium text-sm leading-relaxed shadow-sm ${msg.role === 'user'
                 ? 'bg-navy-custom text-white rounded-tr-none'
                 : 'bg-white text-navy-custom rounded-tl-none border border-gray-100 prose prose-slate prose-sm max-w-none'
                 }`}>
@@ -94,7 +94,7 @@ const AssistantModal: React.FC<AssistantModalProps> = ({ isOpen, onClose }) => {
           ))}
           {isTyping && (
             <div className="flex justify-start">
-              <div className="bg-white p-6 rounded-[32px] rounded-tl-none border border-gray-100 shadow-sm">
+              <div className="bg-white px-6 py-4 rounded-[32px] rounded-tl-none border border-gray-100 shadow-sm">
                 <div className="flex gap-2">
                   <div className="size-2 bg-navy-custom/20 rounded-full animate-bounce"></div>
                   <div className="size-2 bg-navy-custom/20 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
@@ -106,12 +106,12 @@ const AssistantModal: React.FC<AssistantModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Action Tray */}
-        <div className="px-10 py-4 flex gap-3 overflow-x-auto no-scrollbar border-t border-gray-50">
-          {['How do I check marks?', 'Where is the bus?', 'How to send notes?', 'Is my child safe?'].map(cmd => (
+        <div className="px-10 py-4 flex gap-3 overflow-x-auto no-scrollbar border-t border-gray-50 font-normal">
+          {['What is Letuic?', 'How do I get started?', 'Is there a mobile app?', 'How do I contact support?'].map(cmd => (
             <button
               key={cmd}
               onClick={() => handleMagicCommand(cmd)}
-              className="flex-shrink-0 px-5 py-2.5 bg-navy-custom/5 hover:bg-primary/20 text-navy-custom text-xs font-medium tracking-normal rounded-full transition-colors border border-navy-custom/5"
+              className="flex-shrink-0 px-5 py-2.5 bg-white/5 hover:bg-primary/20 text-navy-custom text-xs font-medium tracking-normal rounded-full transition-colors border border-navy-custom/5"
             >
               {cmd}
             </button>
@@ -128,12 +128,12 @@ const AssistantModal: React.FC<AssistantModalProps> = ({ isOpen, onClose }) => {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               placeholder="Ask about Letuic"
-              className="w-full bg-apple-grey/60 border-none rounded-2xl py-4 px-4 pr-20 text-lg font-medium focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none"
+              className="w-full bg-apple-grey/60 border-none rounded-2xl py-4 px-4 pr-20 text-md font-medium focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none"
             />
             <button
               onClick={handleSend}
               disabled={!input.trim() || isTyping}
-              className="absolute right-2 top-1/2 -translate-y-1/2 size-12 bg-navy-custom text-primary rounded-xl flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:scale-100"
+              className="absolute right-1 top-1/2 -translate-y-1/2 size-12 bg-navy-custom text-primary rounded-xl flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:scale-100"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
             </button>

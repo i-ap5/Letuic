@@ -82,7 +82,8 @@ app.post('/api/chat', async (req, res) => {
         - Transport logistics (Bus tracking, arrival alerts).
         - Student Engagement (Activity feeds, student-run content, discussion boards).
         
-        Be helpful, concise, and professional. If asked about bus tracking, explain how our live GPS integration works for parents. If asked about attendance, mention our auto-alert system for parents.`,
+        Be helpful, concise, and professional. If asked about bus tracking, explain how our live GPS integration works for parents. If asked about attendance, mention our auto-alert system for parents.
+        If asked for support or contact info, provide: info@letuic.com`,
             },
             // Forwarding history if beneficial, the original code had it in signature but unused.
             // history: history 
@@ -93,6 +94,42 @@ app.post('/api/chat', async (req, res) => {
     } catch (error) {
         console.error("Gemini Chat Error:", error);
         res.status(500).json({ error: "Error connecting to intelligence layer." });
+    }
+});
+
+// Endpoint: Submit Contact Form
+app.post('/api/submit-contact', async (req, res) => {
+    const { name, email, phone, description } = req.body;
+
+    if (!name || !email || !phone || !description) {
+        return res.status(400).json({ error: "All fields are required." });
+    }
+
+    const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLScgmztzzVO0N2Uvn2Dd3QAj2pQgreyKrLbIilOqCfdBjtZzaQ/formResponse";
+
+    try {
+        const formData = new URLSearchParams();
+        formData.append("entry.397564941", name);
+        formData.append("entry.908752501", email);
+        formData.append("entry.1958228289", phone);
+        formData.append("entry.1254308882", description);
+
+        const response = await fetch(GOOGLE_FORM_ACTION_URL, {
+            method: "POST",
+            body: formData,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Google Form returned status: ${response.status}`);
+        }
+
+        res.json({ success: true, message: "Form submitted successfully" });
+    } catch (error) {
+        console.error("Contact Form Submission Error:", error);
+        res.status(500).json({ error: "Failed to submit form." });
     }
 });
 

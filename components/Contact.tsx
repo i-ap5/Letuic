@@ -8,21 +8,49 @@ const Contact: React.FC = () => {
     description: ''
   });
 
-  const [errors, setErrors] = useState<{ email?: string; name?: string }>({});
+  const [errors, setErrors] = useState<{ email?: string; name?: string; phone?: string; description?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+
+    // Ensure it starts with +91
+    if (!value.startsWith('+91 ')) {
+      value = '+91 ' + value.replace(/^\+91\s?/, '');
+    }
+
+    // Allow only numbers/spaces
+    const numericPart = value.substring(4).replace(/\D/g, '');
+
+    // Limit to 10 digits
+    if (numericPart.length > 10) return;
+
+    setFormData({ ...formData, phone: '+91 ' + numericPart });
+    if (errors.phone) setErrors({ ...errors, phone: undefined });
+  };
+
   const validate = () => {
-    const newErrors: { email?: string; name?: string } = {};
+    const newErrors: { email?: string; name?: string; phone?: string; description?: string } = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
+      newErrors.name = "We need a name to address you properly!";
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = "How can we write back without an email?";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
+      newErrors.email = "That email looks a bit disjointed. Typo?";
+    }
+
+    const phoneDigits = formData.phone.replace(/\D/g, '');
+    // +91 is 2 digits + 10 digit number = 12 digits total, or just check suffix length
+    if (phoneDigits.length < 12) { // 91 + 10 digits
+      newErrors.phone = "We need 10 valid digits to reach you!";
+    }
+
+    if (!formData.description.trim()) {
+      newErrors.description = "Tell us a tiny bit more about your vision!";
     }
 
     setErrors(newErrors);
@@ -37,20 +65,18 @@ const Contact: React.FC = () => {
 
     setIsSubmitting(true);
 
-    const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLScgmztzzVO0N2Uvn2Dd3QAj2pQgreyKrLbIilOqCfdBjtZzaQ/formResponse";
-
-    const submissionData = new FormData();
-    submissionData.append("entry.397564941", formData.name);
-    submissionData.append("entry.908752501", formData.email);
-    submissionData.append("entry.1958228289", formData.phone);
-    submissionData.append("entry.1254308882", formData.description);
+    const API_URL = "/api/submit-contact";
 
     try {
-      await fetch(GOOGLE_FORM_ACTION_URL, {
+      const response = await fetch(API_URL, {
         method: "POST",
-        mode: "no-cors",
-        body: submissionData
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
+
+      if (!response.ok) throw new Error("Server submission failed");
 
       // Artificial delay for smooth UX
       setTimeout(() => {
@@ -155,7 +181,7 @@ const Contact: React.FC = () => {
                         if (errors.name) setErrors({ ...errors, name: undefined });
                       }}
                     />
-                    {errors.name && <p className="text-red-500 text-[10px] font-bold ml-2">{errors.name}</p>}
+                    {errors.name && <p className="text-red-500 text-[10px] font-normal ml-2">{errors.name}</p>}
                   </div>
 
                   {/* Email Field */}
@@ -171,7 +197,7 @@ const Contact: React.FC = () => {
                         if (errors.email) setErrors({ ...errors, email: undefined });
                       }}
                     />
-                    {errors.email && <p className="text-red-500 text-[10px] font-bold ml-2">{errors.email}</p>}
+                    {errors.email && <p className="text-red-500 text-[10px] font-normal ml-2">{errors.email}</p>}
                   </div>
                 </div>
 
@@ -179,26 +205,29 @@ const Contact: React.FC = () => {
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-navy-custom/40 ml-2">Phone</label>
                   <input
-                    required
                     type="tel"
                     placeholder="+91 XXXXX XXXXX"
-                    className="w-full bg-apple-grey/60 border-none rounded-xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none"
+                    className={`w-full bg-apple-grey/60 border-none rounded-xl py-4 px-5 text-sm font-medium focus:ring-2 focus:bg-white transition-all outline-none ${errors.phone ? 'ring-2 ring-red-500/50 bg-red-50/50' : 'focus:ring-primary'}`}
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={handlePhoneChange}
                   />
+                  {errors.phone && <p className="text-red-500 text-[10px] font-normal ml-2">{errors.phone}</p>}
                 </div>
 
                 {/* Description Field */}
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-navy-custom/40 ml-2">Objectives</label>
                   <textarea
-                    required
                     rows={3}
                     placeholder="What do you expect from Letuic?"
-                    className="w-full bg-apple-grey/60 border-none rounded-2xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none resize-none"
+                    className={`w-full bg-apple-grey/60 border-none rounded-2xl py-4 px-5 text-sm font-medium focus:ring-2 focus:bg-white transition-all outline-none resize-none ${errors.description ? 'ring-2 ring-red-500/50 bg-red-50/50' : 'focus:ring-primary'}`}
                     value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    onChange={(e) => {
+                      setFormData({ ...formData, description: e.target.value });
+                      if (errors.description) setErrors({ ...errors, description: undefined });
+                    }}
                   ></textarea>
+                  {errors.description && <p className="text-red-500 text-[10px] font-normal ml-2">{errors.description}</p>}
                 </div>
 
                 {/* Submit Button - Fixed Height to prevent jump */}

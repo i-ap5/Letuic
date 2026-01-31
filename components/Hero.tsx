@@ -717,14 +717,19 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
           <span className="text-[10px] font-bold tracking-[0.2em] text-navy-custom/40 uppercase">Simply Collaborate</span>
         </div>
 
-        {/* Heading: Reduced size from 120px to 100px */}
-        <h1 className="text-6xl md:text-8xl lg:text-[90px] xl:text-[100px] font-extrabold text-navy-custom leading-[0.85] max-w-6xl mx-auto mb-10 tracking-[-0.04em] animate-fade-up opacity-0" style={{ animationDelay: '0.2s' }}>
-          School life made <br className="hidden lg:block" />
-          <span className="text-gradient">easier</span> for Everyone.
+        {/* Heading: Word-by-Word Reveal Animation */}
+        <h1 className="text-6xl md:text-7xl lg:text-[80px] xl:text-[90px] font-extrabold text-navy-custom leading-[0.85] max-w-6xl mx-auto mb-10 tracking-[-0.04em]">
+          <span className="inline-block animate-fade-up opacity-0" style={{ animationDelay: '0.1s' }}>School</span>{' '}
+          <span className="inline-block animate-fade-up opacity-0" style={{ animationDelay: '0.2s' }}>life</span>{' '}
+          <span className="inline-block animate-fade-up opacity-0" style={{ animationDelay: '0.3s' }}>made</span>
+          <br className="hidden lg:block" />
+          <span className="inline-block text-gradient animate-fade-up opacity-0" style={{ animationDelay: '0.4s', animationDuration: '0.8s' }}>Easier</span>{' '}
+          <span className="inline-block animate-fade-up opacity-0" style={{ animationDelay: '0.5s' }}>for</span>{' '}
+          <span className="inline-block animate-fade-up opacity-0" style={{ animationDelay: '0.6s' }}>Everyone.</span>
         </h1>
 
         {/* Description: Reduced size and mb */}
-        <p className="text-base md:text-lg text-navy-custom/30 max-w-xl mx-auto leading-relaxed font-medium mb-10 animate-fade-up opacity-0" style={{ animationDelay: '0.4s' }}>
+        <p className="text-base md:text-lg text-navy-custom/30 max-w-xl mx-auto leading-relaxed font-medium mb-10 animate-fade-up opacity-0" style={{ animationDelay: '0.7s' }}>
           Attendance, bus tracking, marks, and notes, everything you need to know about your school, right on your phone. No confusion. Just clarity.
         </p>
 
@@ -742,7 +747,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
         </div> */}
         <div
           className="flex flex-col sm:flex-row justify-center items-center gap-4 animate-fade-up opacity-0"
-          style={{ animationDelay: "0.6s" }}
+          style={{ animationDelay: "0.9s" }}
         >
           {/* PRIMARY BUTTON */}
           <button
