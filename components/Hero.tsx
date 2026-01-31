@@ -721,7 +721,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
         <h1 className="text-6xl md:text-7xl lg:text-[80px] xl:text-[90px] font-extrabold text-navy-custom leading-[0.85] max-w-6xl mx-auto mb-10 tracking-[-0.04em]">
           <span className="inline-block animate-fade-up opacity-0" style={{ animationDelay: '0.1s' }}>School</span>{' '}
           <span className="inline-block animate-fade-up opacity-0" style={{ animationDelay: '0.2s' }}>life</span>{' '}
-          <span className="inline-block animate-fade-up opacity-0" style={{ animationDelay: '0.3s' }}>made</span>
+          <span className="inline-block animate-fade-up opacity-0" style={{ animationDelay: '0.3s' }}>made</span>{' '}
           <br className="hidden lg:block" />
           <span className="inline-block text-gradient animate-fade-up opacity-0" style={{ animationDelay: '0.4s', animationDuration: '0.8s' }}>Easier</span>{' '}
           <span className="inline-block animate-fade-up opacity-0" style={{ animationDelay: '0.5s' }}>for</span>{' '}
