@@ -35,20 +35,57 @@ const Community: React.FC<CommunityProps> = ({ onNavigate }) => {
     return (
         <div className="min-h-screen bg-navy-custom text-white selection:bg-primary/30 pb-20 pt-24 md:pt-32" ref={scrollRef}>
 
-            {/* Custom Animations Styles */}
+            {/* Custom Animations Styles - ENHANCED */}
             <style>{`
                 @keyframes orbit-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
                 @keyframes orbit-ccw { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
                 @keyframes maintain-upright { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
                 @keyframes maintain-upright-ccw { from { transform: rotate(-360deg); } to { transform: rotate(0deg); } }
                 
-                .anim-orbit-slow { animation: orbit-cw 40s linear infinite; }
-                .anim-orbit-med { animation: orbit-ccw 25s linear infinite; }
-                .anim-orbit-fast { animation: orbit-cw 15s linear infinite; }
+                @keyframes float {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-10px); }
+                }
                 
-                .anim-counter-slow { animation: maintain-upright 40s linear infinite; }
-                .anim-counter-med { animation: maintain-upright-ccw 25s linear infinite; }
-                .anim-counter-fast { animation: maintain-upright 15s linear infinite; }
+                @keyframes pulse-glow {
+                    0%, 100% { box-shadow: 0 0 40px -10px rgba(219, 232, 144, 0.4); }
+                    50% { box-shadow: 0 0 60px -5px rgba(219, 232, 144, 0.6); }
+                }
+                
+                @keyframes fade-in-up {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                
+                @keyframes subtle-float {
+                    0%, 100% { transform: translate(0, 0); }
+                    25% { transform: translate(5px, -5px); }
+                    50% { transform: translate(0, -8px); }
+                    75% { transform: translate(-5px, -5px); }
+                }
+                
+                .anim-orbit-slow { animation: orbit-cw 50s linear infinite; }
+                .anim-orbit-med { animation: orbit-ccw 35s linear infinite; }
+                .anim-orbit-fast { animation: orbit-cw 20s linear infinite; }
+                
+                .anim-counter-slow { animation: maintain-upright 50s linear infinite; }
+                .anim-counter-med { animation: maintain-upright-ccw 35s linear infinite; }
+                .anim-counter-fast { animation: maintain-upright 20s linear infinite; }
+                
+                .anim-float { animation: float 4s ease-in-out infinite; }
+                .anim-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+                .anim-fade-in { animation: fade-in-up 0.8s ease-out forwards; }
+                .anim-subtle-float { animation: subtle-float 6s ease-in-out infinite; }
+                
+                .orbit-ring {
+                    border-color: transparent;
+                    background: linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent);
+                    background-clip: padding-box;
+                }
+                
+                .card-glow:hover {
+                    box-shadow: 0 0 40px -10px rgba(219, 232, 144, 0.3);
+                }
             `}</style>
 
             {/* Hero Section */}
@@ -90,82 +127,147 @@ const Community: React.FC<CommunityProps> = ({ onNavigate }) => {
                         </div>
                     </div>
 
-                    {/* Right: Circular Modern Ecosystem */}
-                    <div className="relative h-[350px] md:h-[650px] flex items-center justify-center overflow-hidden md:overflow-visible">
-                        {/* Scalable Container for Mobile */}
+                    {/* Right: ENHANCED Circular Modern Ecosystem */}
+                    <div className="relative h-[350px] md:h-[650px] flex items-center justify-center">
+
+                        {/* Background Glow */}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div className="w-[400px] h-[400px] md:w-[600px] md:h-[600px] bg-primary/5 rounded-full blur-[100px]" />
+                        </div>
+
+                        {/* Floating Ambient Particles */}
+                        {[...Array(8)].map((_, i) => (
+                            <div
+                                key={i}
+                                className="absolute w-1 h-1 bg-primary/40 rounded-full anim-subtle-float"
+                                style={{
+                                    left: `${20 + Math.random() * 60}%`,
+                                    top: `${20 + Math.random() * 60}%`,
+                                    animationDelay: `${i * 0.5}s`,
+                                    opacity: 0.3 + Math.random() * 0.4
+                                }}
+                            />
+                        ))}
+
+                        {/* Scalable Container */}
                         <div className="relative flex items-center justify-center transform scale-[0.55] sm:scale-75 md:scale-100 transition-transform duration-500">
-                            {/* Center Hub */}
-                            <div className="absolute z-30 size-32 bg-navy-custom/30 backdrop-blur-2xl border border-white/20 rounded-full flex items-center justify-center shadow-[0_0_80px_-20px_theme(colors.primary.DEFAULT)]">
-                                <div className="absolute inset-0 border border-primary/20 rounded-full animate-ping opacity-20 duration-[3s]" />
-                                <LogoSecW className="w-14 h-14 text-white" />
+
+                            {/* Center Hub - Enhanced */}
+                            <div className="absolute z-30 size-36 anim-pulse-glow">
+                                {/* Outer Ring */}
+                                <div className="absolute inset-0 border-2 border-primary/20 rounded-full animate-ping opacity-20" style={{ animationDuration: '3s' }} />
+                                {/* Inner Ring */}
+                                <div className="absolute inset-2 border border-white/10 rounded-full" />
+                                {/* Core */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-navy-custom/80 to-navy-custom backdrop-blur-2xl border border-white/20 rounded-full flex items-center justify-center shadow-[0_0_60px_-15px_theme(colors.primary.DEFAULT)]">
+                                    <LogoSecW className="w-14 h-14 text-white anim-float [&_.cls-1]:hidden" />
+                                </div>
                             </div>
 
                             {/* Orbit 1: Fast (Avatars) */}
-                            <div className="absolute size-[280px] border border-white/5 rounded-full anim-orbit-fast">
-                                {/* Item 1 */}
-                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 size-12 rounded-full border border-white/10 p-1 bg-navy-custom/50 backdrop-blur-md anim-counter-fast">
-                                    <img src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png" className="size-full rounded-full" />
+                            <div className="absolute size-[280px] rounded-full anim-orbit-fast">
+                                <div className="absolute inset-0 border border-white/[0.03] rounded-full" />
+                                {/* Avatar 1 */}
+                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 anim-counter-fast" style={{ animationDelay: '0s' }}>
+                                    <div className="size-14 rounded-full border-2 border-primary/30 p-0.5 bg-navy-custom/80 backdrop-blur-md shadow-lg hover:scale-110 transition-transform cursor-pointer">
+                                        <img src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png" className="size-full rounded-full" />
+                                    </div>
                                 </div>
-                                {/* Item 2 */}
-                                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 size-12 rounded-full border border-white/10 p-1 bg-navy-custom/50 backdrop-blur-md anim-counter-fast">
-                                    <img src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png" className="size-full rounded-full" />
+                                {/* Avatar 2 */}
+                                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 anim-counter-fast">
+                                    <div className="size-12 rounded-full border border-white/10 p-0.5 bg-navy-custom/60 backdrop-blur-md shadow-lg hover:scale-110 transition-transform cursor-pointer">
+                                        <img src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png" className="size-full rounded-full" />
+                                    </div>
                                 </div>
-                                {/* Item 3 */}
-                                <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 size-10 rounded-full bg-primary flex items-center justify-center text-navy-custom font-black text-xs anim-counter-fast shadow-[0_0_20px_theme(colors.primary.DEFAULT)]">
-                                    +5
+                                {/* Counter Badge */}
+                                <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 anim-counter-fast">
+                                    <div className="size-11 rounded-full bg-gradient-to-br from-primary to-lime-400 flex items-center justify-center text-navy-custom font-black text-xs shadow-[0_0_30px_-5px_theme(colors.primary.DEFAULT)] hover:scale-110 transition-transform cursor-pointer">
+                                        +5
+                                    </div>
                                 </div>
                             </div>
 
-                            {/* Orbit 2: Medium (Topics/Bubbles) */}
-                            <div className="absolute size-[420px] border border-white/5 rounded-full anim-orbit-med">
+                            {/* Orbit 2: Medium (Topic Bubbles) */}
+                            <div className="absolute size-[430px] rounded-full anim-orbit-med">
+                                <div className="absolute inset-0 border border-dashed border-white/[0.04] rounded-full" />
                                 {/* Topic 1 */}
-                                <div className="absolute top-[15%] right-[15%] p-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center gap-2 anim-counter-med hover:scale-110 transition-transform cursor-pointer">
-                                    <div className="size-2 bg-blue-400 rounded-full animate-pulse" />
-                                    <span className="text-xs font-bold text-white">Physics 101</span>
+                                <div className="absolute top-[12%] right-[12%] anim-counter-med">
+                                    <div className="px-4 py-2.5 bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-full flex items-center gap-2 hover:bg-white/[0.08] hover:scale-105 transition-all cursor-pointer card-glow">
+                                        <div className="size-2 bg-blue-400 rounded-full animate-pulse" />
+                                        <span className="text-xs font-bold text-white whitespace-nowrap">Physics 101</span>
+                                    </div>
                                 </div>
                                 {/* Topic 2 */}
-                                <div className="absolute bottom-[20%] left-[10%] p-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center gap-2 anim-counter-med hover:scale-110 transition-transform cursor-pointer">
-                                    <span className="text-lg">🎨</span>
-                                    <span className="text-xs font-bold text-white">Digital Art</span>
+                                <div className="absolute bottom-[18%] left-[8%] anim-counter-med">
+                                    <div className="px-4 py-2.5 bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-full flex items-center gap-2 hover:bg-white/[0.08] hover:scale-105 transition-all cursor-pointer card-glow">
+                                        <span className="text-base">🎨</span>
+                                        <span className="text-xs font-bold text-white whitespace-nowrap">Digital Art</span>
+                                    </div>
                                 </div>
-                                {/* Topic 3 */}
-                                <div className="absolute top-[40%] -left-[5%] size-14 bg-purple-500/20 backdrop-blur-md border border-purple-500/30 rounded-2xl flex flex-col items-center justify-center anim-counter-med">
-                                    <span className="text-[10px] font-bold text-purple-200">New</span>
-                                    <span className="text-xs font-black text-white">Quiz</span>
+                                {/* Topic 3 - Quiz */}
+                                <div className="absolute top-[45%] -left-[3%] anim-counter-med">
+                                    <div className="size-16 bg-gradient-to-br from-purple-500/20 to-purple-600/10 backdrop-blur-md border border-purple-400/20 rounded-full flex flex-col items-center justify-center hover:scale-110 transition-transform cursor-pointer shadow-[0_0_30px_-10px_rgba(168,85,247,0.4)]">
+                                        <span className="text-[9px] font-bold text-purple-300 uppercase">New</span>
+                                        <span className="text-sm font-black text-white">Quiz</span>
+                                    </div>
                                 </div>
                             </div>
 
-                            {/* Orbit 3: Slow (Large Cards) */}
-                            <div className="absolute size-[580px] border border-dashed border-white/5 rounded-full anim-orbit-slow">
-                                {/* Card 1: Challenge */}
-                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 p-4 bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl shadow-2xl anim-counter-slow group hover:scale-105 transition-transform">
-                                    <div className="flex justify-between items-start mb-2">
-                                        <div className="size-8 rounded-lg bg-red-500/20 flex items-center justify-center text-red-500">⚡</div>
-                                        <span className="text-[9px] font-bold text-white/40 bg-white/5 px-2 py-1 rounded">LIVE</span>
-                                    </div>
-                                    <div className="text-sm font-bold text-white mb-1">Code Sprint 2.0</div>
-                                    <div className="text-[10px] text-white/50">250 students competing</div>
-                                    <div className="mt-2 h-1 w-full bg-white/10 rounded-full overflow-hidden">
-                                        <div className="h-full w-2/3 bg-red-500 rounded-full" />
+                            {/* Orbit 3: Slow (Feature Cards) */}
+                            <div className="absolute size-[600px] rounded-full anim-orbit-slow">
+                                <div className="absolute inset-0 border border-white/[0.02] rounded-full" />
+
+                                {/* Card 1: Code Sprint Challenge */}
+                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 anim-counter-slow">
+                                    <div className="w-52 p-4 bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl hover:scale-105 transition-all cursor-pointer group card-glow">
+                                        <div className="flex justify-between items-start mb-3">
+                                            <div className="size-9 rounded-xl bg-gradient-to-br from-red-500/30 to-orange-500/20 flex items-center justify-center">
+                                                <span className="text-lg">⚡</span>
+                                            </div>
+                                            <span className="text-[9px] font-bold text-red-400 bg-red-500/10 px-2 py-1 rounded-full border border-red-500/20 flex items-center gap-1">
+                                                <span className="size-1.5 bg-red-500 rounded-full animate-pulse" />
+                                                LIVE
+                                            </span>
+                                        </div>
+                                        <div className="text-sm font-bold text-white mb-1 group-hover:text-primary transition-colors">Code Sprint 2.0</div>
+                                        <div className="text-[10px] text-white/50 mb-3">250 students competing</div>
+                                        <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                            <div className="h-full w-2/3 bg-gradient-to-r from-red-500 to-orange-500 rounded-full" />
+                                        </div>
                                     </div>
                                 </div>
 
                                 {/* Card 2: Top Mentor */}
-                                <div className="absolute bottom-[10%] right-[15%] w-44 p-3 bg-navy-custom/60 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl anim-counter-slow flex items-center gap-3">
-                                    <img src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png" className="size-10 rounded-full border border-white/10 bg-black" />
-                                    <div>
-                                        <div className="text-[10px] font-bold text-primary uppercase">Top Mentor</div>
-                                        <div className="text-xs font-bold text-white">Dr. Rao</div>
-                                        <div className="text-[9px] text-white/40">500+ Helps</div>
+                                <div className="absolute bottom-[8%] right-[12%] anim-counter-slow">
+                                    <div className="w-48 p-4 bg-navy-custom/70 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex items-center gap-3 hover:scale-105 transition-all cursor-pointer card-glow">
+                                        <div className="relative">
+                                            <img src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png" className="size-12 rounded-xl border border-white/10" />
+                                            <div className="absolute -bottom-1 -right-1 size-5 bg-primary rounded-lg flex items-center justify-center">
+                                                <svg className="w-3 h-3 text-navy-custom" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="text-[9px] font-bold text-primary uppercase tracking-wider">Top Mentor</div>
+                                            <div className="text-sm font-bold text-white">Dr. Rao</div>
+                                            <div className="text-[10px] text-white/40">500+ Helps</div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                {/* Card 3: New Discussion */}
-                                <div className="absolute bottom-[30%] left-[0%] w-40 p-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl anim-counter-slow">
-                                    <div className="flex -space-x-2 mb-2">
-                                        {[1, 2, 3].map(i => <div key={i} className="size-6 rounded-full border border-navy-custom bg-gray-700 overflow-hidden"><img src={`https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-${i + 5}.png`} /></div>)}
+                                {/* Card 3: Discussion Thread */}
+                                <div className="absolute bottom-[28%] left-[-2%] anim-counter-slow">
+                                    <div className="w-44 p-4 bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl hover:scale-105 transition-all cursor-pointer card-glow">
+                                        <div className="flex -space-x-2 mb-3">
+                                            {[6, 7, 8].map(i => (
+                                                <div key={i} className="size-7 rounded-full border-2 border-navy-custom overflow-hidden">
+                                                    <img src={`https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-${i}.png`} className="size-full" />
+                                                </div>
+                                            ))}
+                                            <div className="size-7 rounded-full border-2 border-navy-custom bg-white/10 flex items-center justify-center text-[8px] font-bold">+12</div>
+                                        </div>
+                                        <div className="text-[11px] font-bold text-white mb-1">New Discussion</div>
+                                        <div className="text-[10px] text-white/50">in <span className="text-blue-400 font-bold">#Mathematics</span></div>
                                     </div>
-                                    <div className="text-[10px] font-bold text-white">New Discussion in <span className="text-blue-400">#Math</span></div>
                                 </div>
                             </div>
                         </div>
