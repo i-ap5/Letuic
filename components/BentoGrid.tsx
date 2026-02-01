@@ -85,12 +85,12 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
         >
           <div className="grid grid-cols-2 gap-x-6 gap-y-4 text-center">
             {[
-              { category: "Syllabus", title: "Synchronization" },
-              { category: "Real-time", title: "Fleet GPS" },
-              { category: "Neural", title: "Presence Log" },
-              { category: "Growth", title: "Performance IQ" },
-              { category: "Adaptive", title: "Assessments" },
-              { category: "Campus", title: "Activity Stream" },
+              { category: "Classroom", title: "Lesson Plans" },
+              { category: "Transport", title: "Bus Tracker" },
+              { category: "Daily", title: "Attendance" },
+              { category: "Progress", title: "My Marks" },
+              { category: "Homework", title: "Assignments" },
+              { category: "Campus", title: "Notice Board" },
             ].map((item, idx) => (
               <div key={idx} className="flex flex-col">
                 <span className="text-[11px] font-bold uppercase tracking-widest text-navy-custom/30">
