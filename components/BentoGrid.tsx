@@ -393,7 +393,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
                 {[
                   { q: 'Calculus Mind', up: 42, aura: '+125', color: 'bg-primary/10 text-primary border-primary/20' },
                   { q: 'Organic Chem Hub', up: 89, aura: '+89', color: 'bg-white/5 text-white/40 border-white/5' },
-                  { q: 'State Syllabus Prep', up: 156, aura: '+210', color: 'bg-white/10 text-white border-white/10' }
+                  { q: 'Exam Preparation', up: 156, aura: '+210', color: 'bg-white/10 text-white border-white/10' }
                 ].map((item, i) => (
                   <div key={i} className={`p-5 rounded-apple-sm border flex items-center justify-between hover:bg-white/10 transition-all cursor-pointer group/item hover:-translate-y-1 ${item.color}`}>
                     <div className="flex items-center gap-4">
@@ -412,7 +412,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ onNavigate }) => {
                   <div className="size-9 rounded-full bg-primary/20 flex items-center justify-center text-primary">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
                   </div>
-                  <div className="text-white text-[11px] font-black">12.4K Global Discussions</div>
+                  <div className="text-white text-[11px] font-black"> Global Discussions</div>
                 </div>
                 <div className="size-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_#22c55e]"></div>
               </div>
