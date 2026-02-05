@@ -22,7 +22,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, currentView }) => {
     { label: 'Home', action: () => { onNavigate('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
     {
       label: 'Community', action: () => {
-        onNavigate('community');
+        // onNavigate('community');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     },

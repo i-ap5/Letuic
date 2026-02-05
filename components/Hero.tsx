@@ -795,7 +795,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
 
           {/* SECONDARY BUTTON */}
           <button
-            onClick={() => onNavigate?.('community')}
+            // onClick={() => onNavigate?.('community')}
 
             className="relative w-[280px] h-[64px] rounded-[22px]
                bg-white/20 backdrop-blur-3xl
