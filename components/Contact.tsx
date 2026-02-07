@@ -118,45 +118,63 @@ const Contact: React.FC = () => {
           </p>
 
           <div className="space-y-6 pt-4">
-            {[
-              {
-                label: 'Our Office',
-                value: 'IT Park, TVM',
-                href: 'https://maps.google.com/?q=IT+Park+Trivandrum',
-                icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
-              },
-              {
-                label: 'Give us a call',
-                value: '+91 95179 07519',
-                href: 'tel:+919517907519',
-                icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-              },
-              {
-                label: 'Send an email',
-                value: 'info@letuic.com',
-                href: 'mailto:info@letuic.com',
-                icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
-              }
-            ].map((item, i) => {
-              const Wrapper = item.href ? 'a' : 'div';
-              return (
-                <Wrapper
-                  key={i}
-                  href={item.href}
-                  target={item.href?.startsWith('http') ? '_blank' : undefined}
-                  rel={item.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className={`flex items-center gap-5 group ${item.href ? 'cursor-pointer hover:translate-x-1 transition-transform' : ''}`}
-                >
-                  <div className="size-10 rounded-xl bg-white border border-gray-100 flex items-center justify-center shadow-sm group-hover:bg-primary transition-all duration-500 text-navy-custom">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <div className="text-[9px] font-black uppercase tracking-widest text-navy-custom/20">{item.label}</div>
-                    <div className="text-base font-bold text-navy-custom group-hover:text-primary transition-colors">{item.value}</div>
-                  </div>
-                </Wrapper>
-              );
-            })}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                {
+                  label: 'India HQ',
+                  address: 'IT Park, Ernakulam',
+                  phone: '+91 95179 07519',
+                  href: 'tel:+919517907519',
+                  icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                },
+                {
+                  label: 'Germany Office',
+                  address: 'Hannover, Germany',
+                  phone: '+49 1516 844 7009',
+                  href: 'tel:+4915168447009',
+                  icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                },
+                {
+                  label: 'UAE Office',
+                  address: 'Dubai, UAE',
+                  phone: '+971 54 788 6500',
+                  href: 'tel:+971547886500',
+                  icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                },
+                {
+                  label: 'General Inquiries',
+                  address: 'info@letuic.com',
+                  href: 'mailto:info@letuic.com',
+                  icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                }
+              ].map((item, i) => {
+                const Wrapper = item.href ? 'a' : 'div';
+                return (
+                  <Wrapper
+                    key={i}
+                    href={item.href}
+                    target={item.href?.startsWith('http') ? '_blank' : undefined}
+                    rel={item.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className={`flex flex-col gap-3 p-5 rounded-3xl bg-white border border-gray-100 hover:border-primary/20 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group ${item.href ? 'cursor-pointer' : ''}`}
+                  >
+                    <div className="flex items-center justify-between w-full">
+                      <div className="size-10 rounded-full bg-navy-custom/5 text-navy-custom flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                        {React.cloneElement(item.icon as React.ReactElement, { width: 18, height: 18 })}
+                      </div>
+                      {item.href && <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-gray-300 group-hover:text-primary transition-colors"><path d="M7 17l9.2-9.2M17 17V7H7" /></svg>}
+                    </div>
+
+                    <div>
+                      <div className="text-[10px] font-black uppercase tracking-widest text-navy-custom/40 mb-1">{item.label}</div>
+                      <div className="text-lg font-bold text-navy-custom leading-tight">{item.address}</div>
+                      {item.phone && (
+                        <div className="text-sm font-semibold text-primary mt-1">{item.phone}</div>
+                      )}
+                    </div>
+                  </Wrapper>
+                );
+              })}
+            </div>
           </div>
         </div>
 
@@ -249,7 +267,7 @@ const Contact: React.FC = () => {
             ) : (
               // Success View - integrated in the same card
               <div className="flex flex-col items-center justify-center text-center animate-fade-in w-full h-full space-y-8">
-                <div className="size-24 rounded-full bg-green-500/10 flex items-center justify-center text-green-500 mb-2">
+                <div className="size-24 rounded-full bg-green-700 flex items-center justify-center text-green-700 mb-2">
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="animate-[scale_0.4s_ease-out]"><polyline points="20 6 9 17 4 12" /></svg>
                 </div>
                 <div>
