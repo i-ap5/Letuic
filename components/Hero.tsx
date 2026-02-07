@@ -762,7 +762,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenAssistant, onNavigate }) => {
     active:scale-95"
           >
             <span className="transition-transform duration-500 group-hover:-translate-x-2">
-              Contact Sales
+              Connect with us
             </span>
 
             {/* Arrow */}
