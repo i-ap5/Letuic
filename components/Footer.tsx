@@ -184,7 +184,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, currentView }) => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Copyright */}
             <p className={`text-xs font-medium ${isDark ? 'text-white/50' : 'text-navy-custom/40'}`}>
-              © 2026 Letuic Inc. All rights reserved.
+              © 2026 Letuic LLP. All rights reserved.
             </p>
 
             {/* Legal Links */}
