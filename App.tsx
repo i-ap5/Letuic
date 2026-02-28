@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import BentoGrid from './components/BentoGrid';
@@ -10,39 +10,40 @@ import AssistantModal from './components/AssistantModal';
 import Contact from './components/Contact';
 import Community from './components/Community';
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'contact' | 'community'>('home');
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const currentView = location.pathname.includes('/community')
+    ? 'community'
+    : location.pathname.includes('/contact')
+      ? 'contact'
+      : 'home';
 
   const handleNavigate = (view: 'home' | 'contact' | 'community') => {
-    setCurrentView(view);
-    window.history.pushState({ view }, '', `#${view}`);
+    if (view === 'home') navigate('/');
+    else if (view === 'contact') navigate('/contact');
+    else if (view === 'community') navigate('/community');
   };
 
   useEffect(() => {
-    // Handle Browser Back Button
-    const handlePopState = (event: PopStateEvent) => {
-      if (event.state && event.state.view) {
-        setCurrentView(event.state.view);
-      } else {
-        // Fallback for initial load or empty state
-        setCurrentView('home');
-      }
-    };
-
-    window.addEventListener('popstate', handlePopState);
-
-    // Set initial state if null
-    if (!window.history.state) {
-      window.history.replaceState({ view: 'home' }, '', '#home');
-    }
-
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
-
-  useEffect(() => {
     window.scrollTo(0, 0);
-  }, [currentView]);
+
+    // Dynamic SEO Metadata for current page
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (currentView === 'home') {
+      document.title = 'Letuic | Modern EdTech Hub';
+      if (metaDescription) metaDescription.setAttribute('content', 'Letuic is an EdTech platform helping students and educators learn, teach, and collaborate using powerful digital tools.');
+    } else if (currentView === 'community') {
+      document.title = 'Letuic Community | Connect & Learn';
+      if (metaDescription) metaDescription.setAttribute('content', 'Join the Letuic Community. Collaborate with educators, students, and institutions driving the future of learning.');
+    } else if (currentView === 'contact') {
+      document.title = 'Contact Letuic | Enterprise EdTech';
+      if (metaDescription) metaDescription.setAttribute('content', 'Get in touch with Letuic to bring modern digital learning tools to your educational institution today.');
+    }
+  }, [location.pathname, currentView]);
 
   useEffect(() => {
     // Scroll Reveal Observer
@@ -63,39 +64,40 @@ const App: React.FC = () => {
     revealElements.forEach(el => observer.observe(el));
 
     return () => observer.disconnect();
-  }, [currentView]); // Re-observe when view changes
+  }, [location.pathname]); // Re-observe when view changes
 
   return (
     <div className={`min-h-screen selection:bg-primary/30 overflow-x-hidden ${currentView === 'community' ? 'bg-navy-custom' : 'bg-white'}`}>
       <Navbar onNavigate={handleNavigate} currentView={currentView} />
 
       <main>
-        {currentView === 'home' ? (
-          <>
-            <div id="platform">
-              <Hero
-                onOpenAssistant={() => setIsAssistantOpen(true)}
-                onNavigate={handleNavigate}
-              />
-            </div>
+        <Routes>
+          <Route path="/" element={
+            <>
+              <div id="platform">
+                <Hero
+                  onOpenAssistant={() => setIsAssistantOpen(true)}
+                  onNavigate={handleNavigate}
+                />
+              </div>
 
-            <div id="ecosystem" className="scroll-mt-32">
-              <BentoGrid onNavigate={handleNavigate} />
-            </div>
+              <div id="ecosystem" className="scroll-mt-32">
+                <BentoGrid onNavigate={handleNavigate} />
+              </div>
 
-            <div id="solutions" className="scroll-mt-32">
-              <HowItWorks />
-            </div>
+              <div id="solutions" className="scroll-mt-32">
+                <HowItWorks />
+              </div>
 
-            <div id="security" className="reveal scroll-mt-32">
-              <CTA onNavigate={handleNavigate} />
-            </div>
-          </>
-        ) : currentView === 'community' ? (
-          <Community onNavigate={handleNavigate} />
-        ) : (
-          <Contact />
-        )}
+              <div id="security" className="reveal scroll-mt-32">
+                <CTA onNavigate={handleNavigate} />
+              </div>
+            </>
+          } />
+
+          <Route path="/community" element={<Community onNavigate={handleNavigate} />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
       </main>
 
       <Footer onNavigate={handleNavigate} currentView={currentView} />
@@ -116,5 +118,13 @@ const App: React.FC = () => {
     </div>
   );
 };
+
+const App: React.FC = () => {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  );
+}
 
 export default App;
