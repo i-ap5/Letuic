@@ -18,7 +18,7 @@ const Careers: React.FC<CareersProps> = ({ onNavigate }) => {
             <div className="absolute top-0 right-0 w-[40%] aspect-square bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 -z-10"></div>
             <div className="absolute bottom-0 left-0 w-[40%] aspect-square bg-navy-custom/5 blur-[120px] rounded-full translate-y-1/3 -translate-x-1/3 -z-10"></div>
             <div className="mb-20 text-left reveal max-w-[1000px] mx-auto">
-                <div className="px-4 py-1.5 rounded-full bg-navy-custom/5 border border-navy-custom/10 text-[9px] font-black uppercase  text-navy-custom w-fit mb-8">
+                <div className="px-4 py-1.5 rounded-full bg-navy-custom/5 border border-navy-custom/10 text-[9px] font-black uppercase tracking-widest text-navy-custom w-fit mb-8">
                     Careers
                 </div>
                 <h1 className="text-5xl md:text-7xl font-black text-navy-custom tracking-tighter mb-6 leading-[0.95]">
@@ -44,7 +44,7 @@ const Careers: React.FC<CareersProps> = ({ onNavigate }) => {
                     <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <div>
                             <div className="flex flex-wrap items-center gap-2 mb-4">
-                                <span className="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black tracking-widest uppercase shadow-sm">
+                                <span className="px-3 py-1.5 rounded-full bg-navy-custom text-primary text-[10px] font-black tracking-widest uppercase shadow-sm">
                                     Growth Team
                                 </span>
                                 <span className="px-3 py-1.5 rounded-full bg-navy-custom/5 text-navy-custom/50 text-[10px] font-black tracking-widest uppercase">
@@ -56,8 +56,7 @@ const Careers: React.FC<CareersProps> = ({ onNavigate }) => {
                             </h3>
                         </div>
 
-                        <div className="flex items-center text-navy-custom/30 group-hover:text-primary transition-colors duration-300">
-                            <span className="mr-4 font-black uppercase tracking-[0.2em] text-[10px] hidden md:block">View Details</span>
+                        <div className="flex items-center justify-end text-navy-custom/30 group-hover:text-primary transition-colors duration-300">                            <span className="mr-4 font-black text-[12px] hidden md:block">View Details</span>
                             <div className="size-10 md:size-12 rounded-full bg-navy-custom/5 group-hover:bg-primary/10 flex items-center justify-center transition-colors duration-300">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform">
                                     <path d="M5 12h14" />

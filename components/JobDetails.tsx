@@ -140,7 +140,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ onNavigate }) => {
 
                 <div className="mb-16 reveal">
                     <div className="flex flex-wrap items-center gap-3 mb-6">
-                        <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black tracking-widest uppercase shadow-sm">
+                        <span className="px-4 py-1.5 rounded-full bg-navy-custom text-primary text-[10px] font-black tracking-widest uppercase shadow-sm">
                             Growth Team
                         </span>
                         <span className="px-4 py-1.5 rounded-full bg-navy-custom/5 text-navy-custom/50 text-[10px] font-black tracking-widest uppercase">
@@ -323,7 +323,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ onNavigate }) => {
                                             <div className="size-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                                         ) : (
                                             <>
-                                                Submit Application
+                                                Apply Now
                                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="group-hover:translate-x-1 transition-transform">
                                                     <path d="M5 12h14" />
                                                     <path d="m12 5 7 7-7 7" />
@@ -348,7 +348,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ onNavigate }) => {
                                     <div>
                                         <h3 className="text-2xl font-black text-navy-custom tracking-tighter mb-3">Application Received</h3>
                                         <p className="text-navy-custom/60 font-medium leading-relaxed text-sm">
-                                            Thank you for applying. We'll review your CV and get back to you shortly.
+                                            Every great journey starts with a single step, and yours just reached us. We’re reviewing your application and will connect with you soon.
                                         </p>
                                     </div>
                                 </div>
