@@ -3,8 +3,8 @@ import LogoSec from "@/components/assets/logo.svg?react";
 import LogoWhite from "@/components/assets/logo_w.svg?react";
 
 interface NavbarProps {
-  onNavigate: (view: 'home' | 'contact' | 'community') => void;
-  currentView: 'home' | 'contact' | 'community';
+  onNavigate: (view: 'home' | 'contact' | 'community' | 'careers') => void;
+  currentView: 'home' | 'contact' | 'community' | 'careers';
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
@@ -28,20 +28,18 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
   }, [isOpen]);
 
   const navLinks = [
-    { label: 'Platform', id: 'platform' },
-    { label: 'Ecosystem', id: 'ecosystem' },
-    { label: 'Methodology', id: 'solutions' },
+    { label: 'Home', id: 'home' },
+    { label: 'Community', id: 'community' },
+    { label: 'Careers', id: 'careers' },
   ];
 
   const handleNav = (id: string) => {
     setIsOpen(false);
-    if (currentView !== 'home') {
-      onNavigate('home');
-      setTimeout(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-      }, 120);
-    } else {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
+    if (id === 'careers' || id === 'community' || id === 'home') {
+      onNavigate(id as 'home' | 'community' | 'careers');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
     }
   };
 
@@ -83,16 +81,22 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
             />
           </div>
 
-          <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map(link => (
-              <button
-                key={link.id}
-                onClick={() => handleNav(link.id)}
-                className={`text-[11px] font-black uppercase tracking-[0.2em] transition-colors ${currentView === 'community' ? 'text-white/60 hover:text-white' : 'text-navy-custom/30 hover:text-navy-custom'}`}
-              >
-                {link.label}
-              </button>
-            ))}
+          <nav className="hidden lg:flex items-center gap-12">
+            {navLinks.map(link => {
+              const isActive = currentView === link.id;
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => handleNav(link.id)}
+                  className={`text-[11px] uppercase tracking-[0.2em] transition-colors ${isActive
+                    ? (currentView === 'community' ? 'text-white font-black' : 'text-navy-custom font-black')
+                    : (currentView === 'community' ? 'text-white/60 hover:text-white font-bold' : 'text-navy-custom/40 hover:text-navy-custom font-bold')
+                    }`}
+                >
+                  {link.label}
+                </button>
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-4">
@@ -119,17 +123,21 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
 
         <div className="relative h-full flex flex-col justify-center items-center px-10">
           <div className="flex flex-col gap-8 text-center">
-            {navLinks.map((link, i) => (
-              <button
-                key={link.id}
-                onClick={() => handleNav(link.id)}
-                style={{ transitionDelay: `${i * 100}ms` }}
-                className={`text-4xl font-black tracking-tighter text-navy-custom transition-all duration-700
-                  ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-              >
-                {link.label}
-              </button>
-            ))}
+            {navLinks.map((link, i) => {
+              const isActive = currentView === link.id;
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => handleNav(link.id)}
+                  style={{ transitionDelay: `${i * 100}ms` }}
+                  className={`text-4xl tracking-tighter transition-all duration-700
+                    ${isActive ? 'font-black text-navy-custom' : 'font-bold text-navy-custom/40'}
+                    ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                >
+                  {link.label}
+                </button>
+              );
+            })}
             <button
               onClick={() => { onNavigate('contact'); setIsOpen(false); }}
               className={`text-4xl font-black tracking-tighter text-primary transition-all duration-700 delay-300

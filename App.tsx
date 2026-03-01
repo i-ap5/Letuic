@@ -9,6 +9,8 @@ import Footer from './components/Footer';
 import AssistantModal from './components/AssistantModal';
 import Contact from './components/Contact';
 import Community from './components/Community';
+import Careers from './components/Careers';
+import JobDetails from './components/JobDetails';
 
 const AppContent: React.FC = () => {
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
@@ -20,12 +22,15 @@ const AppContent: React.FC = () => {
     ? 'community'
     : location.pathname.includes('/contact')
       ? 'contact'
-      : 'home';
+      : location.pathname.includes('/careers')
+        ? 'careers'
+        : 'home';
 
-  const handleNavigate = (view: 'home' | 'contact' | 'community') => {
+  const handleNavigate = (view: 'home' | 'contact' | 'community' | 'careers') => {
     if (view === 'home') navigate('/');
     else if (view === 'contact') navigate('/contact');
     else if (view === 'community') navigate('/community');
+    else if (view === 'careers') navigate('/careers');
   };
 
   useEffect(() => {
@@ -42,6 +47,9 @@ const AppContent: React.FC = () => {
     } else if (currentView === 'contact') {
       document.title = 'Contact Letuic | Enterprise EdTech';
       if (metaDescription) metaDescription.setAttribute('content', 'Get in touch with Letuic to bring modern digital learning tools to your educational institution today.');
+    } else if (currentView === 'careers') {
+      document.title = 'Careers at Letuic | Work with Us';
+      if (metaDescription) metaDescription.setAttribute('content', 'Join the Letuic team and build the future of educational technology.');
     }
   }, [location.pathname, currentView]);
 
@@ -97,6 +105,8 @@ const AppContent: React.FC = () => {
 
           <Route path="/community" element={<Community onNavigate={handleNavigate} />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/careers" element={<Careers onNavigate={handleNavigate} />} />
+          <Route path="/careers/growth-intern" element={<JobDetails onNavigate={handleNavigate} />} />
         </Routes>
       </main>
 

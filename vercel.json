@@ -1,12 +1,13 @@
 {
+    "version": 2,
     "rewrites": [
         {
-            "source": "/api/:match*",
-            "destination": "/api/:match*"
+            "source": "/api/(.*)",
+            "destination": "/server.js"
         },
         {
             "source": "/(.*)",
-            "destination": "/"
+            "destination": "/index.html"
         }
     ]
 }
