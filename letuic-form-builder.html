@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Letuic Form Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
+<style>
+:root {
+  --dark:#152328; --lime:#dbe890; --lime2:#c8d870;
+  --bg:#eef0ec; --white:#fff; --muted:#5a7178;
+  --border:#dde3e0; --error:#e05555; --radius:10px;
+  --shadow:0 4px 24px rgba(21,35,40,0.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark);min-height:100vh;}
+
+/* NAV */
+.topnav{background:var(--dark);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:54px;position:sticky;top:0;z-index:200;}
+.nav-logo{font-family:'Syne',sans-serif;font-size:19px;font-weight:800;color:#fff;}
+.nav-logo span{color:var(--lime);}
+.nav-tabs{display:flex;gap:3px;}
+.nav-tab{padding:6px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;color:rgba(255,255,255,0.5);border:none;background:none;transition:all .18s;font-family:'DM Sans',sans-serif;}
+.nav-tab.active{background:var(--lime);color:var(--dark);}
+.nav-tab:hover:not(.active){color:#fff;background:rgba(255,255,255,0.08);}
+
+.view{display:none;} .view.active{display:block;}
+
+/* ── BUILDER ── */
+.builder-layout{max-width:840px;margin:28px auto;padding:0 14px 72px;}
+
+.form-meta-card{background:var(--white);border-radius:var(--radius);padding:24px 28px;margin-bottom:18px;box-shadow:var(--shadow);}
+.form-title-input{width:100%;font-family:'Syne',sans-serif;font-size:21px;font-weight:700;border:none;border-bottom:2px solid var(--border);outline:none;padding:6px 0;background:transparent;color:var(--dark);margin-bottom:10px;}
+.form-title-input:focus{border-bottom-color:var(--dark);}
+.form-desc-input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 13px;font-family:'DM Sans',sans-serif;font-size:13.5px;outline:none;resize:none;min-height:52px;background:#fafbf9;color:var(--dark);}
+.form-desc-input:focus{border-color:var(--dark);}
+
+/* SECTION CARD */
+.section-card{background:var(--white);border-radius:var(--radius);margin-bottom:14px;box-shadow:var(--shadow);overflow:visible;border:1.5px solid transparent;transition:border .18s, box-shadow .18s;}
+.section-card.sortable-ghost{opacity:0.4;border:2px dashed var(--lime);}
+.section-card.sortable-chosen{box-shadow:0 8px 32px rgba(21,35,40,0.18);}
+
+.section-header{padding:14px 20px;background:var(--dark);display:flex;align-items:center;gap:10px;border-radius:8px 8px 0 0;cursor:default;}
+.drag-handle{color:rgba(255,255,255,0.35);font-size:16px;cursor:grab;padding:2px 4px;user-select:none;flex-shrink:0;}
+.drag-handle:hover{color:rgba(255,255,255,0.7);}
+.drag-handle:active{cursor:grabbing;}
+.section-name-input{flex:1;background:transparent;border:none;outline:none;color:var(--lime);font-family:'Syne',sans-serif;font-size:14px;font-weight:700;min-width:0;}
+.section-name-input::placeholder{color:rgba(219,232,144,0.35);}
+.section-actions{display:flex;gap:5px;flex-shrink:0;}
+.icon-btn{width:28px;height:28px;border-radius:6px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.55);font-size:13px;transition:all .15s;flex-shrink:0;}
+.icon-btn:hover{background:rgba(255,255,255,0.18);color:#fff;}
+.icon-btn.del-sec:hover{background:rgba(224,85,85,0.3);color:#ff8888;}
+
+.section-body{padding:16px 20px 18px;}
+.questions-list{min-height:4px;}
+
+/* QUESTION CARD */
+.question-card{background:#f9fbf8;border:1.5px solid var(--border);border-radius:8px;padding:14px 14px 12px;margin-bottom:10px;position:relative;transition:box-shadow .15s;}
+.question-card.sortable-ghost{opacity:0.35;border:2px dashed var(--lime2);}
+.question-card.sortable-chosen{box-shadow:0 4px 18px rgba(21,35,40,0.12);z-index:10;}
+.question-card:hover{box-shadow:0 2px 10px rgba(21,35,40,0.07);}
+
+/* top row: drag + label + type + delete */
+.q-top{display:flex;gap:8px;align-items:center;margin-bottom:9px;}
+.q-drag{color:#ccc;font-size:15px;cursor:grab;flex-shrink:0;user-select:none;padding:2px;}
+.q-drag:hover{color:#999;}
+.q-drag:active{cursor:grabbing;}
+.q-label-input{flex:1;border:none;border-bottom:1.5px solid var(--border);outline:none;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:600;color:var(--dark);background:transparent;padding:3px 0;transition:border .15s;min-width:0;}
+.q-label-input:focus{border-bottom-color:var(--dark);}
+.q-label-input::placeholder{color:#bbc;font-weight:400;}
+.q-type-select{border:1.5px solid var(--border);border-radius:7px;padding:5px 8px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:var(--dark);background:var(--white);outline:none;cursor:pointer;flex-shrink:0;max-width:140px;}
+.q-del{width:26px;height:26px;border-radius:5px;border:none;cursor:pointer;background:transparent;color:#ccc;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
+.q-del:hover{background:#fee;color:var(--error);}
+
+.q-instr{width:100%;border:1.5px solid var(--border);border-radius:7px;padding:6px 11px;font-size:12.5px;font-family:'DM Sans',sans-serif;color:var(--muted);outline:none;background:var(--white);margin-top:6px;transition:border .15s;}
+.q-instr:focus{border-color:var(--dark);color:var(--dark);}
+.q-instr::placeholder{font-style:italic;}
+
+.q-meta{display:flex;gap:12px;align-items:center;margin-top:8px;flex-wrap:wrap;}
+.q-meta label{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--muted);cursor:pointer;font-weight:500;white-space:nowrap;}
+.q-meta input[type=checkbox]{accent-color:var(--dark);width:13px;height:13px;}
+.q-meta input[type=number]{width:56px;padding:4px 7px;border:1.5px solid var(--border);border-radius:6px;font-size:12px;outline:none;font-family:'DM Sans',sans-serif;}
+.meta-sep{color:var(--border);font-size:14px;}
+
+.q-extra{margin-top:8px;}
+.q-extra input,.q-extra textarea{width:100%;border:1.5px solid var(--border);border-radius:7px;padding:6px 11px;font-size:12.5px;font-family:'DM Sans',sans-serif;color:var(--dark);outline:none;background:var(--white);}
+.q-extra label{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;margin-top:8px;}
+
+/* Conditional logic */
+.cond-block{margin-top:10px;background:#f0f4ed;border:1.5px solid var(--lime2);border-radius:7px;padding:10px 12px;}
+.cond-title{font-size:11px;font-weight:700;color:var(--dark);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.cond-title span{background:var(--lime);color:var(--dark);border-radius:4px;padding:1px 6px;font-size:10px;}
+.cond-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;}
+.cond-select{border:1.5px solid var(--border);border-radius:6px;padding:5px 8px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;background:var(--white);color:var(--dark);}
+.cond-val-input{border:1.5px solid var(--border);border-radius:6px;padding:5px 9px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;background:var(--white);color:var(--dark);flex:1;min-width:80px;}
+.cond-op-label{font-size:11px;color:var(--muted);font-weight:600;white-space:nowrap;}
+.sub-questions-list{margin-top:8px;padding-left:14px;border-left:3px solid var(--lime2);}
+.add-sub-btn{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:6px;border:1.5px dashed var(--lime2);background:transparent;color:var(--dark);font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:6px;}
+.add-sub-btn:hover{background:#e8f0d5;border-color:var(--lime);}
+
+/* ADD BUTTONS */
+.add-row{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;}
+.add-btn{padding:7px 14px;border-radius:7px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px dashed var(--border);background:transparent;color:var(--muted);transition:all .15s;font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;gap:5px;}
+.add-btn:hover{border-color:var(--dark);color:var(--dark);background:#f4f5f2;}
+.add-btn.primary{border-style:solid;background:var(--lime);color:var(--dark);border-color:var(--lime);}
+.add-btn.primary:hover{background:var(--lime2);border-color:var(--lime2);}
+.section-add-row{display:flex;justify-content:center;margin-top:10px;}
+
+/* BOTTOM BAR */
+.builder-bar{position:fixed;bottom:0;left:0;right:0;background:var(--dark);padding:12px 28px;display:flex;justify-content:space-between;align-items:center;z-index:99;}
+.builder-bar-left{font-size:12.5px;color:rgba(255,255,255,0.45);}
+.builder-bar-right{display:flex;gap:8px;}
+.bar-btn{padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.bar-btn.sec{background:rgba(255,255,255,0.08);color:#fff;}
+.bar-btn.sec:hover{background:rgba(255,255,255,0.15);}
+.bar-btn.acc{background:var(--lime);color:var(--dark);}
+.bar-btn.acc:hover{background:var(--lime2);}
+
+/* ── PREVIEW ── */
+.preview-wrap{max-width:640px;margin:30px auto;padding:0 14px 60px;}
+.preview-form-header{background:var(--dark);border-radius:var(--radius) var(--radius) 0 0;padding:28px 32px 24px;}
+.preview-form-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--lime);margin-bottom:5px;}
+.preview-form-desc{font-size:13.5px;color:rgba(255,255,255,0.6);line-height:1.65;}
+.preview-progress-bar{height:4px;background:rgba(219,232,144,0.18);}
+.preview-progress-fill{height:100%;background:var(--lime);transition:width .4s ease;}
+.preview-section{background:var(--white);padding:26px 32px;display:none;}
+.preview-section.active{display:block;}
+.preview-section-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--dark);margin-bottom:18px;padding-bottom:11px;border-bottom:2px solid var(--lime);display:flex;align-items:center;gap:8px;}
+.section-badge{background:var(--lime);color:var(--dark);font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;}
+.preview-question{margin-bottom:20px;}
+.preview-q-label{font-size:13.5px;font-weight:600;color:var(--dark);margin-bottom:4px;display:flex;align-items:center;gap:4px;}
+.preview-q-label .req{color:var(--error);font-size:15px;line-height:1;}
+.preview-q-instr{font-size:12px;color:var(--muted);margin-bottom:7px;line-height:1.5;}
+.preview-input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 13px;font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--dark);outline:none;background:#fafbf9;transition:border .18s,box-shadow .18s;}
+.preview-input:focus{border-color:var(--dark);box-shadow:0 0 0 3px rgba(21,35,40,0.05);}
+.preview-input.error{border-color:var(--error);}
+textarea.preview-input{resize:vertical;min-height:90px;}
+.phone-wrap{display:flex;}
+.phone-code{border:1.5px solid var(--border);border-right:none;border-radius:8px 0 0 8px;padding:9px 10px;font-family:'DM Sans',sans-serif;font-size:13px;background:#f0f2ee;color:var(--dark);outline:none;cursor:pointer;flex-shrink:0;}
+.phone-code:focus{border-color:var(--dark);}
+.phone-input{border-radius:0 8px 8px 0!important;}
+.file-drop{border:2px dashed var(--border);border-radius:8px;padding:20px;text-align:center;cursor:pointer;transition:all .18s;background:#fafbf9;position:relative;}
+.file-drop:hover,.file-drop.dragover{border-color:var(--dark);background:#f3f5f0;}
+.file-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.file-drop-icon{font-size:26px;margin-bottom:6px;}
+.file-drop-text{font-size:12.5px;color:var(--muted);}
+.file-drop-text strong{color:var(--dark);}
+.file-list{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;}
+.file-chip{background:var(--lime);color:var(--dark);padding:3px 9px;border-radius:20px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:4px;}
+.file-chip button{background:none;border:none;cursor:pointer;font-size:12px;color:var(--dark);padding:0;line-height:1;}
+.char-count{font-size:11px;color:var(--muted);text-align:right;margin-top:3px;}
+.field-error{font-size:12px;color:var(--error);margin-top:4px;font-weight:500;min-height:16px;}
+
+/* Conditional sub-question in preview */
+.preview-sub-question{margin-top:12px;padding-left:16px;border-left:3px solid var(--lime2);display:none;}
+.preview-sub-question.visible{display:block;}
+
+.preview-nav{background:var(--white);border-top:1px solid var(--border);padding:18px 32px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 var(--radius) var(--radius);}
+.step-dots{display:flex;gap:5px;}
+.step-dot{width:7px;height:7px;border-radius:50%;background:var(--border);transition:all .2s;}
+.step-dot.done{background:var(--lime);}
+.step-dot.active{background:var(--dark);width:18px;border-radius:4px;}
+.prev-btn,.next-btn{padding:9px 22px;border-radius:8px;font-size:13.5px;font-weight:700;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.prev-btn{background:var(--bg);color:var(--dark);}
+.prev-btn:hover{background:var(--border);}
+.next-btn{background:var(--dark);color:var(--lime);}
+.next-btn:hover{background:#1e333a;}
+.next-btn.submit{background:var(--lime);color:var(--dark);}
+
+.success-screen{background:var(--white);border-radius:var(--radius);padding:56px 32px;text-align:center;display:none;}
+.success-icon{font-size:48px;margin-bottom:14px;}
+.success-title{font-family:'Syne',sans-serif;font-size:21px;font-weight:800;margin-bottom:7px;}
+.success-sub{font-size:13.5px;color:var(--muted);line-height:1.7;}
+
+/* ── RESPONSES ── */
+.responses-layout{max-width:1080px;margin:28px auto;padding:0 14px 60px;}
+.responses-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
+.responses-title{font-family:'Syne',sans-serif;font-size:21px;font-weight:800;}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px;}
+.stat-card{background:var(--white);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);}
+.stat-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;}
+.stat-value{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--dark);}
+.responses-table-wrap{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
+.responses-table{width:100%;border-collapse:collapse;font-size:13px;}
+.responses-table th{background:var(--dark);color:var(--lime);padding:11px 14px;text-align:left;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;white-space:nowrap;}
+.responses-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--dark);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:top;}
+.responses-table tr:last-child td{border-bottom:none;}
+.responses-table tr:hover td{background:#f9faf7;}
+.no-responses{text-align:center;padding:56px 20px;color:var(--muted);font-size:14px;}
+.no-responses .icon{font-size:38px;margin-bottom:10px;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(21,35,40,0.5);display:flex;align-items:center;justify-content:center;z-index:300;padding:16px;opacity:0;pointer-events:none;transition:opacity .2s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--white);border-radius:14px;padding:28px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(21,35,40,0.2);transform:translateY(14px);transition:transform .2s;}
+.modal-overlay.open .modal{transform:translateY(0);}
+.modal-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;margin-bottom:5px;}
+.modal-sub{font-size:12.5px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
+.modal label{display:block;font-size:11px;font-weight:700;color:var(--dark);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em;}
+.modal input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 13px;font-family:'DM Sans',sans-serif;font-size:13.5px;outline:none;margin-bottom:14px;transition:border .15s;}
+.modal input:focus{border-color:var(--dark);}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:4px;}
+.modal-btn{padding:9px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.modal-btn.cancel{background:var(--bg);color:var(--dark);}
+.modal-btn.save{background:var(--dark);color:var(--lime);}
+
+.toast{position:fixed;bottom:72px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--dark);color:var(--lime);padding:9px 20px;border-radius:8px;font-size:13px;font-weight:600;opacity:0;transition:all .25s;pointer-events:none;z-index:400;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+@media(max-width:600px){
+  .topnav{padding:0 14px;}
+  .nav-tab{padding:5px 11px;font-size:12px;}
+  .builder-layout,.preview-wrap,.responses-layout{padding:0 8px 72px;margin-top:16px;}
+  .form-meta-card,.section-body{padding:16px;}
+  .section-header{padding:12px 16px;}
+  .preview-form-header,.preview-section,.preview-nav{padding-left:18px;padding-right:18px;}
+  .builder-bar{padding:10px 14px;}
+  .q-top{flex-wrap:wrap;}
+  .q-type-select{max-width:100%;}
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-logo">Letu<span>ic</span> Forms</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchView('builder',this)">&#9998; Builder</button>
+    <button class="nav-tab" onclick="switchView('preview',this)">&#9654; Preview</button>
+    <button class="nav-tab" onclick="switchView('responses',this)">&#128202; Responses</button>
+  </div>
+</nav>
+
+<!-- ══ BUILDER ══ -->
+<div id="view-builder" class="view active">
+  <div class="builder-layout">
+    <div class="form-meta-card">
+      <input class="form-title-input" id="formTitle" placeholder="Form Title…" value="Growth &amp; Marketing Internship Application">
+      <textarea class="form-desc-input" id="formDesc" placeholder="Description / instructions for applicants…" rows="2">Fill in all sections carefully. Shortlisted candidates will be contacted within 5 working days.</textarea>
+    </div>
+    <div id="sectionsContainer"></div>
+    <div class="section-add-row">
+      <button class="add-btn primary" onclick="addSection()">&#43; Add Section</button>
+    </div>
+  </div>
+  <div class="builder-bar">
+    <span class="builder-bar-left" id="builderStatus">Ready</span>
+    <div class="builder-bar-right">
+      <button class="bar-btn sec" onclick="openSheetsModal()">&#9881; Google Sheets</button>
+      <button class="bar-btn acc" onclick="doPreview()">Preview &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PREVIEW ══ -->
+<div id="view-preview" class="view">
+  <div class="preview-wrap">
+    <div class="preview-form-header">
+      <div class="preview-form-title" id="previewTitle"></div>
+      <div class="preview-form-desc" id="previewDesc"></div>
+    </div>
+    <div class="preview-progress-bar"><div class="preview-progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div id="previewSections"></div>
+    <div id="successScreen" class="success-screen">
+      <div class="success-icon">&#10003;</div>
+      <div class="success-title">Application Submitted!</div>
+      <div class="success-sub">Thank you for applying. We've received your application and will review it shortly.<br>Shortlisted candidates will be contacted within 5 working days.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RESPONSES ══ -->
+<div id="view-responses" class="view">
+  <div class="responses-layout">
+    <div class="responses-header">
+      <div class="responses-title">Responses</div>
+      <div style="display:flex;gap:8px;">
+        <button class="bar-btn sec" style="background:#fff;color:var(--dark);border:1.5px solid var(--border);" onclick="exportCSV()">&#8595; Export CSV</button>
+        <button class="bar-btn acc" onclick="openSheetsModal()">&#9881; Sheets</button>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="statTotal">0</div></div>
+      <div class="stat-card"><div class="stat-label">Today</div><div class="stat-value" id="statToday">0</div></div>
+      <div class="stat-card"><div class="stat-label">This Week</div><div class="stat-value" id="statWeek">0</div></div>
+      <div class="stat-card"><div class="stat-label">Sheets Sync</div><div class="stat-value" id="statSync" style="font-size:13px;padding-top:5px;">Not set</div></div>
+    </div>
+    <div class="responses-table-wrap"><div id="responsesTableContainer"></div></div>
+  </div>
+</div>
+
+<!-- Sheets Modal -->
+<div class="modal-overlay" id="sheetsModal">
+  <div class="modal">
+    <div class="modal-title">&#128203; Google Sheets Integration</div>
+    <div class="modal-sub">Deploy a Google Apps Script as a web app from your Sheet, set access to "Anyone", then paste the URL below.</div>
+    <label>Apps Script Web App URL</label>
+    <input type="url" id="sheetsUrl" placeholder="https://script.google.com/macros/s/…">
+    <label>Sheet Tab Name (optional)</label>
+    <input type="text" id="sheetsName" placeholder="Sheet1">
+    <div class="modal-actions">
+      <button class="modal-btn cancel" onclick="closeSheetsModal()">Cancel</button>
+      <button class="modal-btn save" onclick="saveSheetsConfig()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════ STATE ═══════════════════════
+let responses = JSON.parse(localStorage.getItem('lf_responses')||'[]');
+let sheetsConfig = JSON.parse(localStorage.getItem('lf_sheets')||'{}');
+let formData = {};
+let currentSection = 0;
+
+const TYPES = [
+  ['short','Short Text'],['long','Long Text'],['email','Email'],
+  ['phone','Phone'],['number','Number'],['dropdown','Dropdown'],
+  ['radio','Multiple Choice'],['checkbox','Checkboxes'],
+  ['file','File Upload'],['date','Date']
+];
+const CODES = [
+  ['+91','🇮🇳 IN +91'],['+1','🇺🇸 US +1'],['+44','🇬🇧 GB +44'],
+  ['+971','🇦🇪 AE +971'],['+65','🇸🇬 SG +65'],['+61','🇦🇺 AU +61'],
+  ['+49','🇩🇪 DE +49'],['+33','🇫🇷 FR +33']
+];
+const TYPE_OPTS = TYPES.map(([v,l])=>`<option value="${v}">${l}</option>`).join('');
+const CODE_OPTS = CODES.map(([v,l])=>`<option value="${v}"${v==='+91'?' selected':''}>${l}</option>`).join('');
+
+// ═══════════════════════ VIEWS ═══════════════════════
+function switchView(name, btn) {
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  btn.classList.add('active');
+  if(name==='preview') renderPreview();
+  if(name==='responses') renderResponses();
+}
+function doPreview(){
+  renderPreview();
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('view-preview').classList.add('active');
+  document.querySelectorAll('.nav-tab')[1].classList.add('active');
+}
+
+// ═══════════════════════ BUILDER ═══════════════════════
+let sectionSortable = null;
+
+function addSection(name='') {
+  const sid = 'sec_'+Date.now()+'_'+Math.random().toString(36).slice(2,6);
+  const div = document.createElement('div');
+  div.className='section-card'; div.dataset.sid=sid;
+  div.innerHTML=`
+    <div class="section-header">
+      <span class="drag-handle" title="Drag to reorder">&#8661;</span>
+      <input class="section-name-input" placeholder="Section Name…" value="${name}">
+      <div class="section-actions">
+        <button class="icon-btn del-sec" title="Delete section" onclick="deleteSection(this)">&#10005;</button>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="questions-list"></div>
+      <div class="add-row">
+        <button class="add-btn" onclick="addQuestion(this)">&#43; Add Question</button>
+      </div>
+    </div>`;
+  document.getElementById('sectionsContainer').appendChild(div);
+
+  // Make questions sortable
+  new Sortable(div.querySelector('.questions-list'),{
+    animation:150, handle:'.q-drag', ghostClass:'sortable-ghost', chosenClass:'sortable-chosen'
+  });
+
+  updateStatus();
+
+  // Re-init section sortable after DOM change
+  initSectionSortable();
+}
+
+function initSectionSortable(){
+  if(sectionSortable) sectionSortable.destroy();
+  sectionSortable = new Sortable(document.getElementById('sectionsContainer'),{
+    animation:180, handle:'.drag-handle', ghostClass:'sortable-ghost', chosenClass:'sortable-chosen'
+  });
+}
+
+function deleteSection(btn){
+  const card = btn.closest('.section-card');
+  const qCount = card.querySelectorAll('.question-card').length;
+  if(qCount > 0 && !confirm(`Delete this section and its ${qCount} question(s)?`)) return;
+  card.remove();
+  updateStatus();
+}
+
+function addQuestion(btn, container=null) {
+  const list = container || btn.closest('.section-body').querySelector('.questions-list');
+  const qid='q_'+Date.now()+'_'+Math.random().toString(36).slice(2,5);
+  const div=document.createElement('div');
+  div.className='question-card'; div.dataset.qid=qid;
+  div.innerHTML=`
+    <div class="q-top">
+      <span class="q-drag" title="Drag to reorder">&#8661;</span>
+      <input class="q-label-input" placeholder="Question label…">
+      <select class="q-type-select" onchange="onTypeChange(this)">${TYPE_OPTS}</select>
+      <button class="q-del" title="Delete question" onclick="this.closest('.question-card').remove();updateStatus();">&#10005;</button>
+    </div>
+    <input class="q-instr" placeholder="Instruction / helper text (optional)…">
+    <div class="q-meta">
+      <label><input type="checkbox" class="req-check"> Required</label>
+      <span class="meta-sep">|</span>
+      <label>Min: <input type="number" class="min-len" value="0" min="0"></label>
+      <label>Max chars: <input type="number" class="max-len" value="0" min="0"></label>
+    </div>
+    <div class="q-extra"></div>
+    <div class="q-cond-wrap"></div>`;
+  list.appendChild(div);
+  updateStatus();
+}
+
+function addSubQuestion(btn) {
+  const subList = btn.closest('.cond-block').querySelector('.sub-questions-list');
+  addQuestion(null, subList);
+}
+
+function onTypeChange(sel) {
+  const card = sel.closest('.question-card');
+  const extra = card.querySelector('.q-extra');
+  const condWrap = card.querySelector('.q-cond-wrap');
+  const type = sel.value;
+  const metaNumbers = card.querySelectorAll('.q-meta .min-len,.q-meta .max-len,.q-meta label:has(.min-len),.q-meta label:has(.max-len),.q-meta .meta-sep');
+
+  // show/hide char limits
+  metaNumbers.forEach(el=>{
+    el.style.display = ['short','long','email'].includes(type) ? '' : 'none';
+  });
+
+  extra.innerHTML='';
+  if(['dropdown','radio','checkbox'].includes(type)){
+    extra.innerHTML=`<label>Options (comma-separated)</label>
+      <input class="options-input" placeholder="Option A, Option B, Option C">`;
+  }
+  if(type==='file'){
+    extra.innerHTML=`<label>Accepted file types</label>
+      <input class="accept-input" placeholder=".pdf,.doc,.docx,.png" value=".pdf,.doc,.docx">`;
+  }
+
+  // Conditional logic only for choice types
+  if(['dropdown','radio','checkbox'].includes(type)){
+    condWrap.innerHTML=`
+      <div class="cond-block">
+        <div class="cond-title">&#9889; Conditional Logic <span>IF answer =</span></div>
+        <div class="cond-row">
+          <span class="cond-op-label">Show sub-question when answer is:</span>
+          <input class="cond-val-input" placeholder="e.g. Yes">
+        </div>
+        <div class="sub-questions-list"></div>
+        <button class="add-sub-btn" onclick="addSubQuestion(this)">&#43; Add Sub-question</button>
+      </div>`;
+    // make sub-questions sortable
+    new Sortable(condWrap.querySelector('.sub-questions-list'),{
+      animation:120, handle:'.q-drag', ghostClass:'sortable-ghost', chosenClass:'sortable-chosen'
+    });
+  } else {
+    condWrap.innerHTML='';
+  }
+}
+
+function updateStatus(){
+  const sc=document.querySelectorAll('#sectionsContainer > .section-card').length;
+  const qc=document.querySelectorAll('.question-card').length;
+  document.getElementById('builderStatus').textContent=`${sc} section${sc!==1?'s':''} · ${qc} question${qc!==1?'s':''}`;
+}
+
+function getFormState(){
+  const sections=[];
+  document.querySelectorAll('#sectionsContainer > .section-card').forEach((sc,si)=>{
+    const questions=[];
+    sc.querySelectorAll(':scope > .section-body > .questions-list > .question-card').forEach((qc,qi)=>{
+      const type=qc.querySelector('.q-type-select').value;
+      // sub-questions
+      const subQs=[];
+      const subList=qc.querySelector('.sub-questions-list');
+      if(subList){
+        subList.querySelectorAll('.question-card').forEach((sq,sqi)=>{
+          subQs.push({
+            id:sq.dataset.qid,
+            label:sq.querySelector('.q-label-input').value,
+            type:sq.querySelector('.q-type-select').value,
+            instruction:sq.querySelector('.q-instr')?.value||'',
+            required:sq.querySelector('.req-check')?.checked||false,
+            maxLength:parseInt(sq.querySelector('.max-len')?.value)||0,
+            minLength:parseInt(sq.querySelector('.min-len')?.value)||0,
+            options:sq.querySelector('.options-input')?.value||'',
+          });
+        });
+      }
+      questions.push({
+        id:qc.dataset.qid,
+        label:qc.querySelector('.q-label-input').value,
+        type,
+        instruction:qc.querySelector('.q-instr').value,
+        required:qc.querySelector('.req-check').checked,
+        maxLength:parseInt(qc.querySelector('.max-len').value)||0,
+        minLength:parseInt(qc.querySelector('.min-len').value)||0,
+        options:qc.querySelector('.options-input')?.value||'',
+        accept:qc.querySelector('.accept-input')?.value||'',
+        condValue:qc.querySelector('.cond-val-input')?.value||'',
+        subQuestions:subQs
+      });
+    });
+    sections.push({ id:sc.dataset.sid, name:sc.querySelector('.section-name-input').value, questions });
+  });
+  return { title:document.getElementById('formTitle').value, description:document.getElementById('formDesc').value, sections };
+}
+
+// ═══════════════════════ PREVIEW ═══════════════════════
+function renderPreview(){
+  formData=getFormState();
+  currentSection=0;
+  document.getElementById('previewTitle').textContent=formData.title||'Untitled Form';
+  document.getElementById('previewDesc').textContent=formData.description||'';
+  const container=document.getElementById('previewSections');
+  container.innerHTML='';
+  document.getElementById('successScreen').style.display='none';
+
+  formData.sections.forEach((sec,si)=>{
+    const div=document.createElement('div');
+    div.className='preview-section'+(si===0?' active':'');
+    div.id='psec_'+si;
+    const questionsHTML=sec.questions.map((q,qi)=>buildQHTML(q,si,qi,false)).join('');
+    const isLast=si===formData.sections.length-1;
+    div.innerHTML=`
+      <div class="preview-section-title">
+        <span class="section-badge">${si+1}/${formData.sections.length}</span>
+        ${sec.name||'Section '+(si+1)}
+      </div>
+      ${questionsHTML}
+      <div class="preview-nav">
+        <div class="step-dots" id="dots_${si}"></div>
+        <div style="display:flex;gap:8px;">
+          ${si>0?`<button class="prev-btn" onclick="goSection(${si-1})">&#8592; Back</button>`:''}
+          ${isLast
+            ?`<button class="next-btn submit" onclick="submitForm()">Submit &#10003;</button>`
+            :`<button class="next-btn" onclick="validateAndNext(${si})">Next &#8594;</button>`}
+        </div>
+      </div>`;
+    container.appendChild(div);
+  });
+  updateDots(); updateProgress();
+}
+
+function buildQHTML(q,si,qi,isSub,parentName=''){
+  const name=isSub?`sub_${parentName}_${qi}`:`q_${si}_${qi}`;
+  const req=q.required?'<span class="req">*</span>':'';
+  const instr=q.instruction?`<div class="preview-q-instr">${q.instruction}</div>`:'';
+  let inputHTML=buildInputHTML(q,name);
+  let subHTML='';
+  if(q.subQuestions && q.subQuestions.length>0 && q.condValue){
+    const subs=q.subQuestions.map((sq,sqi)=>buildQHTML(sq,si,sqi,true,name)).join('');
+    subHTML=`<div class="preview-sub-question" id="sub_block_${name}" data-trigger="${q.condValue}">${subs}</div>`;
+  }
+  return `<div class="preview-question" data-required="${q.required}" data-type="${q.type}" data-minlen="${q.minLength||0}" data-name="${name}" data-cond-target="sub_block_${name}">
+    <div class="preview-q-label">${q.label||'Question'} ${req}</div>
+    ${instr}${inputHTML}
+    <div class="field-error" id="err_${name}"></div>
+    ${subHTML}
+  </div>`;
+}
+
+function buildInputHTML(q,name){
+  switch(q.type){
+    case 'short': return `<input class="preview-input" type="text" id="${name}" ${q.maxLength?`maxlength="${q.maxLength}"`:''}
+        oninput="updateCC(this,${q.maxLength})" placeholder="${q.instruction||'Your answer'}">
+        ${q.maxLength?`<div class="char-count" id="cc_${name}">0 / ${q.maxLength}</div>`:''}`;
+    case 'long': return `<textarea class="preview-input" id="${name}" rows="4" ${q.maxLength?`maxlength="${q.maxLength}"`:''}
+        oninput="updateCC(this,${q.maxLength})" placeholder="${q.instruction||'Your answer'}"></textarea>
+        ${q.maxLength?`<div class="char-count" id="cc_${name}">0 / ${q.maxLength}</div>`:''}`;
+    case 'email': return `<input class="preview-input" type="email" id="${name}" placeholder="you@example.com">`;
+    case 'phone': return `<div class="phone-wrap">
+        <select class="phone-code" id="cc_sel_${name}">${CODE_OPTS}</select>
+        <input class="preview-input phone-input" type="tel" id="${name}" placeholder="9876543210">
+      </div>`;
+    case 'number': return `<input class="preview-input" type="number" id="${name}" placeholder="0">`;
+    case 'date': return `<input class="preview-input" type="date" id="${name}">`;
+    case 'dropdown':{
+      const opts=(q.options||'').split(',').map(o=>`<option value="${o.trim()}">${o.trim()}</option>`).join('');
+      return `<select class="preview-input" id="${name}" onchange="checkCond(this,'${name}')">
+        <option value="">Select…</option>${opts}</select>`;}
+    case 'radio':{
+      const opts=(q.options||'').split(',').map((o,i)=>`
+        <label style="display:flex;align-items:center;gap:8px;margin-bottom:7px;cursor:pointer;font-size:13.5px;">
+          <input type="radio" name="${name}" value="${o.trim()}" style="accent-color:var(--dark);width:14px;height:14px;" onchange="checkCondRadio('${name}')">
+          ${o.trim()}</label>`).join('');
+      return `<div id="${name}">${opts}</div>`;}
+    case 'checkbox':{
+      const opts=(q.options||'').split(',').map(o=>`
+        <label style="display:flex;align-items:center;gap:8px;margin-bottom:7px;cursor:pointer;font-size:13.5px;">
+          <input type="checkbox" name="${name}" value="${o.trim()}" style="accent-color:var(--dark);width:14px;height:14px;" onchange="checkCondCheckbox('${name}')">
+          ${o.trim()}</label>`).join('');
+      return `<div id="${name}">${opts}</div>`;}
+    case 'file': return `<div class="file-drop" id="fd_${name}" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleDrop(event,'${name}')">
+        <input type="file" accept="${q.accept||'*'}" multiple onchange="handleFiles(this,'${name}')">
+        <div class="file-drop-icon">&#128194;</div>
+        <div class="file-drop-text"><strong>Click to upload</strong> or drag &amp; drop<br><span style="font-size:11px;opacity:.7;">${q.accept||'Any file type'}</span></div>
+      </div>
+      <div class="file-list" id="fl_${name}"></div>`;
+    default: return `<input class="preview-input" type="text" id="${name}">`;
+  }
+}
+
+// Conditional logic triggers
+function checkCond(sel, name){
+  const block = document.getElementById('sub_block_'+name);
+  if(!block) return;
+  block.classList.toggle('visible', sel.value === block.dataset.trigger);
+}
+function checkCondRadio(name){
+  const checked = document.querySelector(`input[name="${name}"]:checked`);
+  const block = document.getElementById('sub_block_'+name);
+  if(!block) return;
+  block.classList.toggle('visible', checked && checked.value === block.dataset.trigger);
+}
+function checkCondCheckbox(name){
+  const checked = Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(x=>x.value);
+  const block = document.getElementById('sub_block_'+name);
+  if(!block) return;
+  block.classList.toggle('visible', checked.includes(block.dataset.trigger));
+}
+
+function updateCC(el,max){ const cc=document.getElementById('cc_'+el.id); if(cc) cc.textContent=el.value.length+(max?' / '+max:''); }
+
+function handleFiles(input,name){ showFiles(Array.from(input.files),name); }
+function handleDrop(e,name){ e.preventDefault(); document.getElementById('fd_'+name).classList.remove('dragover'); showFiles(Array.from(e.dataTransfer.files),name); }
+function showFiles(files,name){
+  const list=document.getElementById('fl_'+name);
+  files.forEach(f=>{
+    const chip=document.createElement('div'); chip.className='file-chip';
+    chip.innerHTML=`&#128196; ${f.name} <button onclick="this.parentElement.remove()">&#10005;</button>`;
+    list.appendChild(chip);
+  });
+}
+
+function updateDots(){
+  formData.sections.forEach((_,si)=>{
+    const el=document.getElementById('dots_'+si); if(!el) return;
+    el.innerHTML=formData.sections.map((__,di)=>`<div class="step-dot ${di<currentSection?'done':di===currentSection?'active':''}"></div>`).join('');
+  });
+}
+function updateProgress(){
+  const pct=formData.sections.length>1?(currentSection/(formData.sections.length-1))*100:0;
+  document.getElementById('progressFill').style.width=pct+'%';
+}
+function goSection(idx){
+  document.querySelectorAll('.preview-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('psec_'+idx).classList.add('active');
+  currentSection=idx; updateDots(); updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function getVal(qDiv, name, type){
+  if(type==='radio'){ const c=qDiv.querySelector(`input[name="${name}"]:checked`); return c?c.value:''; }
+  if(type==='checkbox'){ return qDiv.querySelectorAll(`input[name="${name}"]:checked`).length>0?'checked':''; }
+  if(type==='file'){ const fl=document.getElementById('fl_'+name); return fl&&fl.children.length>0?'uploaded':''; }
+  const el=document.getElementById(name); return el?el.value.trim():'';
+}
+
+function validateSection(secEl){
+  let valid=true;
+  secEl.querySelectorAll('.preview-question').forEach(qDiv=>{
+    // skip hidden sub-questions
+    if(qDiv.closest('.preview-sub-question') && !qDiv.closest('.preview-sub-question').classList.contains('visible')) return;
+    const name=qDiv.dataset.name, required=qDiv.dataset.required==='true', type=qDiv.dataset.type, minLen=parseInt(qDiv.dataset.minlen)||0;
+    const errEl=document.getElementById('err_'+name); errEl.textContent='';
+    const val=getVal(qDiv,name,type);
+    const inputEl=document.getElementById(name);
+    if(required&&!val){ errEl.textContent='This field is required.'; inputEl?.classList.add('error'); valid=false; }
+    else if(type==='email'&&val&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)){ errEl.textContent='Please enter a valid email.'; inputEl?.classList.add('error'); valid=false; }
+    else if(type==='phone'&&val&&!/^\d{7,15}$/.test(val.replace(/\s/g,''))){ errEl.textContent='Please enter a valid phone number.'; inputEl?.classList.add('error'); valid=false; }
+    else if(minLen&&val.length<minLen){ errEl.textContent=`Minimum ${minLen} characters required.`; inputEl?.classList.add('error'); valid=false; }
+    else{ inputEl?.classList.remove('error'); }
+  });
+  return valid;
+}
+
+function validateAndNext(si){
+  const sec=document.getElementById('psec_'+si);
+  if(validateSection(sec)) goSection(si+1);
+  else sec.querySelector('.field-error:not(:empty)')?.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function submitForm(){
+  const lastIdx=formData.sections.length-1;
+  const sec=document.getElementById('psec_'+lastIdx);
+  if(!validateSection(sec)){ sec.querySelector('.field-error:not(:empty)')?.scrollIntoView({behavior:'smooth',block:'center'}); return; }
+
+  const entry={_timestamp:new Date().toISOString(), _form:formData.title};
+  formData.sections.forEach((s,si)=>{
+    s.questions.forEach((q,qi)=>{
+      const name=`q_${si}_${qi}`;
+      let val='';
+      if(q.type==='radio'){ const c=document.querySelector(`input[name="${name}"]:checked`); val=c?c.value:''; }
+      else if(q.type==='checkbox'){ val=Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(x=>x.value).join(', '); }
+      else if(q.type==='phone'){ val=(document.getElementById('cc_sel_'+name)?.value||'+91')+' '+(document.getElementById(name)?.value||''); }
+      else if(q.type==='file'){ val=Array.from(document.getElementById('fl_'+name)?.children||[]).map(c=>c.textContent.replace('✕','').trim()).join(', '); }
+      else { val=document.getElementById(name)?.value||''; }
+      entry[q.label||`Q${qi+1}`]=val;
+      // sub questions
+      q.subQuestions?.forEach((sq,sqi)=>{
+        const sname=`sub_q_${si}_${qi}_${sqi}`;
+        const subBlock=document.getElementById(`sub_block_${name}`);
+        if(subBlock?.classList.contains('visible')){
+          const sval=document.getElementById(sname)?.value||'';
+          entry[(q.label||`Q${qi+1}`)+'→'+(sq.label||`Sub${sqi+1}`)]=sval;
+        }
+      });
+    });
+  });
+
+  responses.push(entry);
+  localStorage.setItem('lf_responses',JSON.stringify(responses));
+
+  if(sheetsConfig.url){
+    fetch(sheetsConfig.url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(entry)}).catch(()=>{});
+  }
+
+  document.querySelectorAll('.preview-section').forEach(s=>s.style.display='none');
+  document.getElementById('successScreen').style.display='block';
+  document.getElementById('progressFill').style.width='100%';
+  showToast('✓ Submitted!');
+}
+
+// ═══════════════════════ RESPONSES ═══════════════════════
+function renderResponses(){
+  responses=JSON.parse(localStorage.getItem('lf_responses')||'[]');
+  const today=new Date().toDateString(), weekAgo=Date.now()-7*86400000;
+  document.getElementById('statTotal').textContent=responses.length;
+  document.getElementById('statToday').textContent=responses.filter(r=>new Date(r._timestamp).toDateString()===today).length;
+  document.getElementById('statWeek').textContent=responses.filter(r=>new Date(r._timestamp)>weekAgo).length;
+  document.getElementById('statSync').innerHTML=sheetsConfig.url?'&#9989; Connected':'Not set';
+  const container=document.getElementById('responsesTableContainer');
+  if(!responses.length){ container.innerHTML=`<div class="no-responses"><div class="icon">&#128203;</div>No responses yet.</div>`; return; }
+  const allKeys=[...new Set(responses.flatMap(r=>Object.keys(r)))];
+  const cols=allKeys.filter(k=>k!=='_timestamp'&&k!=='_form');
+  container.innerHTML=`<div style="overflow-x:auto"><table class="responses-table">
+    <thead><tr><th>#</th><th>Submitted At</th>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead>
+    <tbody>${responses.map((r,i)=>`<tr><td>${i+1}</td><td>${new Date(r._timestamp).toLocaleString('en-IN')}</td>${cols.map(c=>`<td title="${r[c]||''}">${r[c]||'-'}</td>`).join('')}</tr>`).join('')}</tbody>
+  </table></div>`;
+}
+
+function exportCSV(){
+  if(!responses.length){showToast('No responses');return;}
+  const keys=[...new Set(responses.flatMap(r=>Object.keys(r)))];
+  const csv=[keys,...responses.map(r=>keys.map(k=>`"${(r[k]||'').replace(/"/g,'""')}"`))]
+    .map(r=>r.join(',')).join('\n');
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download=`responses_${Date.now()}.csv`; a.click(); showToast('CSV downloaded!');
+}
+
+// ═══════════════════════ SHEETS ═══════════════════════
+function openSheetsModal(){ document.getElementById('sheetsUrl').value=sheetsConfig.url||''; document.getElementById('sheetsName').value=sheetsConfig.sheetName||''; document.getElementById('sheetsModal').classList.add('open'); }
+function closeSheetsModal(){ document.getElementById('sheetsModal').classList.remove('open'); }
+function saveSheetsConfig(){
+  sheetsConfig={url:document.getElementById('sheetsUrl').value.trim(), sheetName:document.getElementById('sheetsName').value.trim()};
+  localStorage.setItem('lf_sheets',JSON.stringify(sheetsConfig)); closeSheetsModal();
+  showToast(sheetsConfig.url?'✓ Sheets connected!':'Config cleared');
+}
+
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500); }
+
+// ═══════════════════════ INIT ═══════════════════════
+(function(){
+  addSection('Personal Information');
+  const sec=document.querySelector('.section-card');
+  const btn=sec.querySelector('.add-btn');
+  [{label:'Full Name',type:'short',req:true,instr:'Enter your full legal name'},
+   {label:'Email Address',type:'email',req:true,instr:'We will use this to contact you'},
+   {label:'Phone Number',type:'phone',req:true,instr:''}
+  ].forEach(d=>{
+    addQuestion(btn);
+    const cards=sec.querySelectorAll('.question-card');
+    const c=cards[cards.length-1];
+    c.querySelector('.q-label-input').value=d.label;
+    c.querySelector('.q-type-select').value=d.type;
+    c.querySelector('.req-check').checked=d.req;
+    c.querySelector('.q-instr').value=d.instr;
+    onTypeChange(c.querySelector('.q-type-select'));
+  });
+  addSection('Education & Background');
+  addSection('Open-ended Questions');
+  updateStatus();
+})();
+</script>
+</body>
+</html>

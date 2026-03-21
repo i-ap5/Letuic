@@ -11,6 +11,7 @@ import Contact from './components/Contact';
 import Community from './components/Community';
 import Careers from './components/Careers';
 import JobDetails from './components/JobDetails';
+import NotFound from './components/NotFound';
 
 const AppContent: React.FC = () => {
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
@@ -50,6 +51,9 @@ const AppContent: React.FC = () => {
     } else if (currentView === 'careers') {
       document.title = 'Careers at Letuic | Work with Us';
       if (metaDescription) metaDescription.setAttribute('content', 'Join the Letuic team and build the future of educational technology.');
+    } else {
+      document.title = '404 | Node Not Found';
+      if (metaDescription) metaDescription.setAttribute('content', 'The page you are looking for does not exist in the Letuic ecosystem.');
     }
   }, [location.pathname, currentView]);
 
@@ -106,7 +110,8 @@ const AppContent: React.FC = () => {
           <Route path="/community" element={<Community onNavigate={handleNavigate} />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/careers" element={<Careers onNavigate={handleNavigate} />} />
-          <Route path="/careers/growth-intern" element={<JobDetails onNavigate={handleNavigate} />} />
+          <Route path="/careers/:slug" element={<JobDetails onNavigate={handleNavigate} />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 

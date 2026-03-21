@@ -9,9 +9,14 @@ export default {
     theme: {
         extend: {
             colors: {
-                "primary": "#dbe890",
-                "navy-custom": "#152328",
-                "apple-grey": "#F5F5F7",
+                "primary": "#dbe890",      // Letuic Lime (Core Brand)
+                "secondary": "#152328",    // Letuic Navy (Secondary/Header Brand)
+                "accent-blue": "#3b82f6",  // Action Blue (Additional Accents)
+                "navy": "#152328",         // Navy-custom (Background/Headers)
+                "navy-custom": "#152328",  // Legacy support for navy-custom
+                "apple-grey": "#F5F5F7",   // Soft UI Surface
+                "muted": "#5a7178",        // Steel Muted
+                "error": "#e05555",        // Status Red
             },
             fontFamily: {
                 "sans": ["DM Sans", "sans-serif"],
