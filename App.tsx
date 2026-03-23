@@ -37,22 +37,42 @@ const AppContent: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
 
+    const baseUrl = 'https://letuic.com';
+    const canonicalUrl = `${baseUrl}${location.pathname === '/' ? '' : location.pathname}`;
+
+    // Update Canonical Link
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', canonicalUrl);
+
+    // Update OG URL
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute('content', canonicalUrl);
+
     // Dynamic SEO Metadata for current page
     const metaDescription = document.querySelector('meta[name="description"]');
     if (currentView === 'home') {
-      document.title = 'Letuic | Modern EdTech Hub';
-      if (metaDescription) metaDescription.setAttribute('content', 'Letuic is an EdTech platform helping students and educators learn, teach, and collaborate using powerful digital tools.');
+      document.title = 'Letuic | Modern EdTech Hub - Empowering Learning Ecosystems';
+      const desc = 'Letuic is a premium EdTech platform providing students and educators with modern digital learning tools, collaborative workspaces, and career opportunities.';
+      if (metaDescription) metaDescription.setAttribute('content', desc);
     } else if (currentView === 'community') {
-      document.title = 'Letuic Community | Connect & Learn';
-      if (metaDescription) metaDescription.setAttribute('content', 'Join the Letuic Community. Collaborate with educators, students, and institutions driving the future of learning.');
+      document.title = 'Letuic Community | Connect & Learn - Collaborative EdTech and Learning';
+      const desc = 'Join the Letuic Community. Collaborate with educators, students, and institutions driving the future of learning with modern digital tools.';
+      if (metaDescription) metaDescription.setAttribute('content', desc);
     } else if (currentView === 'contact') {
-      document.title = 'Contact Letuic | Enterprise EdTech';
-      if (metaDescription) metaDescription.setAttribute('content', 'Get in touch with Letuic to bring modern digital learning tools to your educational institution today.');
+      document.title = 'Contact Letuic | Enterprise EdTech - Get in Touch';
+      const desc = 'Get in touch with Letuic to bring modern digital learning tools to your educational institution. We help scale learning ecosystems.';
+      if (metaDescription) metaDescription.setAttribute('content', desc);
     } else if (currentView === 'careers') {
-      document.title = 'Careers at Letuic | Work with Us';
-      if (metaDescription) metaDescription.setAttribute('content', 'Join the Letuic team and build the future of educational technology.');
+      document.title = 'Careers at Letuic | Build the Future of EdTech';
+      const desc = 'Join the Letuic team and build the future of educational technology. Explore open roles in product, engineering, and growth.';
+      if (metaDescription) metaDescription.setAttribute('content', desc);
     } else {
-      document.title = '404 | Node Not Found';
+      document.title = '404 | Page Not Found - Letuic';
       if (metaDescription) metaDescription.setAttribute('content', 'The page you are looking for does not exist in the Letuic ecosystem.');
     }
   }, [location.pathname, currentView]);

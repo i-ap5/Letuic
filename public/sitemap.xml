@@ -3,37 +3,31 @@
   
     <url>
       <loc>https://letuic.com/</loc>
-      <lastmod>2026-03-01T16:22:41.735Z</lastmod>
-      <changefreq>weekly</changefreq>
+      <lastmod>2026-03-23T14:50:00Z</lastmod>
+      <changefreq>daily</changefreq>
       <priority>1.0</priority>
     </url>
   
     <url>
       <loc>https://letuic.com/contact</loc>
-      <lastmod>2026-03-01T16:22:41.741Z</lastmod>
+      <lastmod>2026-03-23T14:50:00Z</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>
   
     <url>
       <loc>https://letuic.com/community</loc>
-      <lastmod>2026-03-01T16:22:41.741Z</lastmod>
+      <lastmod>2026-03-23T14:50:00Z</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>
   
     <url>
       <loc>https://letuic.com/careers</loc>
-      <lastmod>2026-03-01T16:22:41.741Z</lastmod>
+      <lastmod>2026-03-23T14:50:00Z</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>
   
-    <url>
-      <loc>https://letuic.com/careers/growth-intern</loc>
-      <lastmod>2026-03-01T16:22:41.741Z</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
   
 </urlset>
