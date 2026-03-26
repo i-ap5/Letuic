@@ -11,6 +11,8 @@ import Contact from './components/Contact';
 import Community from './components/Community';
 import Careers from './components/Careers';
 import JobDetails from './components/JobDetails';
+import Blog from './components/Blog';
+import BlogPost from './components/BlogPost';
 import NotFound from './components/NotFound';
 
 const AppContent: React.FC = () => {
@@ -25,13 +27,16 @@ const AppContent: React.FC = () => {
       ? 'contact'
       : location.pathname.includes('/careers')
         ? 'careers'
-        : 'home';
+        : location.pathname.includes('/blog')
+          ? 'blog'
+          : 'home';
 
-  const handleNavigate = (view: 'home' | 'contact' | 'community' | 'careers') => {
+  const handleNavigate = (view: 'home' | 'contact' | 'community' | 'careers' | 'blog') => {
     if (view === 'home') navigate('/');
     else if (view === 'contact') navigate('/contact');
     else if (view === 'community') navigate('/community');
     else if (view === 'careers') navigate('/careers');
+    else if (view === 'blog') navigate('/blog');
   };
 
   useEffect(() => {
@@ -71,6 +76,12 @@ const AppContent: React.FC = () => {
       document.title = 'Careers at Letuic | Build the Future of EdTech';
       const desc = 'Join the Letuic team and build the future of educational technology. Explore open roles in product, engineering, and growth.';
       if (metaDescription) metaDescription.setAttribute('content', desc);
+    } else if (currentView === 'blog') {
+      if (location.pathname === '/blog') {
+        document.title = 'Letuic Blog | Edu-Insights & Innovation';
+        const desc = 'Explore the latest insights on educational technology, student success stories, and platform updates from the Letuic team.';
+        if (metaDescription) metaDescription.setAttribute('content', desc);
+      }
     } else {
       document.title = '404 | Page Not Found - Letuic';
       if (metaDescription) metaDescription.setAttribute('content', 'The page you are looking for does not exist in the Letuic ecosystem.');
@@ -131,6 +142,8 @@ const AppContent: React.FC = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/careers" element={<Careers onNavigate={handleNavigate} />} />
           <Route path="/careers/:slug" element={<JobDetails onNavigate={handleNavigate} />} />
+          <Route path="/blog" element={<Blog onNavigate={handleNavigate} />} />
+          <Route path="/blog/:slug" element={<BlogPost onNavigate={handleNavigate} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

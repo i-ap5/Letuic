@@ -3,8 +3,8 @@ import LogoSec from "@/components/assets/logo.svg?react";
 import LogoWhite from "@/components/assets/logo_w.svg?react";
 
 interface NavbarProps {
-  onNavigate: (view: 'home' | 'contact' | 'community' | 'careers') => void;
-  currentView: 'home' | 'contact' | 'community' | 'careers';
+  onNavigate: (view: 'home' | 'contact' | 'community' | 'careers' | 'blog') => void;
+  currentView: 'home' | 'contact' | 'community' | 'careers' | 'blog';
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
@@ -30,14 +30,15 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
   const navLinks = [
     { label: 'Home', id: 'home' },
     { label: 'Community', id: 'community' },
+    { label: 'Blog', id: 'blog' },
     { label: 'Careers', id: 'careers' },
   ];
 
   const handleNav = (id: string) => {
     setIsOpen(false);
 
-    if (id === 'careers' || id === 'community' || id === 'home') {
-      onNavigate(id as 'home' | 'community' | 'careers');
+    if (id === 'careers' || id === 'community' || id === 'home' || id === 'blog') {
+      onNavigate(id as 'home' | 'community' | 'careers' | 'blog');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
