@@ -173,10 +173,10 @@ const BlogPost: React.FC<BlogPostProps> = ({ onNavigate }) => {
                         {post.title}
                      </h1>
                      {post.excerpt && (
-                        <p className="hidden md:block text-lg lg:text-xl font-medium text-white/80 leading-relaxed max-w-3xl drop-shadow-sm line-clamp-2">
-                           {post.excerpt}
-                        </p>
-                     )}
+                         <p className="text-sm md:text-lg lg:text-xl font-medium text-white/80 leading-relaxed max-w-3xl drop-shadow-sm line-clamp-2 md:line-clamp-2">
+                            {post.excerpt}
+                         </p>
+                      )}
                   </div>
                </div>
 
