@@ -59,7 +59,7 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
   }, [loading, posts]);
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] selection:bg-primary/30 pb-32 pt-32" ref={scrollRef}>
+    <div className="min-h-screen bg-[#F8F9FA] selection:bg-primary/30 pb-32 pt-24" ref={scrollRef}>
 
       <style>{`
         .reveal-item.in-view {
@@ -75,7 +75,7 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
 
       <div className="relative z-10 container max-w-[1280px] mx-auto px-4 md:px-6">
 
-        <div className="max-w-4xl mb-24 reveal-item opacity-0 translate-y-8">
+        <div className="max-w-4xl mb-12 transition-all duration-700">
           <div className="flex items-center gap-4 mb-10">
             <div className="h-px w-12 bg-navy-custom/10"></div>
             <span className="text-[12px] font-black text-navy-custom/30">
@@ -95,7 +95,7 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
         </div>
 
         {/* Categories Bar */}
-        <div className="flex flex-wrap gap-4 mb-16 reveal-item opacity-0 translate-y-8" style={{ transitionDelay: '300ms' }}>
+        <div className="flex flex-wrap gap-4 mb-16 transition-all duration-700" style={{ transitionDelay: '300ms' }}>
           {categories.map((cat) => (
             <button
               key={cat}
@@ -111,11 +111,22 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
         </div>
 
         {loading ? (
-          <div className="animate-pulse w-full">
-            <div className="h-[350px] md:h-[450px] bg-navy-custom/5 rounded-[32px] mb-16 w-full" />
+          <div className="w-full">
+            {/* Hero Shimmer */}
+            <div className="h-[350px] md:h-[450px] bg-navy-custom/[0.03] rounded-[32px] mb-16 w-full animate-pulse flex flex-col justify-end p-8 md:p-14">
+              <div className="h-6 w-32 bg-navy-custom/5 rounded-full mb-6" />
+              <div className="h-10 w-2/3 bg-navy-custom/5 rounded-xl mb-6" />
+              <div className="h-4 w-1/3 bg-navy-custom/5 rounded-full" />
+            </div>
+            {/* Grid Shimmer */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3].map(i => (
-                <div key={i} className="h-[400px] w-full bg-navy-custom/5 rounded-[32px]" />
+                <div key={i} className="h-[450px] w-full bg-navy-custom/[0.03] rounded-[32px] p-8 animate-pulse">
+                   <div className="h-48 w-full bg-navy-custom/5 rounded-2xl mb-8" />
+                   <div className="h-4 w-24 bg-navy-custom/5 rounded-full mb-4" />
+                   <div className="h-6 w-full bg-navy-custom/5 rounded-lg mb-4" />
+                   <div className="h-6 w-2/3 bg-navy-custom/5 rounded-lg" />
+                </div>
               ))}
             </div>
           </div>
@@ -175,12 +186,12 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
             </div>
           </>
         ) : (
-          <div className="text-center py-32 bg-white rounded-[48px] border border-gray-100 shadow-sm animate-fade-up">
-            <div className="size-24 rounded-[28px] bg-navy-custom/5 flex items-center justify-center mx-auto mb-8 shadow-inner">
+          <div className="text-center px-6 py-20 md:py-32 bg-white rounded-[40px] md:rounded-[48px] border border-gray-100 shadow-sm animate-fade-up">
+            <div className="size-20 md:size-24 rounded-[24px] md:rounded-[28px] bg-navy-custom/5 flex items-center justify-center mx-auto mb-8 shadow-inner">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-navy-custom/40 transition-transform hover:scale-110"><rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /><path d="m9 16 2 2 4-4" /></svg>
             </div>
-            <h3 className="text-3xl font-black text-navy-custom mb-4 tracking-tight">No stories published yet</h3>
-            <p className="text-navy-custom/50 text-lg font-medium max-w-sm mx-auto mb-10 leading-relaxed">We're currently brewing fresh insights for the <span className="text-navy-custom font-black">{selectedCategory}</span> category.</p>
+            <h3 className="text-2xl md:text-3xl font-black text-navy-custom mb-4 tracking-tight">No stories published yet</h3>
+            <p className="text-navy-custom/50 text-base md:text-lg font-medium max-w-sm mx-auto mb-10 leading-relaxed">We're currently brewing fresh insights for the <span className="text-navy-custom font-black">{selectedCategory}</span> category.</p>
             <button onClick={() => setSelectedCategory('All Stories')} className="px-10 py-4 bg-navy-custom text-white rounded-2xl font-black text-[13px] hover:bg-primary hover:text-navy-custom transition-all shadow-xl hover:scale-105">
               Explore All Stories
             </button>

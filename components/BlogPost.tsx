@@ -36,13 +36,13 @@ const BlogPost: React.FC<BlogPostProps> = ({ onNavigate }) => {
    }, [slug]);
 
    const extractHeadings = (markdown: string) => {
-      const headingRegex = /^(#{2,3})\s+(.*)$/gm;
+      const headingRegex = /^(#{2,6})\s+(.*)$/gm;
       const matches = [];
       let match;
       while ((match = headingRegex.exec(markdown)) !== null) {
          matches.push({
             level: match[1].length,
-            text: match[2].replace(/[^\w\s]/gi, ''),
+            text: match[2].replace(/[^\w\s]/gi, '').trim(),
             id: match[2].toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')
          });
       }
@@ -118,15 +118,15 @@ const BlogPost: React.FC<BlogPostProps> = ({ onNavigate }) => {
 
    if (loading || !post) {
       return (
-         <div className="min-h-screen bg-[#F8F9FA] pt-40 pb-40 container max-w-[1280px] mx-auto px-4 md:px-6">
+         <div className="min-h-screen bg-[#F8F9FA] pt-32 pb-32 container max-w-[1280px] mx-auto px-4 md:px-6">
             <div className="animate-pulse">
                <div className="h-4 w-32 bg-navy-custom/5 rounded-full mb-10" />
-               <div className="h-[55vh] md:h-[65vh] w-full bg-navy-custom/5 rounded-[40px] md:rounded-[56px] mb-12" />
+               <div className="h-[35vh] md:h-[45vh] w-full bg-navy-custom/5 rounded-[40px] md:rounded-[56px] mb-12" />
                <div className="max-w-4xl">
-                  <div className="h-10 w-2/3 bg-navy-custom/5 rounded-full mb-6" />
-                  <div className="h-6 w-1/3 bg-navy-custom/5 rounded-full mb-12" />
+                  <div className="h-8 w-2/3 bg-navy-custom/5 rounded-full mb-6" />
+                  <div className="h-4 w-1/3 bg-navy-custom/5 rounded-full mb-12" />
                   <div className="space-y-4">
-                     {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-4 w-full bg-navy-custom/5 rounded-full" />)}
+                     {[1, 2, 3].map(i => <div key={i} className="h-4 w-full bg-navy-custom/5 rounded-full" />)}
                   </div>
                </div>
             </div>
@@ -148,7 +148,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ onNavigate }) => {
 
          <main className="pt-32 pb-40">
             {/* 1. Hero Content & Author Row Wrapper */}
-            <div className="container max-w-[1280px] mx-auto px-4 md:px-6 mb-20 animate-fade-up">
+            <div className="container max-w-[1280px] mx-auto px-4 md:px-6 mb-6 animate-fade-up">
                {/* Breadcrumbs */}
                <nav className="flex items-center gap-4 text-[11px] font-black  text-navy-custom/30 mb-10">
                   <button onClick={() => navigate('/')} className="hover:text-primary transition-colors cursor-pointer">Home</button>
@@ -218,7 +218,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ onNavigate }) => {
             </div>
 
             {/* 2. Grid Content */}
-            <div className="container max-w-[1280px] mx-auto px-4 md:px-6 animate-fade-up" style={{ animationDelay: '300ms' }}>
+            <div className="container max-w-[1280px] mx-auto px-4 md:px-6 animate-fade-up" style={{ animationDelay: '100ms' }}>
                <div className="flex flex-col lg:flex-row gap-12 xl:gap-24 relative">
                   {/* Left Segment: Table of Contents */}
                   <aside className="hidden lg:block lg:w-[15%] xl:w-[250px] shrink-0">
@@ -230,7 +230,8 @@ const BlogPost: React.FC<BlogPostProps> = ({ onNavigate }) => {
                                  <a
                                     key={i}
                                     href={`#${h.id}`}
-                                    className={`block text-[13px] font-bold leading-relaxed transition-all hover:text-primary ${h.level === 3 ? 'pl-4 text-navy-custom/40 border-l border-transparent' : 'text-navy-custom/80'}`}
+                                    className={`block text-[13px] font-bold leading-relaxed transition-all hover:text-primary ${h.level === 2 ? 'text-navy-custom/80' : 'text-navy-custom/40 border-l border-transparent'}`}
+                                    style={{ paddingLeft: h.level > 2 ? `${(h.level - 2) * 1.5}rem` : '0' }}
                                  >
                                     {h.text}
                                  </a>
@@ -243,6 +244,9 @@ const BlogPost: React.FC<BlogPostProps> = ({ onNavigate }) => {
                   {/* Right Segment: Body Text */}
                   <article className="flex-1 min-w-0 pr-0 xl:pr-12 max-w-4xl">
                      <style>{`
+                        .blog-body-text > *:first-child {
+                           margin-top: 0 !important;
+                        }
                         .blog-body-text p {
                            font-size: 17px;
                            line-height: 1.65;
