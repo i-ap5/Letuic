@@ -59,7 +59,7 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
   }, [loading, posts]);
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] selection:bg-primary/30 pb-32 pt-24" ref={scrollRef}>
+    <div className="min-h-screen bg-[#F8F9FA] selection:bg-primary/30" ref={scrollRef}>
 
       <style>{`
         .reveal-item.in-view {
@@ -68,15 +68,14 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
         }
       `}</style>
 
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-[-20%] left-[-10%] w-[80vw] h-[80vw] bg-primary/10 rounded-full blur-[160px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] bg-navy-custom/5 rounded-full blur-[140px]" />
-      </div>
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-[40%] aspect-square bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 -z-10"></div>
+      <div className="absolute bottom-0 left-0 w-[40%] aspect-square bg-navy-custom/5 blur-[120px] rounded-full translate-y-1/3 -translate-x-1/3 -z-10"></div>
 
-      <div className="relative z-10 container max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="relative z-10 container max-w-[1280px] mx-auto px-5 md:px-10 pt-28 md:pt-32 pb-16 md:pb-24">
 
-        <div className="max-w-4xl mb-12 transition-all duration-700">
-          <div className="flex items-center gap-4 mb-10">
+        <div className="max-w-[1000px] mx-auto mb-20 transition-all duration-700">
+          <div className="flex items-center gap-4 mb-8">
             <div className="h-px w-12 bg-navy-custom/10"></div>
             <span className="text-[12px] font-black text-navy-custom/30">
               Insights
@@ -84,18 +83,18 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
             <div className="h-px w-12 bg-navy-custom/10"></div>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-black text-navy-custom tracking-tighter leading-[0.9] mb-10">
+          <h1 className="text-5xl md:text-7xl font-black text-navy-custom tracking-tighter leading-[0.95] mb-6">
             Insights for the <br />
-            <span className="text-gradient">Intellectual Hub.</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-500">Intellectual Hub.</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-navy-custom/30 font-medium max-w-2xl leading-relaxed">
+          <p className="text-lg md:text-xl text-navy-custom/50 font-medium max-w-2xl leading-relaxed">
             Exploring the intersection of technology, education, and human collaboration.
           </p>
         </div>
 
         {/* Categories Bar */}
-        <div className="flex flex-wrap gap-4 mb-16 transition-all duration-700" style={{ transitionDelay: '300ms' }}>
+        <div className="flex flex-wrap gap-4 mb-16 transition-all duration-700 max-w-[1000px] mx-auto" style={{ transitionDelay: '300ms' }}>
           {categories.map((cat) => (
             <button
               key={cat}
@@ -110,7 +109,8 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
           ))}
         </div>
 
-        {loading ? (
+        <div className="max-w-[1000px] mx-auto">
+          {loading ? (
           <div className="w-full">
             {/* Hero Shimmer */}
             <div className="h-[350px] md:h-[450px] bg-navy-custom/[0.03] rounded-[32px] mb-16 w-full animate-pulse flex flex-col justify-end p-8 md:p-14">
@@ -197,6 +197,7 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
             </button>
           </div>
         )}
+        </div>
 
         {/* Newsletter CTA */}
         {/* <div className="bg-white rounded-[48px] p-12 md:p-20 border border-gray-100 shadow-bento reveal-item opacity-0 translate-y-8 text-center relative overflow-hidden group">

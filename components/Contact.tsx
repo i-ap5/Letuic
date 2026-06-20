@@ -105,8 +105,12 @@ const Contact: React.FC = () => {
 
         {/* Left Content */}
         <div className="lg:col-span-5 space-y-10 reveal-left">
-          <div className="px-4 py-1.5 rounded-full bg-navy-custom/5 border border-navy-custom/10 text-[9px] font-black uppercase tracking-[0.4em] text-navy-custom w-fit">
-            Contact Us
+          <div className="flex items-center gap-4">
+            <div className="h-px w-12 bg-navy-custom/10"></div>
+            <span className="text-[12px] font-black text-navy-custom/30">
+              Contact Us
+            </span>
+            <div className="h-px w-12 bg-navy-custom/10"></div>
           </div>
 
           <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-navy-custom leading-[0.95]">

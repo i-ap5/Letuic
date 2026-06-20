@@ -3,8 +3,8 @@ import LogoSec from "@/components/assets/logo.svg?react";
 import LogoWhite from "@/components/assets/logo_w.svg?react";
 
 interface NavbarProps {
-  onNavigate: (view: 'home' | 'contact' | 'community' | 'careers' | 'blog') => void;
-  currentView: 'home' | 'contact' | 'community' | 'careers' | 'blog';
+  onNavigate: (view: 'home' | 'contact' | 'community' | 'careers' | 'blog' | 'about') => void;
+  currentView: 'home' | 'contact' | 'community' | 'careers' | 'blog' | 'about';
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
@@ -29,6 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
 
   const navLinks = [
     { label: 'Home', id: 'home' },
+    { label: 'About', id: 'about' },
     { label: 'Community', id: 'community' },
     { label: 'Blog', id: 'blog' },
     { label: 'Careers', id: 'careers' },
@@ -37,8 +38,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
   const handleNav = (id: string) => {
     setIsOpen(false);
 
-    if (id === 'careers' || id === 'community' || id === 'home' || id === 'blog') {
-      onNavigate(id as 'home' | 'community' | 'careers' | 'blog');
+    if (id === 'careers' || id === 'community' || id === 'home' || id === 'blog' || id === 'about') {
+      onNavigate(id as 'home' | 'community' | 'careers' | 'blog' | 'about');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }

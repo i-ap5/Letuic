@@ -13,6 +13,7 @@ import Careers from './components/Careers';
 import JobDetails from './components/JobDetails';
 import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
+import About from './components/About';
 import NotFound from './components/NotFound';
 
 const AppContent: React.FC = () => {
@@ -29,14 +30,17 @@ const AppContent: React.FC = () => {
         ? 'careers'
         : location.pathname.includes('/blog')
           ? 'blog'
-          : 'home';
+          : location.pathname.includes('/about')
+            ? 'about'
+            : 'home';
 
-  const handleNavigate = (view: 'home' | 'contact' | 'community' | 'careers' | 'blog') => {
+  const handleNavigate = (view: 'home' | 'contact' | 'community' | 'careers' | 'blog' | 'about') => {
     if (view === 'home') navigate('/');
     else if (view === 'contact') navigate('/contact');
     else if (view === 'community') navigate('/community');
     else if (view === 'careers') navigate('/careers');
     else if (view === 'blog') navigate('/blog');
+    else if (view === 'about') navigate('/about');
   };
 
   useEffect(() => {
@@ -75,6 +79,10 @@ const AppContent: React.FC = () => {
     } else if (currentView === 'careers') {
       document.title = 'Careers at Letuic | Build the Future of EdTech';
       const desc = 'Join the Letuic team and build the future of educational technology. Explore open roles in product, engineering, and growth.';
+      if (metaDescription) metaDescription.setAttribute('content', desc);
+    } else if (currentView === 'about') {
+      document.title = 'About Us | Letuic - Empowering Collaborative Learning';
+      const desc = 'Learn about Letuic, our core mission, values, and the expert team building the modern educational tech hub of tomorrow.';
       if (metaDescription) metaDescription.setAttribute('content', desc);
     } else if (currentView === 'blog') {
       if (location.pathname === '/blog') {
@@ -138,6 +146,7 @@ const AppContent: React.FC = () => {
             </>
           } />
 
+          <Route path="/about" element={<About onNavigate={handleNavigate} />} />
           <Route path="/community" element={<Community onNavigate={handleNavigate} />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/careers" element={<Careers onNavigate={handleNavigate} />} />

@@ -3,8 +3,8 @@ import LogoSec from "@/components/assets/logo.svg?react";
 import LogoWhite from "@/components/assets/logo_w.svg?react";
 
 interface FooterProps {
-  onNavigate: (view: 'home' | 'contact' | 'community' | 'careers' | 'blog') => void;
-  currentView: 'home' | 'contact' | 'community' | 'careers' | 'blog';
+  onNavigate: (view: 'home' | 'contact' | 'community' | 'careers' | 'blog' | 'about') => void;
+  currentView: 'home' | 'contact' | 'community' | 'careers' | 'blog' | 'about';
 }
 
 const Footer: React.FC<FooterProps> = ({ onNavigate, currentView }) => {
@@ -20,6 +20,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, currentView }) => {
 
   const navLinks = [
     { label: 'Home', action: () => { onNavigate('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+    { label: 'About', action: () => { onNavigate('about'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
     {
       label: 'Community', action: () => {
         onNavigate('community');

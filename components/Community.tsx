@@ -94,8 +94,12 @@ const Community: React.FC<CommunityProps> = ({ onNavigate }) => {
 
                     {/* Left: Text Content */}
                     <div className="relative z-10 animate-fade-up">
-                        <div className="inline-flex px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black tracking-widest uppercase mb-8 shadow-[0_0_20px_-5px_theme(colors.primary.DEFAULT)]">
-                            Student Hub
+                        <div className="flex items-center gap-4 mb-8">
+                            <div className="h-px w-12 bg-primary/20"></div>
+                            <span className="text-[12px] font-black text-primary/70">
+                                Student Hub
+                            </span>
+                            <div className="h-px w-12 bg-primary/20"></div>
                         </div>
                         <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
                             Built for <br />

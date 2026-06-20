@@ -55,8 +55,12 @@ const Careers: React.FC<CareersProps> = ({ onNavigate }) => {
             <div className="absolute top-0 right-0 w-[40%] aspect-square bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 -z-10"></div>
             <div className="absolute bottom-0 left-0 w-[40%] aspect-square bg-navy-custom/5 blur-[120px] rounded-full translate-y-1/3 -translate-x-1/3 -z-10"></div>
             <div className="mb-20 text-left reveal in-view max-w-[1000px] mx-auto">
-                <div className="px-4 py-1.5 rounded-full bg-navy-custom/5 border border-navy-custom/10 text-[9px] font-black uppercase tracking-widest text-navy-custom w-fit mb-8">
-                    Careers
+                <div className="flex items-center gap-4 mb-8">
+                    <div className="h-px w-12 bg-navy-custom/10"></div>
+                    <span className="text-[12px] font-black text-navy-custom/30 ">
+                        Careers
+                    </span>
+                    <div className="h-px w-12 bg-navy-custom/10"></div>
                 </div>
                 <h1 className="text-5xl md:text-7xl font-black text-navy-custom tracking-tighter mb-6 leading-[0.95]">
                     Build the <br className="md:hidden" />
@@ -106,7 +110,7 @@ const Careers: React.FC<CareersProps> = ({ onNavigate }) => {
                             className="group block p-8 rounded-[2.5rem] bg-white border border-navy/5 hover:border-primary/20 hover:shadow-2xl hover:shadow-navy/5 transition-all duration-500 cursor-pointer relative overflow-hidden"
                         >
                             <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            
+
                             <div className="flex flex-col gap-6">
                                 <div className="flex flex-wrap items-center justify-between gap-4">
                                     <div className="flex flex-wrap items-center gap-2">
@@ -133,7 +137,7 @@ const Careers: React.FC<CareersProps> = ({ onNavigate }) => {
                                     <h3 className="text-3xl md:text-4xl font-black text-navy group-hover:text-secondary transition-colors duration-300 tracking-tighter leading-none">
                                         {job.title}
                                     </h3>
-                                    
+
                                     {job.description && (
                                         <p className="text-navy/40 text-sm font-medium line-clamp-2 leading-relaxed max-w-2xl">
                                             {job.description}
