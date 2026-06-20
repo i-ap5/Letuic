@@ -120,6 +120,16 @@ const Contact: React.FC = () => {
           <p className="text-base text-navy-custom/40 font-medium leading-relaxed max-w-sm">
             Ready to bring Letuic to your school? Send us a message and we'll help you get started.
           </p>
+          <div className="mt-4 space-y-1">
+            <p className="text-[10px] font-black uppercase tracking-widest text-navy-custom/40">
+              For general inquiries
+            </p>
+            <p className="text-xl md:text-2xl font-black text-navy-custom">
+              <a href="mailto:info@letuic.com" className="hover:text-primary transition-colors underline decoration-2 decoration-primary/40 hover:decoration-primary">
+                info@letuic.com
+              </a>
+            </p>
+          </div>
 
           <div className="space-y-6 pt-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -139,17 +149,18 @@ const Contact: React.FC = () => {
                   icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 },
                 {
+                  label: 'Ireland Office',
+                  address: 'Ireland',
+                  phone: '+353 89 438 9852',
+                  href: 'tel:+353894389852',
+                  icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                },
+                {
                   label: 'UAE Office',
                   address: 'Dubai, UAE',
                   phone: '+971 54 788 6500',
                   href: 'tel:+971547886500',
                   icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                },
-                {
-                  label: 'General Inquiries',
-                  address: 'info@letuic.com',
-                  href: 'mailto:info@letuic.com',
-                  icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                 }
               ].map((item, i) => {
                 const Wrapper = item.href ? 'a' : 'div';
