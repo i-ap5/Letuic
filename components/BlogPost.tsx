@@ -58,7 +58,6 @@ const BlogPost: React.FC<BlogPostProps> = ({ onNavigate }) => {
             if (/\\n/.test(cleanBody)) {
                cleanBody = cleanBody.replace(/\\n/g, '\n').replace(/\\r/g, '\r').replace(/\\"/g, '"');
             }
-            cleanBody = cleanBody.replace(/\n(?!\n)/g, '\n\n');
             setPost({ ...data, body: cleanBody });
             extractHeadings(cleanBody);
 
@@ -457,7 +456,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ onNavigate }) => {
 
                      <div className="blog-body-text">
                         <ReactMarkdown
-                           remarkPlugins={[remarkGfm]}
+                           remarkPlugins={[[remarkGfm, { breaks: true }]]}
                            rehypePlugins={[rehypeRaw as any]}
                            components={{
                               h1: ({ children }) => <h1 id={String(children).toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}>{children}</h1>,
