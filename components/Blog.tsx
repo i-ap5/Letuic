@@ -59,7 +59,7 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
   }, [loading, posts]);
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] selection:bg-primary/30" ref={scrollRef}>
+    <div className="min-h-screen bg-[#F8F9FA] selection:bg-primary/30 overflow-x-hidden relative" ref={scrollRef}>
 
       <style>{`
         .reveal-item.in-view {
@@ -69,8 +69,8 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
       `}</style>
 
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[40%] aspect-square bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 -z-10"></div>
-      <div className="absolute bottom-0 left-0 w-[40%] aspect-square bg-navy-custom/5 blur-[120px] rounded-full translate-y-1/3 -translate-x-1/3 -z-10"></div>
+      <div className="absolute top-0 right-0 w-[40%] max-w-[400px] aspect-square bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 -z-10"></div>
+      <div className="absolute bottom-0 left-0 w-[40%] max-w-[400px] aspect-square bg-navy-custom/5 blur-[120px] rounded-full translate-y-1/3 -z-10"></div>
 
       <div className="relative z-10 container max-w-[1280px] mx-auto px-5 md:px-10 pt-28 md:pt-32 pb-16 md:pb-24">
 
@@ -83,7 +83,7 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
             <div className="h-px w-12 bg-navy-custom/10"></div>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-black text-navy-custom tracking-tighter leading-[0.95] mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-navy-custom tracking-tighter leading-[0.95] mb-6 break-words">
             Insights for the <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-500">Intellectual Hub.</span>
           </h1>
@@ -159,8 +159,8 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
                     <h2 className="text-3xl md:text-5xl lg:text-5xl font-black text-white tracking-tighter leading-[1.1] mb-8 group-hover:text-primary transition-colors duration-500 line-clamp-3 break-words overflow-hidden text-ellipsis">
                       {featuredPost.title}
                     </h2>
-                    <div className="flex items-center gap-6">
-                      <button className="px-10 py-4 bg-white text-navy-custom rounded-2xl font-black text-sm hover:scale-105 transition-transform">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+                      <button className="w-fit px-10 py-4 bg-white text-navy-custom rounded-2xl font-black text-sm hover:scale-105 transition-transform">
                         Read Article
                       </button>
                       <div className="flex items-center gap-3 text-white/40 text-[11px] font-bold tracking-wide">

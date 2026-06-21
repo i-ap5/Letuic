@@ -58,8 +58,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, currentView }) => {
               The future of educational intelligence.
             </p>
 
-            {/* Navigation Links - Horizontal */}
-            <div className="flex justify-center gap-6 mb-8">
+            {/* Navigation Links - Grid */}
+            <div className="grid grid-cols-3 gap-x-4 gap-y-3 mb-8 max-w-[280px] mx-auto">
               {navLinks.map((link) => (
                 <button
                   key={link.label}
