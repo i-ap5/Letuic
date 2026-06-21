@@ -162,7 +162,7 @@ export default async function handler(req, res) {
         'name': 'Letuic',
         'logo': {
           '@type': 'ImageObject',
-          'url': `${SITE_URL}/logo.png`,
+          'url': `${SITE_URL}/logo_s.png`,
         },
       },
     };
