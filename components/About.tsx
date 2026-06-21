@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface TeamMember {
   name: string;
@@ -12,6 +12,83 @@ interface TeamMember {
   imagePosition?: string;
 }
 
+const TeamMemberCard: React.FC<{ member: TeamMember }> = ({ member }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className="group rounded-3xl bg-white border border-navy-custom/5 hover:border-primary/20 hover:shadow-2xl hover:shadow-navy-custom/5 transition-all duration-500 overflow-hidden flex flex-col h-full">
+      {/* Image with hover effects */}
+      <div className="aspect-square w-full overflow-hidden bg-navy-custom/5 relative">
+        <img
+          src={member.image}
+          alt={member.name}
+          className={`size-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-750 ease-out ${member.imagePosition || 'object-center'}`}
+        />
+
+        {/* Overlay social buttons */}
+        <div className="absolute bottom-4 right-4 flex gap-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+          <a
+            href={member.linkedin}
+            aria-label="LinkedIn"
+            target="_blank"
+            rel="noreferrer"
+            className="size-9 rounded-xl bg-navy-custom text-white hover:bg-primary hover:text-navy-custom flex items-center justify-center transition-colors shadow-lg"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z" /></svg>
+          </a>
+          <a
+            href={member.twitter}
+            aria-label="Twitter"
+            target="_blank"
+            rel="noreferrer"
+            className="size-9 rounded-xl bg-navy-custom text-white hover:bg-primary hover:text-navy-custom flex items-center justify-center transition-colors shadow-lg"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+          </a>
+          {member.github && (
+            <a
+              href={member.github}
+              aria-label="GitHub"
+              target="_blank"
+              rel="noreferrer"
+              className="size-9 rounded-xl bg-navy-custom text-white hover:bg-primary hover:text-navy-custom flex items-center justify-center transition-colors shadow-lg"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
+            </a>
+          )}
+        </div>
+      </div>
+
+      {/* Details */}
+      <div className="p-6 flex flex-col flex-grow">
+        <h4 className="text-xl font-black text-navy-custom tracking-tight">
+          {member.name}
+        </h4>
+        <div className="text-[10px] font-black uppercase tracking-widest text-navy-custom/40 mt-1">
+          {member.role}
+        </div>
+        {member.bio && (
+          <div className="mt-3 flex-grow flex flex-col justify-between">
+            <p
+              className={`text-navy-custom/50 text-xs md:text-sm font-medium leading-relaxed transition-all duration-300 ${
+                isExpanded ? '' : 'line-clamp-3'
+              }`}
+            >
+              {member.bio}
+            </p>
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="text-[10px] font-bold uppercase tracking-wider text-primary hover:text-navy-custom mt-2 w-fit transition-colors self-start"
+            >
+              {isExpanded ? 'Read Less' : 'Read More'}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 interface AboutProps {
   onNavigate: (view: 'home' | 'contact' | 'community' | 'careers' | 'blog' | 'about') => void;
 }
@@ -24,9 +101,9 @@ const About: React.FC<AboutProps> = ({ onNavigate }) => {
   const team: TeamMember[] = [
     {
       name: 'Vishnu',
-      role: 'CEO',
+      role: 'Founder & CEO',
       category: 'leadership',
-      bio: '',
+      bio: "A technology leader specializing in cybersecurity and artificial intelligence. He has built Letuic's highly secure infrastructure using advanced AI threat detection, safety frameworks, and privacy protection technologies. Dedicated to ethical and safe AI in education, Vishnu is focused on building a secure, reliable, and smart digital learning platform that protects student data while providing personalized learning experiences.",
       image: '/Letuic_v1.webp',
       linkedin: 'https://www.linkedin.com/in/vishnu-m-1497b2148/',
       twitter: '#',
@@ -36,7 +113,7 @@ const About: React.FC<AboutProps> = ({ onNavigate }) => {
       name: 'Ashwin Venugopal',
       role: 'CMO',
       category: 'leadership',
-      bio: '',
+      bio: "Combines a strong background in creative design and modern technology marketing. As a specialist in generative AI and digital storytelling, Ashwin builds brand experiences using large language models and smart design tools. Through creative direction and marketing, he helps shape Letuic's voice, translating complex technology into clear, engaging stories that connect teachers and students worldwide.",
       image: '/Letuic_av.webp',
       linkedin: 'https://www.linkedin.com/in/ashwin-venugopal-0b0935260/',
       twitter: '#',
@@ -44,9 +121,9 @@ const About: React.FC<AboutProps> = ({ onNavigate }) => {
     },
     {
       name: 'Arun Pradeep',
-      role: 'Product Manager',
+      role: 'Head of Product',
       category: 'technology',
-      bio: '',
+      bio: "A product and software leader who combines a deep understanding of user-centric design with experience building scalable platforms. He leads the design and development of products that use smart AI features, like personalized recommendations and real-time collaboration tools. At Letuic, Arun channels his startup experience and product strategy to deliver software that makes learning more collaborative.",
       image: '/Letuic_ak1.webp',
       linkedin: 'https://www.linkedin.com/in/akconnect/',
       twitter: '#',
@@ -143,62 +220,7 @@ const About: React.FC<AboutProps> = ({ onNavigate }) => {
         {/* Team Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {team.map((member, i) => (
-            <div
-              key={i}
-              className="group rounded-3xl bg-white border border-navy-custom/5 hover:border-primary/20 hover:shadow-2xl hover:shadow-navy-custom/5 transition-all duration-500 overflow-hidden"
-            >
-              {/* Image with hover effects */}
-              <div className="aspect-square w-full overflow-hidden bg-navy-custom/5 relative">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className={`size-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-750 ease-out ${member.imagePosition || 'object-center'}`}
-                />
-
-                {/* Overlay social buttons */}
-                <div className="absolute bottom-4 right-4 flex gap-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <a
-                    href={member.linkedin}
-                    aria-label="LinkedIn"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="size-9 rounded-xl bg-navy-custom text-white hover:bg-primary hover:text-navy-custom flex items-center justify-center transition-colors shadow-lg"
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z" /></svg>
-                  </a>
-                  <a
-                    href={member.twitter}
-                    aria-label="Twitter"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="size-9 rounded-xl bg-navy-custom text-white hover:bg-primary hover:text-navy-custom flex items-center justify-center transition-colors shadow-lg"
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
-                  </a>
-                  {member.github && (
-                    <a
-                      href={member.github}
-                      aria-label="GitHub"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="size-9 rounded-xl bg-navy-custom text-white hover:bg-primary hover:text-navy-custom flex items-center justify-center transition-colors shadow-lg"
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              {/* Details */}
-              <div className="p-6">
-                <h4 className="text-xl font-black text-navy-custom tracking-tight">
-                  {member.name}
-                </h4>
-                <div className="text-[10px] font-black uppercase tracking-widest text-navy-custom/40 mt-1">
-                  {member.role}
-                </div>
-              </div>
-            </div>
+            <TeamMemberCard key={i} member={member} />
           ))}
         </div>
       </div>
